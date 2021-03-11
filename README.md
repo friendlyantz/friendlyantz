@@ -89,7 +89,7 @@ When I'm not coding find me taking photos or trying to send my kite at the neare
   <img src="https://res.cloudinary.com/nico1711/image/upload/c_scale,h_30/v1598849653/node-js_tkywbk.png" alt="nodejs-logo">
   <!-- <img src="https://res.cloudinary.com/nico1711/image/upload/c_scale,h_30/v1598849652/sweetalert_fizd2k.png" alt="sweetalert-logo"> -->
   <img src="https://res.cloudinary.com/nico1711/image/upload/c_scale,h_30/v1598849652/linkedin_obs3m2.png" alt="linkedin-logo">
-  <img src="https://res.cloudinary.com/nico1711/image/upload/c_scale,h_30/v1598849652/pwa-logo_nxppg4.png" alt="pwa-logo">
+<!--   <img src="https://res.cloudinary.com/nico1711/image/upload/c_scale,h_30/v1598849652/pwa-logo_nxppg4.png" alt="pwa-logo"> -->
   <img src="https://res.cloudinary.com/nico1711/image/upload/c_scale,h_30/v1598849651/new_cloudinary_logo_square_kninl9.png" alt="cloudinary-logo">
   <!-- <img src="https://res.cloudinary.com/nico1711/image/upload/c_scale,h_30/v1598849651/postmark_o4dr2s.png" alt="postmark-logo"> -->
   <!-- <img src="https://res.cloudinary.com/nico1711/image/upload/c_scale,h_30/v1598849650/twilio_j6qvbk.png" alt="twilio-logo"> -->
