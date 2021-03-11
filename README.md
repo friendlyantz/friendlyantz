@@ -18,7 +18,7 @@ When I'm not coding find me taking photos or trying to send my kite at the neare
  ```ruby
  class Anton
    def initialize
-     @name = 'Anton'
+     @name = 'Anton Paneleev'
      @dob = "1987-04-01T04:15:00"
      @work = 'Software Engineer'
      @education = [ 'Auckland University of Technology', 'Moscow State University of Civil Engineering', 'Le Wagon' ]
