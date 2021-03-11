@@ -42,7 +42,7 @@ When I'm not coding find me taking photos or trying to send my kite at the neare
           'Working with Legacy Code by Michael Feathers ', 
           '99 Bottles of OOP by Sandi Metz', 
           'Object Oriented Design Principles by Sandi Metz'
-       ]
+       ],
        tinkering: 'Machine learning and building Jetson Nano robot'
       }
    end
