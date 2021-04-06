@@ -1,10 +1,10 @@
 <h1 align="center">🤠 G'Day! I'm Anton</h1>
 
 <p align="center">
-I'm a fullstack software engineer, based in Melbourne, Australia. I am switching into tech after more than a decade in Civil Engineering and Project Management consulting - I rediscovered my passion and living the dream now, building digital products using Lean Design principles.   
+I'm a fullstack software engineer, based in Melbourne, Australia. I am switching into tech after more than a decade in Civil Engineering and Project Management consulting - I rediscovered my passion and living the dream now, building digital products and hoping to make the world a better place.
 </p>
 <p align="center"> 
-When I'm not coding find me taking photos or trying to send my kite at the nearest beach
+When I'm not coding find me taking photos or trying to send my kite at the nearest kitesurfing spot
 </p>
 
 <div align="center">
