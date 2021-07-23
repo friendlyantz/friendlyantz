@@ -53,22 +53,12 @@ When I'm not coding you can find me taking photos or kitesurfing in refreshing M
 
 <h4>Some of the technologies that I use are: </h4>
 <p float="left">
- <img src="images/ruby.png" height="48px">          <img src="images/javascript.png" height="48px">          <img src="images/html-5.png" height="48px">          <img src="images/css.png" height="48px">          <img src="images/sass.png" height="48px">          <img src="images/postgres.png" height="48px">          <img src="images/mysql.png" height="48px">          <img src="images/figma.png" height="48px">     
+ <img src="images/ruby.png" height="48px">          <img src="images/javascript.png" height="48px">          <img src="images/html-5.png" height="48px">          <img src="images/css.png" height="48px">          <img src="images/sass.png" height="48px">          <img src="images/postgres.png" height="48px">          <img src="images/mysql.png" height="48px">          <img src="images/figma.png" height="48px">          <img src="images/aha.png" height="48px">         <img src="images/jira.png" height="48px">      
  </p>
-
-<!-- <h4>I have experience building with the following CMS tools: </h4>
-<p float="left">
- <img src="images/squarespace.png" height="48px">          <img src="images/wix.png" height="48px">
-</p>
-
-<h4>As a previous product manager, I have experience with: </h4>
-<p float="left">
- <img src="images/aha.png" height="48px">          <img src="images/jira.png" height="48px">          <img src="images/rally.png" height="48px">
-</p> -->
 
 <h4>I'm currently working on learning the following: </h4>
 <p float="left">
- <img src="images/python.png" height="48px">          <img src="images/react.png" height="48px">
+ <img src="images/python.png" height="48px">
 </p>
 
 
@@ -95,6 +85,7 @@ When I'm not coding you can find me taking photos or kitesurfing in refreshing M
   <!-- <img src="https://res.cloudinary.com/nico1711/image/upload/c_scale,h_30/v1598849650/twilio_j6qvbk.png" alt="twilio-logo"> -->
   <img src="https://res.cloudinary.com/nico1711/image/upload/c_scale,h_30/v1598849651/googlemaps_uujgzn.png" alt="googlemaps-logo">
   <img src="https://res.cloudinary.com/nico1711/image/upload/c_scale,h_30/v1598849651/googledeveloper_dpefgw.png" alt="google-dev-logo">
+  <img src="images/react.png" height="48px">
 </p>
 
 <br>
