@@ -54,6 +54,10 @@ When I'm not coding you can find me taking photos or kitesurfing in refreshing M
 <h4>Some of the technologies that I use are: </h4>
 <p float="left">
  <img src="images/ruby.png" height="48px">          <img src="images/javascript.png" height="48px">          <img src="images/postgres.png" height="48px">          <img src="images/jira.png" height="48px">          <img src="https://res.cloudinary.com/nico1711/image/upload/c_scale,h_30/v1598849659/jquery_lvyzat.png" alt="jquery-logo">
+    <img src="https://res.cloudinary.com/nico1711/image/upload/c_scale,h_30/v1598849653/redis_xtyczu.png" alt="redis-logo">
+    <img src="https://res.cloudinary.com/nico1711/image/upload/c_scale,h_30/v1598849658/aws_zdxicw.jpg" alt="aws-logo">
+
+
  </p>
 
 <h4>I'm currently working on learning the following: </h4>
@@ -68,12 +72,10 @@ When I'm not coding you can find me taking photos or kitesurfing in refreshing M
 <p>
   <img src="https://res.cloudinary.com/nico1711/image/upload/c_scale,h_30/v1598849659/mapbox_ik768l.png" alt="mapbox-logo">
   <!-- <img src="https://res.cloudinary.com/nico1711/image/upload/c_scale,h_30/v1598849658/soap_oujliq.png" alt="soap-logo"> -->
-  <img src="https://res.cloudinary.com/nico1711/image/upload/c_scale,h_30/v1598849658/aws_zdxicw.jpg" alt="aws-logo">
   <img src="https://res.cloudinary.com/nico1711/image/upload/c_scale,h_30/v1598849657/ux-ui-logo_g1gptz.png" alt="ux-ui-logo">
   <!-- <img src="https://res.cloudinary.com/nico1711/image/upload/c_scale,h_30/v1598849655/stripe_wpdp4s.png" alt="stripe-logo"> -->
   <img src="https://res.cloudinary.com/nico1711/image/upload/c_scale,h_30/v1598849655/algolia_pgipvv.png" alt="algolia-logo">
   <img src="https://res.cloudinary.com/nico1711/image/upload/c_scale,h_30/v1598849654/websockets_owvtbv.png" alt="websockets-logo">
-  <!-- <img src="https://res.cloudinary.com/nico1711/image/upload/c_scale,h_30/v1598849653/redis_xtyczu.png" alt="redis-logo"> -->
   <img src="https://res.cloudinary.com/nico1711/image/upload/c_scale,h_30/v1598849653/google_gqugc7.png" alt="autocomplete-logo">
   <img src="https://res.cloudinary.com/nico1711/image/upload/c_scale,h_30/v1598849653/node-js_tkywbk.png" alt="nodejs-logo">
   <!-- <img src="https://res.cloudinary.com/nico1711/image/upload/c_scale,h_30/v1598849652/sweetalert_fizd2k.png" alt="sweetalert-logo"> -->
