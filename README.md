@@ -53,9 +53,10 @@ When I'm not coding you can find me taking photos or kitesurfing in refreshing M
 
 <h4>Some of the technologies that I use are: </h4>
 <p float="left">
- <img src="images/ruby.png" height="48px">          <img src="images/javascript.png" height="48px">          <img src="images/postgres.png" height="48px">          <img src="images/jira.png" height="48px">          <img src="https://res.cloudinary.com/nico1711/image/upload/c_scale,h_30/v1598849659/jquery_lvyzat.png" alt="jquery-logo">
-    <img src="https://res.cloudinary.com/nico1711/image/upload/c_scale,h_30/v1598849653/redis_xtyczu.png" alt="redis-logo">
-    <img src="https://res.cloudinary.com/nico1711/image/upload/c_scale,h_30/v1598849658/aws_zdxicw.jpg" alt="aws-logo">
+ <img src="images/ruby.png" height="48px">          <img src="images/javascript.png" height="48px">          <img src="images/postgres.png" height="48px">          <img src="images/jira.png" height="48px">         
+  <img src="https://res.cloudinary.com/nico1711/image/upload/c_scale,h_30/v1598849659/jquery_lvyzat.png" alt="jquery-logo">
+  <img src="https://res.cloudinary.com/nico1711/image/upload/c_scale,h_30/v1598849653/redis_xtyczu.png" alt="redis-logo">
+  <img src="https://res.cloudinary.com/nico1711/image/upload/c_scale,h_30/v1598849658/aws_zdxicw.jpg" alt="aws-logo">
 
 
  </p>
@@ -70,6 +71,8 @@ When I'm not coding you can find me taking photos or kitesurfing in refreshing M
 
 ### What I sometimes play with
 <p>
+  <img src="images/react.png" height="48px">
+  <img src="images/figma.png" height="48px">
   <img src="https://res.cloudinary.com/nico1711/image/upload/c_scale,h_30/v1598849659/mapbox_ik768l.png" alt="mapbox-logo">
   <!-- <img src="https://res.cloudinary.com/nico1711/image/upload/c_scale,h_30/v1598849658/soap_oujliq.png" alt="soap-logo"> -->
   <img src="https://res.cloudinary.com/nico1711/image/upload/c_scale,h_30/v1598849657/ux-ui-logo_g1gptz.png" alt="ux-ui-logo">
@@ -86,8 +89,7 @@ When I'm not coding you can find me taking photos or kitesurfing in refreshing M
   <!-- <img src="https://res.cloudinary.com/nico1711/image/upload/c_scale,h_30/v1598849650/twilio_j6qvbk.png" alt="twilio-logo"> -->
   <img src="https://res.cloudinary.com/nico1711/image/upload/c_scale,h_30/v1598849651/googlemaps_uujgzn.png" alt="googlemaps-logo">
   <img src="https://res.cloudinary.com/nico1711/image/upload/c_scale,h_30/v1598849651/googledeveloper_dpefgw.png" alt="google-dev-logo">
-  <img src="images/react.png" height="48px">
-  <img src="images/figma.png" height="48px">
+
 </p>
 
 <br>
