@@ -102,4 +102,4 @@ When I'm not coding you can find me taking photos or kitesurfing in refreshing M
 
 
 
-![Visitors](https://visitor-badge.glitch.me/badge?page_id=friendlyantz.friendlyantz) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat&logo=github)](https://github.com/friendlyantz) [![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/friendlyantz)
+![Visitors](https://visitor-badge.glitch.me/badge?page_id=friendlyantz.friendlyantz) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat&logo=github)](https://github.com/friendlyantz?tab=repositories) [![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/friendlyantz?tab=stars)
