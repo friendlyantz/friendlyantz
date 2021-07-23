@@ -53,7 +53,7 @@ When I'm not coding you can find me taking photos or kitesurfing in refreshing M
 
 <h4>Some of the technologies that I use are: </h4>
 <p float="left">
- <img src="images/ruby.png" height="48px">          <img src="images/javascript.png" height="48px">          <img src="images/postgres.png" height="48px">          <img src="images/aha.png" height="48px">         <img src="images/jira.png" height="48px">      
+ <img src="images/ruby.png" height="48px">          <img src="images/javascript.png" height="48px">          <img src="images/postgres.png" height="48px">          <img src="images/jira.png" height="48px">          <img src="https://res.cloudinary.com/nico1711/image/upload/c_scale,h_30/v1598849659/jquery_lvyzat.png" alt="jquery-logo">
  </p>
 
 <h4>I'm currently working on learning the following: </h4>
@@ -66,7 +66,6 @@ When I'm not coding you can find me taking photos or kitesurfing in refreshing M
 
 ### What I sometimes play with
 <p>
-  <img src="https://res.cloudinary.com/nico1711/image/upload/c_scale,h_30/v1598849659/jquery_lvyzat.png" alt="jquery-logo">
   <img src="https://res.cloudinary.com/nico1711/image/upload/c_scale,h_30/v1598849659/mapbox_ik768l.png" alt="mapbox-logo">
   <!-- <img src="https://res.cloudinary.com/nico1711/image/upload/c_scale,h_30/v1598849658/soap_oujliq.png" alt="soap-logo"> -->
   <img src="https://res.cloudinary.com/nico1711/image/upload/c_scale,h_30/v1598849658/aws_zdxicw.jpg" alt="aws-logo">
