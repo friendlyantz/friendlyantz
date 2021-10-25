@@ -85,10 +85,6 @@ end
     <td><img src="images/swif.png" height="48px"></td>
     <td><a href="https://devpost.com/software/swif-shop-with-friends">SQUAREUP Hackathon: SWiF - Shop With Friends</a></td>
   </tr>
-  <tr>
-    <td> <img src="images/atlassian.png" height="48px"></td>
-    <td><a href="https://codegeist.devpost.com/"> Codegeist by Atlassian</a></td>
-  </tr>
 </table>
 
 <br>
