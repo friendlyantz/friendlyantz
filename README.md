@@ -89,19 +89,13 @@ end
 
 <br>
 
-### Books I recommend
+### Books I read / recommend
 
-```ruby
-def ruby_books
-  {
-    reading: [
-      'Working with Legacy Code by Michael Feathers ', 
-      '99 Bottles of OOP by Sandi Metz', 
-      'Object Oriented Design Principles by Sandi Metz'
-    ]
-  }
-end
-```
+- 'Working with Legacy Code by Michael Feathers ', 
+- '99 Bottles of OOP by Sandi Metz', 
+- 'Object Oriented Design Principles by Sandi Metz',
+- ['Ruby Under a Microscope'](https://github.com/friendlyantz/ruby_under_microscope)
+
 
 ```python
 def python_books(x):
