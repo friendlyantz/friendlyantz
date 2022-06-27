@@ -10,6 +10,9 @@
 <div align="center">
 
   [![Linkedin Badge](https://img.shields.io/badge/-panteleev-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/panteleev/)](https://www.linkedin.com/in/panteleev/)
+
+  [friendlyantz blog](https://friendlyantz.github.io/friendlyantz/)
+
 </div>
 <br>
 
@@ -18,7 +21,7 @@
 ```ruby
 class Anton
   def initialize
-    @name = 'Anton'
+    @name = 'Anton Panteleev'
     @dob = "1987-04-01T04:15:00"
     @work = 'Full-Stack Software Engineer and Data Scientist'
     @education = [ 'Auckland University of Technology',
