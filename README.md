@@ -18,7 +18,7 @@
 ```ruby
 class Anton
   def initialize
-    @name = 'Anton Paneleev'
+    @name = 'Anton'
     @dob = "1987-04-01T04:15:00"
     @work = 'Full-Stack Software Engineer and Data Scientist'
     @education = [ 'Auckland University of Technology',
