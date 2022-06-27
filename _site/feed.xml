@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-06-27T21:28:28+10:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Friendlyantz Blog</title><subtitle>An amazing website.</subtitle><author><name>Anton, Friendlyantz</name></author><entry><title type="html">G’Day! I’m Anton 🤠</title><link href="http://localhost:4000/blog/welcome/" rel="alternate" type="text/html" title="G’Day! I’m Anton 🤠" /><published>2022-06-01T18:50:12+10:00</published><updated>2022-06-01T18:50:12+10:00</updated><id>http://localhost:4000/blog/welcome</id><content type="html" xml:base="http://localhost:4000/blog/welcome/"><![CDATA[<p>Fullstack software engineer, based in Melbourne, Australia.</p>
+
+<p>I switched into tech after more than a decade in Civil Engineering and Project Management consulting - I rediscovered my passion and living the dream now, building digital products and hoping to make the world a better place.</p>
+
+<p>I am focused on back-end, Data Science, Machine Learning and ML ops. I very much enjoy what I do</p>
+
+<h3 id="how-id-define-myselfliterally">How I’d define myself…literally</h3>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Anton</span>
+  <span class="k">def</span> <span class="nf">initialize</span>
+    <span class="vi">@name</span> <span class="o">=</span> <span class="s1">'Anton Paneleev'</span>
+    <span class="vi">@dob</span> <span class="o">=</span> <span class="s2">"1987-04-01T04:15:00"</span>
+    <span class="vi">@work</span> <span class="o">=</span> <span class="s1">'Full-Stack Software Engineer and Data Scientist'</span>
+    <span class="vi">@education</span> <span class="o">=</span> <span class="p">[</span> <span class="s1">'Auckland University of Technology'</span><span class="p">,</span>
+                   <span class="s1">'Moscow State University of Civil Engineering'</span><span class="p">,</span>
+                   <span class="s1">'Le Wagon'</span> 
+                  <span class="p">]</span>
+    <span class="vi">@hobbies</span> <span class="o">=</span> <span class="p">[</span>  <span class="s1">'Kitesurfing'</span><span class="p">,</span> 
+                  <span class="s1">'Camping'</span><span class="p">,</span>
+                  <span class="s1">'Motorcycling'</span><span class="p">,</span>
+                  <span class="s1">'Longboarding'</span>
+                <span class="p">]</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">current_location</span>
+    <span class="s1">'Melbourne, Australia'</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">previous_locations</span>
+    <span class="p">[</span> <span class="s1">'Brisbane, Australia'</span><span class="p">,</span>
+      <span class="s1">'Auckland, New Zealand'</span><span class="p">,</span>
+      <span class="s1">'Moscow, Russia'</span>
+    <span class="p">]</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="some-of-the-technologies-that-i-use-are">Some of the technologies that I use are:</h3>
+<p float="left">
+  <img src="images/ruby.png" height="48px" />
+  <img src="images/postgres.png" height="48px" />
+  <img src="images/docker.png" height="48px" />
+  <img src="images/jupyter.png" height="48px" />
+  <img src="https://res.cloudinary.com/nico1711/image/upload/c_scale,h_30/v1598849653/redis_xtyczu.png" alt="redis-logo" />
+  <img src="https://res.cloudinary.com/nico1711/image/upload/c_scale,h_30/v1598849658/aws_zdxicw.jpg" alt="aws-logo" />
+  <img src="images/atlassian.png" height="48px" />
+  <img src="images/jira.png" height="48px" />
+ </p>
+
+<h3 id="im-currently-working-on-learning-the-following">I’m currently working on learning the following:</h3>
+<p float="left">
+ <img src="images/python.png" height="48px" />
+ <img src="images/pandas.png" height="48px" />
+</p>
+
+<h3 id="what-i-sometimes-play-with">What I sometimes play with</h3>
+<p>
+  <img src="images/jetson.png" height="48px" />
+  <img src="images/javascript.png" height="48px" />
+</p>
+
+<h3 id="my-hackathons">My Hackathons</h3>
+<table>
+  <tr>
+    <td><img src="images/swif.png" height="48px" /></td>
+    <td><a href="https://devpost.com/software/swif-shop-with-friends">SQUAREUP Hackathon: SWiF - Shop With Friends</a></td>
+  </tr>
+</table>
+
+<p><br /></p>
+
+<h3 id="books-i-read--recommend">Books I read / recommend</h3>
+
+<ul>
+  <li>‘Working with Legacy Code by Michael Feathers ‘,</li>
+  <li>‘99 Bottles of OOP by Sandi Metz’,</li>
+  <li>‘Object Oriented Design Principles by Sandi Metz’,</li>
+  <li><a href="https://github.com/friendlyantz/ruby_under_microscope">‘Ruby Under a Microscope’</a></li>
+  <li>‘Automate the Boring Stuff with Python’</li>
+</ul>
+
+<h3 id="quick-stats-about-me">Quick stats about me</h3>
+<p><img src="https://github-readme-stats.vercel.app/api?username=friendlyantz&amp;show_icons=true&amp;title_color=f6c32c&amp;icon_color=f6c32c&amp;text_color=9f9f9f&amp;bg_color=151515&amp;count_private=true" alt="Anton's github stats" /></p>
+
+<p><img src="https://github-readme-stats.vercel.app/api/top-langs/?username=friendlyantz&amp;show_icons=true&amp;title_color=f6c32c&amp;icon_color=f6c32c&amp;text_color=9f9f9f&amp;bg_color=151515&amp;count_private=true&amp;layout=compact" alt="Anton's top languages" /></p>
+
+<p><img src="https://visitor-badge.glitch.me/badge?page_id=friendlyantz.friendlyantz" alt="Visitors" /> <a href="https://github.com/friendlyantz?tab=repositories"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat&amp;logo=github" alt="PRs Welcome" /></a> <a href="https://github.com/friendlyantz?tab=stars"><img src="https://badges.frapsoft.com/os/v2/open-source.svg?v=103" alt="Open Source Love" /></a>
+ <a href="https://www.linkedin.com/in/panteleev/"><img src="https://img.shields.io/badge/-panteleev-blue?style=flat-square&amp;logo=Linkedin&amp;logoColor=white&amp;link=https://www.linkedin.com/in/panteleev/" alt="Linkedin Badge" /></a></p>]]></content><author><name>Anton, Friendlyantz</name></author><category term="blog" /><summary type="html"><![CDATA[Fullstack software engineer, based in Melbourne, Australia.]]></summary></entry></feed>
