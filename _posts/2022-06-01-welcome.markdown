@@ -1,23 +1,14 @@
 ---
-layout: post
-title:  "Welcome"
+layout: posts
+title:  "G'Day! I'm Anton 🤠"
 date:   2022-06-01 18:50:12 +1000
 categories: blog
 ---
-<h1 align="center">🤠 G'Day! I'm Anton</h1>
-<div  align="center">
-  <p>I'm a fullstack software engineer, based in Melbourne, Australia. </p>
-  <p>
-    I switched into tech after more than a decade in Civil Engineering and Project Management consulting - I rediscovered my passion and living the dream now, building digital products and hoping to make the world a better place.
-  </p>
-  <p>I am focused on back-end, Data Science, Machine Learning and ML ops. I do enjoy very very much what I do</p>
-</div>
+Fullstack software engineer, based in Melbourne, Australia.
 
-<div align="center">
+I switched into tech after more than a decade in Civil Engineering and Project Management consulting - I rediscovered my passion and living the dream now, building digital products and hoping to make the world a better place.
 
-  [![Linkedin Badge](https://img.shields.io/badge/-panteleev-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/panteleev/)](https://www.linkedin.com/in/panteleev/)
-</div>
-<br>
+I am focused on back-end, Data Science, Machine Learning and ML ops. I very much enjoy what I do
 
 ### How I'd define myself...literally
 
@@ -71,19 +62,11 @@ end
  <img src="images/pandas.png" height="48px">
 </p>
 
-
-<br>
-
 ### What I sometimes play with
 <p>
-  <!-- <img src="images/figma.png" height="48px"> -->
   <img src="images/jetson.png" height="48px">
   <img src="images/javascript.png" height="48px">
-  <!-- <img src="https://res.cloudinary.com/nico1711/image/upload/c_scale,h_30/v1598849659/mapbox_ik768l.png" alt="mapbox-logo"> -->
-  <!-- <img src="https://res.cloudinary.com/nico1711/image/upload/c_scale,h_30/v1598849655/algolia_pgipvv.png" alt="algolia-logo"> -->
 </p>
-
-<br>
 
 ### My Hackathons
 <table>
@@ -101,20 +84,12 @@ end
 - '99 Bottles of OOP by Sandi Metz', 
 - 'Object Oriented Design Principles by Sandi Metz',
 - ['Ruby Under a Microscope'](https://github.com/friendlyantz/ruby_under_microscope)
-
-
-```python
-def python_books(x):
-    'Automate the Boring Stuff with Python'
-```
-<br>
+- 'Automate the Boring Stuff with Python'
 
 ### Quick stats about me
-| Github Stats | Top Languages |
-| --- | --- |
-| ![Anton's github stats](https://github-readme-stats.vercel.app/api?username=friendlyantz&show_icons=true&title_color=f6c32c&icon_color=f6c32c&text_color=9f9f9f&bg_color=151515&count_private=true) | ![Anton's top languages](https://github-readme-stats.vercel.app/api/top-langs/?username=friendlyantz&show_icons=true&title_color=f6c32c&icon_color=f6c32c&text_color=9f9f9f&bg_color=151515&count_private=true&layout=compact) |
+![Anton's github stats](https://github-readme-stats.vercel.app/api?username=friendlyantz&show_icons=true&title_color=f6c32c&icon_color=f6c32c&text_color=9f9f9f&bg_color=151515&count_private=true)
 
-
-
+![Anton's top languages](https://github-readme-stats.vercel.app/api/top-langs/?username=friendlyantz&show_icons=true&title_color=f6c32c&icon_color=f6c32c&text_color=9f9f9f&bg_color=151515&count_private=true&layout=compact)
 
 ![Visitors](https://visitor-badge.glitch.me/badge?page_id=friendlyantz.friendlyantz) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat&logo=github)](https://github.com/friendlyantz?tab=repositories) [![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/friendlyantz?tab=stars)
+ [![Linkedin Badge](https://img.shields.io/badge/-panteleev-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/panteleev/)](https://www.linkedin.com/in/panteleev/)
