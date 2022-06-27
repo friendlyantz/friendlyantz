@@ -105,7 +105,7 @@ analytics:
 # Site Author
 author:
   name             : "Anton, Friendlyantz"
-  # avatar           : "/assets/images/friendlyantz.jpg"
+  avatar           : # "/assets/images/friendlyantz.jpg"
   bio              : "I am an **amazing** person."
   location         : "Melbourne, Australia"
   email            :
