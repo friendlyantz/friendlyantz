@@ -12,7 +12,7 @@
 
 # theme                  : "minimal-mistakes-jekyll"
 # remote_theme           : "mmistakes/minimal-mistakes"
-minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
+minimal_mistakes_skin    : "dark" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
 # Site Settings
 locale                   : "en-US"
@@ -105,10 +105,10 @@ analytics:
 # Site Author
 author:
   name             : "Anton, Friendlyantz"
-  avatar           : # "/assets/images/friendlyantz.jpg"
+  avatar           : "/images/friendlyantz.jpg"
   bio              : "RoR Dev; Passionate about back_end; love ML"
   location         : "Melbourne, Australia"
-  email            :
+  email            : "panteleev23@gmail.com"
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
