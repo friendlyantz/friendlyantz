@@ -11,7 +11,7 @@
 
   [![Linkedin Badge](https://img.shields.io/badge/-panteleev-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/panteleev/)](https://www.linkedin.com/in/panteleev/)
 
-  [friendlyantz blog](https://friendlyantz.github.io/friendlyantz/)
+  [my blog](https://friendlyantz.github.io/friendlyantz/)
 
 </div>
 <br>
