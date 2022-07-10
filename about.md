@@ -24,6 +24,7 @@ class Anton
                   ]
     @hobbies = [  'Kitesurfing', 
                   'Camping',
+                  'Art Photography',
                   'Motorcycling',
                   'Longboarding'
                 ]
@@ -107,6 +108,15 @@ end
 - 'Object Oriented Design Principles by Sandi Metz',
 - ['Ruby Under a Microscope'](https://github.com/friendlyantz/ruby_under_microscope)
 - 'Automate the Boring Stuff with Python'
+
+### Good Learning material
+
+```ruby
+https://graceful.dev/ - best Ruby learning resource according to Wei
+https://www.destroyallsoftware.com/ - another classic set highly recommended by Gus
+https://syntax.fm/ - podcasts recommended by Mike
+
+```
 
 ### Quick stats about me
 ![Anton's github stats](https://github-readme-stats.vercel.app/api?username=friendlyantz&show_icons=true&title_color=f6c32c&icon_color=f6c32c&text_color=9f9f9f&bg_color=151515&count_private=true)
