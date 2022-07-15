@@ -1,11 +1,10 @@
 ---
-layout: archive
 title:  "G'Day! I'm Anton 🤠"
 date:   2022-06-01 18:50:12 +1000
 categories: blog
 permalink: /about
 ---
-Fullstack software engineer, based in Melbourne, Australia.
+Software engineer and artist, based in Melbourne, Australia.
 
 I switched into tech after more than a decade in Civil Engineering and Project Management consulting - I rediscovered my passion and living the dream now, building digital products and hoping to make the world a better place.
 
