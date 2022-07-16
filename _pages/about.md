@@ -2,7 +2,7 @@
 title:  "G'Day! I'm Anton 🤠"
 date:   2022-06-01 18:50:12 +1000
 categories: blog
-permalink: /about
+permalink: /about/
 ---
 Software engineer and artist, based in Melbourne, Australia.
 
