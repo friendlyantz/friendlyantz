@@ -21,8 +21,6 @@ gallery:
   title: "SA, Robe camping under the startrails"
 ---
 
-Some of my work
-
 {%
   include gallery 
   id="gallery"
