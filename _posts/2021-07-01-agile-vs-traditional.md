@@ -1,5 +1,11 @@
 ---
 title: "Agile vs Traditional Project Management: My 5 takeaways"
+categories:
+  - software_engineering
+tags:
+  - software_engineering
+  - pm
+  - agile
 ---
 
 1. As project members, we solve problems that are imperfectly understood, and we often generate unique and unrepeatable results in terms of the solutions that we come up with to solve those problems.
