@@ -6,8 +6,13 @@ excerpt: "give me a right tool, and I shall move the world?"
 collection: learning
 
 # categories: travel
+header:
+  video:
+    id: l6dwu6cCfkM
+    provider: youtube
 ---
 
-Mike's talk. loved it
+Mike's talk. loved it!
 
+> Source:
 [https://failure-driven.com/presentations/20180627-vi-everywhere-whats-your-superpower/](https://failure-driven.com/presentations/20180627-vi-everywhere-whats-your-superpower/)
