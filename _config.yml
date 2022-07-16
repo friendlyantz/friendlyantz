@@ -218,10 +218,9 @@ kramdown:
 
 # Collections
 collections:
-  portfolio:
+  art:
     output: true
     permalink: /:collection/:path/
-
 
 # Sass/SCSS
 sass:
@@ -310,10 +309,10 @@ defaults:
     values:
       layout: single
       author_profile: true
-  # _portfolio
+  # _art
   - scope:
       path: ""
-      type: portfolio
+      type: art
     values:
       layout: single
       author_profile: false
