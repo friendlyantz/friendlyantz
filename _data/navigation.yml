@@ -1,16 +1,16 @@
 # main links
 main:
-  - title: "About Me"
-    url: /about/
-  - title: "GitHub"
-    url: https://github.com/friendlyantz
+  - title: "Learn"
+    url: /learning/
   - title: "Art"
     url: /art/
-  - title: "Learning"
-    url: /learning/
   # - title: "Categories"
   #   url: /categories/
   # - title: "Tags"
   #   url: /tags/
   # - title: "Sitemap"
   #   url: /sitemap/
+  # - title: "GitHub"
+  #   url: https://github.com/friendlyantz
+  - title: "About"
+    url: /about/
