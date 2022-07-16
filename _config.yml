@@ -221,6 +221,9 @@ collections:
   art:
     output: true
     permalink: /:collection/:path/
+  learning:
+    output: true
+    permalink: /:collection/:path/
 
 # Sass/SCSS
 sass:
@@ -317,3 +320,13 @@ defaults:
       layout: single
       author_profile: false
       share: true
+  # _learning
+  - scope:
+      path: ""
+      type: learning
+    values:
+      layout: single
+      author_profile: false
+      share: true
+      # sidebar:
+        # nav: "learning"
