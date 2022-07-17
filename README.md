@@ -10,8 +10,9 @@
 <div align="center">
 
   [![Linkedin Badge](https://img.shields.io/badge/-panteleev-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/panteleev/)](https://www.linkedin.com/in/panteleev/)
-
-  [my blog](https://friendlyantz.github.io/friendlyantz/)
+  
+  
+ ### [![my_favicon](favicon.ico) My blog :tada: ](https://friendlyantz.github.io/friendlyantz/)
 
 </div>
 <br>
