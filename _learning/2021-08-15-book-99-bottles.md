@@ -71,3 +71,43 @@ A great deal of this pain originates with tests that are tied too closely to cod
 
 Testing, done well, speeds development and lowers costs. Unfortunately it’s also true that flawed tests slow you down and cost you money.
 
+---
+
+Chapterr 3
+
+If the problem is solved, and you choose to refactor now rather than later, you pay the opportunity cost of not being able to work on other problems. Spending time "improving" code based purely on aesthetics may not be the best use of your precious time.
+
+A good way to know that you’re using limited time wisely is to be driven by changes in requirements. The arrival of a new requirement tells you two
+things, one very specific, the other more general.
+
+Specifically, a new requirement tells you exactly how the code should change. Waiting for this requirement avoids the need to speculate about the future. The requirement reveals exactly how you should have initially arranged the code.
+
+---
+
+Conditionals are the bane of OO.
+
+---
+
+Flocking Rules
+1. Selectthethingsthataremostalike.
+2. Findthesmallestdifferencebetweenthem.
+3. Makethesimplestchangethatwillremovethatdifference.
+
+Changes to code can be subdivided into four distinct steps:
+1. parsethenewcode
+2. parseandexecuteit
+3. parse,executeanduseitsresult 4. deleteunusedcode
+
+Flocking - The group’s behavior is the result of a continuous series of small decisions being made by each participating individual:
+1. Alignment-Steer towards the average heading of neighbors
+2. Separation-Don’t get too close to a neighbor
+3. Cohesion-Steer towards the average position of the flock
+Thus, complex behavior emerges from the repeated application of simple rules.
+
+[Steven Strogatz’s Ted Talk](https://www.youtube.com/watch?v=IiXaZGZqpVI&t=196s)
+---
+
+DRYing out sameness has some value, but DRYing out difference has more.
+
+---
+
