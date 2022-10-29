@@ -111,3 +111,6 @@ DRYing out sameness has some value, but DRYing out difference has more.
 
 ---
 
+Erich Gamma, Richard Helm, Ralph Johnson and John Vlissides are commonly referred to as the "Gang of Four," in reference to their joint authorship of Design Patterns: Elements of Reusable Object-Oriented Software, describe twenty-three patterns or solutions to common OO programming problems:
+_The focus here is encapsulating the concept that varies, a theme of many design patterns._
+
