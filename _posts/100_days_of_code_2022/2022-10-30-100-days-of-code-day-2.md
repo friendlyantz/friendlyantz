@@ -11,7 +11,7 @@ tags:
   - esoteric
   - emojicode
 ---
-Day 2:
+Day 2: Emojicode 🐽
 
 Played for the first time with `emojicode` - a fun example of an [esoteric language](https://en.wikipedia.org/wiki/Esoteric_programming_language):
 > _"...a programming language designed to test the boundaries of computer programming language design, as a proof of concept, as software art, as a hacking interface to another language (particularly functional programming or procedural programming languages), or as a joke."_
