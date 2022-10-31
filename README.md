@@ -1,6 +1,6 @@
 <h1 align="center">🤠 G'Day! I'm Anton</h1>
 <div  align="center">
-  <p>I'm a fullstack software engineer, based in Melbourne, Australia. </p>
+  <p>I'm a software engineer, based in Melbourne, Australia. </p>
   <p>
     I switched into tech after more than a decade in Civil Engineering and Project Management consulting - I rediscovered my passion and living the dream now, building digital products and hoping to make the world a better place.
   </p>
