@@ -22,5 +22,7 @@ classes: wide
 - [ ] [Why's (Poignant) Guide to Ruby](https://poignant.guide/)
 - [ ] 99 Bottles - WIP
 
+## Tools
+- [ ] [C4 Diagram](https://c4model.com/)
 ---
 
