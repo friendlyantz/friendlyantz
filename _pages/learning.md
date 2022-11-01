@@ -18,6 +18,9 @@ classes: wide
 - [https://failure-driven.com/presentations/20180627-vi-everywhere-whats-your-superpower/](https://failure-driven.com/presentations/20180627-vi-everywhere-whats-your-superpower/)
 - [VIM Adventures](https://vim-adventures.com/) - learn VI shortcuts game
 
-<!-- ## Ruby Programming -->
-<!-- ## Python -->
+## Books
+- [ ] [Why's (Poignant) Guide to Ruby](https://poignant.guide/)
+- [ ] 99 Bottles - WIP
+
 ---
+
