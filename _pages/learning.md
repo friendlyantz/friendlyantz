@@ -21,6 +21,7 @@ classes: wide
 ## Books
 - [ ] [Why's (Poignant) Guide to Ruby](https://poignant.guide/)
 - [ ] 99 Bottles - WIP
+- [ ] [https://martinfowler.com/books/refactoring.html](https://martinfowler.com/books/refactoring.html)
 
 ## Tools
 - [ ] [C4 Diagram](https://c4model.com/)
