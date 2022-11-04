@@ -23,3 +23,14 @@ D7:
 - classic lsof `lsof -i :9253 -nP -sTCP:LISTEN`
 - `nslookup google.com` - this is simple lookup, but if you need custom ports/etc, you need to go into interactive mode by just `nslookup` and setting your parms, refer `man nslookup`
 - Mac sys logs located here (i.e. Puma server logs): `tail -f ~/Library/Logs/puma-dev.log`
+
+TCP HTB: pwning Redis
+`nmap` timing can be boosted
+`-T<0-5>: Set timing template (higher is faster)`
+I believe this is similar to
+`-T paranoid|sneaky|polite|normal|aggressive|insane`
+fastest way was to add couple of more flags, like scan TCP SYN request `-sS`
+`nmap -v -sV -sS -p T:1009-9999 -T5 0.0.0.0`
+then connect to Redis `redis-cli`
+list keys `keys *`
+`mget 'yrkey'`
