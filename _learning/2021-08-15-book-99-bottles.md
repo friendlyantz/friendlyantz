@@ -120,3 +120,28 @@ It is common to find that hard problems are hard only because the easy ones have
 
 ---
 
+the name of a thing should be one level of abstraction higher than the thing itself.
+
+> First, the new requirement. Recall that the impetus for this refactoring was the need to say "six-pack" instead of "bottle/bottles" when there are 6 bottles. The string "six-pack" is one more concrete example of the underlying abstraction. This suggests that if you name the method "bottle," you will regret this decision in short order.
+1
+bottle
+6
+six-pack
+n
+bottles
+
+---
+
+Making a slew of simultaneous changes is not refactoring—it’s rehacktoring.
+
+---
+
+## Chapter 5
+
+Human agreement about the necessity and rightness of change is reflected in the choice of the word variable for use within computer programming languages. What purpose a variable other than to vary? Most object-oriented programmers write code that both expects and relies upon object mutation. Objects are constructed, used, mutated, and then used again.
+
+Regardless of how intuitive and natural it may seem, mutation is not an absolute requirement. It is perfectly possible (as programmers of functional languages will happily inform you) to construct applications from immutable objects, i.e. objects that do not change. For those unused to this idea, it can be disorienting to imagine reality as constructed by the functional programmer. Instead of refilling your existing cup, you discard it in favor of a new one that looks identical but is full of coffee. Rather than changing yourself to be more fit, you swap yourself for the new, fitter, you. As the Himalayas rise, you replace your existing copy with a brand new mountain range that’s a tiny bit taller.
+
+One of the best things about immutable objects is that they are easy to understand and reason about. These objects never start out one way and then secretly morph into something else. You can be confident that what you see at creation time is always what you get later.
+
+
