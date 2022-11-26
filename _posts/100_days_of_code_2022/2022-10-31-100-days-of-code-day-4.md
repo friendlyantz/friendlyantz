@@ -1,5 +1,5 @@
 ---
-title: "100 Days of Code: day_4-10"
+title: "100 Days of Code: day_4-15"
 categories:
   - software_engineering
   - learning
@@ -34,3 +34,26 @@ fastest way was to add couple of more flags, like scan TCP SYN request `-sS`
 then connect to Redis `redis-cli`
 list keys `keys *`
 `mget 'yrkey'`
+
+D8:
+
+day8 with setting up my new flipper zero device RogueMaster firmware. Esp32 setup coming soon, need windows to run. Exe scripts. 
+
+D9:
+
+day 9 involved a successful hardware hacking of NFC and sub-GHz spectrum. The feeling of joy is priceless, when the script just works as intended after days of research.
+
+D9+,10-11:
+day 9-11 involved hardware hacking and RTFM on RFID - it is an overwhelming rabbit hole, but less overwhelming than couple of days ago...
+
+D12-14:
+Days 12-14: NFC reverse engineering keys from reader intro/rtfm.
+Aslo SubGhz - main vulnerability - you don’t need to decode, you just need to capture the signal
+
+D15:
+Back to Pico W Embedded software plaayground:
+got 2 new boards to replace my cooked picow. 
+Connected to Dev Board I got from Alim which is great and shiny, but I suspect they screwed up wiring for buttons, so the input is 0, and no-input is 1, which we can dance around.
+Also managed to fire-up oled.
+Still struggling with CO2 sensor, connecting MicroPython with Adafruit hardware that originally designed for their CircuitPy is not straight forward. 
+
