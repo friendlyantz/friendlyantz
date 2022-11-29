@@ -136,6 +136,38 @@ Making a slew of simultaneous changes is not refactoring—it’s rehacktoring.
 
 ---
 
+## Chapter 4
+
+The refactoring rules say to start by choosing the cases that are most alike.
+
+---
+
+The fact that the argument is known to equal 1 does not matter. This
+substitution is important, not because it changes the resulting value, but because it increases the level of abstraction.
+
+### 4.5
+#### Sections 4.5+ -> Liskov Substitution Principle: "Subtypes must be substitutable for their supertypes."
+- 4.5 'These methods are incredibly consistent, and this did not happen by accident--they’re a direct result of the refactoring rules' 
+- 4.5 Code is read many more times than it is written
+- 4.6 '`No more` conundrum. The lowercase variant of "no more" is required by verse 1, and now verse 0 needs the same two words, except capitalized as the start of a sentence. The underlying concept is the same in both cases ("no more" is to be sung when the number of bottles is 0)'
+- 4.6 img4.33: The above change follows the strategy of gradually making things more alike in hopes that it will then become clear how to make them identical
+- 4.6 FIXNUM Error: 'You may be itching to fix this error by making a change in the quantity method, but it’s instructive to try attacking it here in verse .'
+- 4.6 Inconsistency of return types by `quantity` method forces the sender of the message to know more than it should.
+- 4.6 'all Ruby objects understand `to_s` , so it was programmatically convenient to blithely convert every return into a string'
+- 4.7 'You may have noticed that the method you create during this refactoring contains code that exactly mirrors the shape of the original case statement. Once this becomes apparent, it makes sense to begin extracting the method in a single step,'
+- 4.7 'The previous chapter showed an example where the entire container method was created at once. That was held up as an example of what not to do. The action method above looks a lot like that original `container` method, and it may seem as if you are now being given permission to act in a way that was previously prohibited.
+- 4.8 'It may help to consider these questions. When the value of number is 5 , what does quantity return? How about when number is 95 ? And finally, what would quantity return if you passed in 99 ?
+If you just realized that you can make these lines a little bit more alike by passing the 99 into quantity , you’ve got it.'
+```ruby
+when 0
+  "#{quantity(99)} bottles of beer on the wall.\n"
+else
+  "#{quantity(number-1)} #{container(number-1)} of beer on the wall.\n"
+```
+- 4.10 You don’t have to understand the entire problem in order to find and express the correct abstractions—you merely apply these rules, repeatedly, and abstractions will naturally appear.
+
+---
+
 ## Chapter 5
 
 Human agreement about the necessity and rightness of change is reflected in the choice of the word variable for use within computer programming languages. What purpose a variable other than to vary? Most object-oriented programmers write code that both expects and relies upon object mutation. Objects are constructed, used, mutated, and then used again.
