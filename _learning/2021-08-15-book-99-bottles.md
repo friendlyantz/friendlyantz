@@ -176,4 +176,81 @@ Regardless of how intuitive and natural it may seem, mutation is not an absolute
 
 One of the best things about immutable objects is that they are easy to understand and reason about. These objects never start out one way and then secretly morph into something else. You can be confident that what you see at creation time is always what you get later.
 
+5.1.1. Identifying Patterns in Code: 'One way to get better at identifying smells is to practice describing the characteristics of code.'
 
+1. Do any methods have the same shape?
+2. Do any methods take an argument of the same name?
+3. Do arguments of the same name always mean the same thing?
+4. If you were to add the private keyword to this class, where would it go?
+5. If you were going to break this class into two pieces, where’s the dividing line?
+6. Do the tests in the conditionals have anything in common?
+7. How many branches do the conditionals have?
+8. Do the methods contain any code other than the conditional?
+9. Does each method depend more on the argument that got passed,or on the class as a whole?
+
+5.1.2. Squint Test:Changes in indentation reveal the presence of conditionals, resulting in multiple execution paths through the code, which add complexity and make code hard to understand.
+Changes in color indicate differences in the level of abstraction. A method that intermixes many colors tells a story that will be difficult to follow.
+
+Having multiple methods that take the same argument is a code smell. It’s important, however, to recognize that here the term "same" means same concept, not identical name. 
+
+5.1.3. Programmers tend to blithely interchange these different comparison operators, confident that if the tests pass, the code is correct. However, having tests that pass doesn’t guarantee the best expression of code, and this is a case where your choice of operator affects future costs.
+Testing for equality has several benefits over the alternatives. Most obviously, it narrows the range of things that meet the condition. In the above examples, if unexpected values of number arrive, the else branch executes. Knowing that the only way to get to the true branch is by
+supplying an exact value of number makes it easier for future readers to
+understand the code. This reduces the difficulty of debugging errors caused by incorrect inputs. Testing for equality also makes the code more precise, and this precision, as you will soon see, enables future refactorings.
+
+5.1.4. ' someone can go to the trouble of injecting a dependency ( number ), but that dependency is too impaired to supply the
+needed behavior.'
+> full-blown OO mindset is deeply suspicious of conditionals! 
+> there’s a big difference between a conditional that selects the correct object and one that supplies behavior. 
+
+5.2. Extracting Classes
+Built-in data classes like String , Fixnum , Integer ( Fixnum 's superclass), Array , and Hash are examples of "primitives." Primitive Obsession is when you use one of
+these data classes to represent a concept in your domain. Obsessing on a primitive results in code that passes built-in types around, and supplies behavior for them.
+The cure for Primitive Obsession is to create a new class to use in place of the primitive. For this operation, the refactoring recipe is Extract Class.
+
+5.2.1 Unlike bottles, numbers aren’t things—they’re ideas, albeit ones so ubiquitous that you’ve likely forgotten how abstract and unlikely they are. Numbers are symbols used to describe quantities of things. They don’t physically exist. You can pick up a bottle, but you cannot pick up a "six."
+BottleNumber is more concrete. ContainerNumber is more abstract.
+The tie-breaker here is that the "name things at one higher level of abstraction" rule applies more to methods than to classes, but this rule applies more to methods than to classes
+Name methods after what they mean, classes can be named after what they are.
+
+5.2.3 Extracting BottleNumber
+1. parsethenewcode 
+2. parseandexecuteit
+3. parse,executeanduseitsresult
+4. deleteunusedcode
+
+
+5.2.4. Steps for removing an argument using one-line changes:
+1. Start by changing the existing argument name to anything other than what it currently is. Using delete_me will help you remember to delete the argument when you’ve updated all of the senders. The value of the default does not matter, so it’s common to use nil
+```ruby
+# def container(number)
+def container(delete_me=nil)
+```
+2. Change every sender of the message to remove the parameter
+```ruby
+# BottleNumber.new(number).container(number)
+BottleNumber.new(number).container
+```
+3. Finally,deletetheargumentfromthemethoddefinition
+```ruby
+def container
+```
+
+> NOTE by Anton: however I would use class method, but this might contradict with OO mindset?
+```ruby
+class BottleNumber
+  def self.container(number)
+  # ...
+```
+
+5.3. Re Functional Programming and OO
+"Human agreement about the necessity and rightness of change is reflected in the choice of the word variable for use within computer programming languages. What purpose a variable other than to vary? Most object-oriented programmers write code that both expects and relies upon object mutation. Objects are constructed, used, mutated, and then used again.
+Regardless of how intuitive and natural it may seem, mutation is not an absolute requirement. It is perfectly possible (as programmers of functional languages will happily inform you) to construct applications from immutable objects, i.e. objects that do not change. For those unused to this idea, it can be disorienting to imagine reality as constructed by the functional programmer. Instead of refilling your existing cup, you discard it in favor of a new one that looks identical but is full of coffee. Rather than changing yourself to be more fit, you swap yourself for the new, fitter, you. As the Himalayas rise, you replace your existing copy with a brand new mountain range that’s a tiny bit taller.
+If the idea of immutability is new to you, the examples in the prior paragraph may seem positively alarming."
+---
+
+5.4
+
+Phil Karlton’s famous saying "There are only two hard things in Computer Science: cache invalidation and naming things."
+
+. The net cost of caching can be calculated only by comparing the benefit of increases in speed to the cost of creating and maintaining the cache. If you require this speed increase, any cost is cheap. If you don’t, every cost is too much.
