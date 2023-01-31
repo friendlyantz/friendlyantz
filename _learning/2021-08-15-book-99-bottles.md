@@ -254,3 +254,5 @@ If the idea of immutability is new to you, the examples in the prior paragraph m
 Phil Karlton’s famous saying "There are only two hard things in Computer Science: cache invalidation and naming things."
 
 . The net cost of caching can be calculated only by comparing the benefit of increases in speed to the cost of creating and maintaining the cache. If you require this speed increase, any cost is cheap. If you don’t, every cost is too much.
+
+5.6 it is often better to finish horizontal refactorings before undertaking vertical tangents
