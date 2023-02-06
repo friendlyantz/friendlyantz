@@ -255,4 +255,34 @@ Phil Karlton’s famous saying "There are only two hard things in Computer Scien
 
 . The net cost of caching can be calculated only by comparing the benefit of increases in speed to the cost of creating and maintaining the cache. If you require this speed increase, any cost is cheap. If you don’t, every cost is too much.
 
-5.6 it is often better to finish horizontal refactorings before undertaking vertical tangents
+5.6. Recognizing Liskov Violations
+"Subclasses should be substitutable for their superclasses."
+- ...The type of the object has changed, but the successor method still returns the old type. This inconsistency is another violation of the generalized Liskov Substitution
+- it is often better to finish horizontal refactorings before undertaking vertical tangents
+
+---
+
+# Chapter 6
+
+6.1 Data Clumps
+
+Data Clump is officially about data, and is defined as the situation in which several (i.e. three or more) data fields routinely occur together.
+
+Having a clump of data usually means you are missing a concept. When a clump gets sent as a set of parameters, the method that receives the clump can easily become polluted with clump management logic. If more than one method takes the same clump as input, some or all of this management logic will inevitably get duplicated in several places. Not only is it a pain to maintain this duplication, but over time the logic might accidentally diverge, introducing errors and confusing everyone involved.
+
+Full-grown Data Clumps are usually removed by extracting a class, but in this small example it makes sense to simply create a new method.
+
+6.2. Making Sense of Conditionals
+
+Fowler offers several curative refactoring recipes. The two main contenders are Replace Conditional with State/Strategy and Replace Conditional with Polymorphism.
+
+The Replace Conditional with State/Strategy recipe removes conditionals by dispersing their branches into new, smaller objects, one of which is later selected and plugged back in at runtime. This recipe results in a code arrangement known as composition.
+The Replace Conditional with Polymorphism recipe removes conditionals by creating one class to hold the defaults of the conditionals (the `false`
+branches), and adding subclasses for each specialization (the `true`
+branches of the various conditions). It then chooses one of these new objects to plug back in at runtime. This recipe solves the conditional problem using inheritance.
+
+6.3. Replacing Conditionals with Polymorphism
+
+
+In OO, polymorphism refers to the idea of having many different kinds of objects that respond to the same message. Senders of the message needn’t care with which of the possible receivers they are communicating. Polymorphism allows senders to depend on the message while remaining ignorant of the type, or class, of the receiver. Senders don’t care what receivers are; instead, they depend on what receivers do.
+
