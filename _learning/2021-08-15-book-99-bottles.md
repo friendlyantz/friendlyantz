@@ -286,3 +286,14 @@ branches of the various conditions). It then chooses one of these new objects to
 
 In OO, polymorphism refers to the idea of having many different kinds of objects that respond to the same message. Senders of the message needn’t care with which of the possible receivers they are communicating. Polymorphism allows senders to depend on the message while remaining ignorant of the type, or class, of the receiver. Senders don’t care what receivers are; instead, they depend on what receivers do.
 
+
+6.3.3. Prevailing with Polymorphism
+
+Polymorphism, and the remainder of this refactoring is just more of the same. Here’s a list of the recipe’s steps:
+1. Createasubclasstostandinforthevalueuponwhichyouswitch.
+a. Copyonemethodthatswitchesonthatvalueintothesubclass.
+b. Inthesubclass,removeeverythingbutthetruebranchofthe conditional.
+i. At this point, create a factory if it does not yet exist, and ii. Add this subclass to the factory if not yet included.
+c. Inthesuperclass,removeeverythingbutthefalsebranchofthe conditional.
+d. Repeatstepsa-cuntilallmethodsthatswitchonthevalueare dispersed.
+2. Iterateuntilasubclassexistsforeverydifferentvalueuponwhichyou switch.
