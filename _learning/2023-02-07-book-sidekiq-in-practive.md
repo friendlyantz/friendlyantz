@@ -32,3 +32,31 @@ Queueing theory provides a few bits of useful terminology:
 ## Little’s Law
 Little’s Law is a very simple equation: it simply says that the number of “units of work” (e.g. customers in a line, jobs in our Sidekiq queues) in a queueing system is equal to the average amount of time required to process that work, multiplied by the average rate of arrival of work (how many customers arrive per minute, how many jobs arrive per minute).
 The result of Little’s Law is also called offered traffic.
+
+---
+
+A stable system when load rapidly increases
+As load increases (jobs are enqueued more rapidly), the length of the queue will increase. Rapid growth of a queue can effectively cause a “brownout”, where the system is not technically down (it’s still online and processing jobs), but the queue has become so deep that by the time jobs execute, they may be completely irrelevant!
+
+### USE Method
+Utilization
+Utilization metrics are just ratios: resources used divided by resources available.
+In a queueing system, the most important resources are not memory or CPU, but the servers which can do work.
+
+Saturation
+Saturation is what occurs when our system is 100% utilized at any given moment: that is, saturation is the growth of the queue. In systems without queues, or with queues of limited length, saturation leads to rejection/denial of service.
+
+Errors
+All errors are wasted capacity: wasted work that could have been spent doing something productive. Keeping errors low means we keep our server capacity available for useful work.
+Useful error metrics to track for Sidekiq include:
+- Size of the retry queue 
+- Size of the dead queue 
+- Redis connection errors
+Error metrics should be as low as possible, so that capacity can be used for useful work.
+
+The Ideal Sidekiq
+1. Each job’s total time (time spent in the queue waiting plus time spent servicing the job in a Sidekiq thread) is less than or equal to its requirements, which vary based on the job.
+2. Utilization is as high as possible while still meeting total time requirements.
+3. Errors are low, so that the maximum amount of capacity is being used on useful, not wasteful, work.
+4. The system can respond quickly to changes in load, keeping job “total time” within parameters even when lots of jobs arrive at once, without downtime.
+
