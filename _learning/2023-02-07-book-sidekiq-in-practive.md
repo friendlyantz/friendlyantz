@@ -2,8 +2,17 @@
 title: "Book: 'Sidekiq in Practice'"
 excerpt: "Queueing system for Ruby"
 collection: learning
+categories:
+  - software_engineering
+  - learning
+tags:
+  - software_engineering
+  - career
+  - learning
+  - book
 ---
 
+# Ch 1
 These three components - work, queues, and threads
 
 - A number of computers (that is, your servers or VPSs or Kubernetes nodes or whatever) contain a number of Sidekiq _processes_, referred to in Sidekiq as “server” processes. Sidekiq processes “do the work”, as opposed to...
@@ -16,8 +25,42 @@ These three components - work, queues, and threads
 
 Sidekiq’s Redis commands are generally executed serially, so we wait for a reply from the database before sending the next command. That means that 2 commands generally take 2 times as long to execute. It also means that we’re imposing 2 times as much load on the Redis database.
 
-Another important thing when considering the Redis command required to queue or execute a job is time complexity (commonly notated with Big O notation). 
+Another important thing when considering the Redis command required to queue or execute a job is time complexity (commonly notated with Big O notation). See also [Big O cheatsheet](https://www.bigocheatsheet.com/)
 
+`perform_async` is fast `O(2)`, it uses:
+- 2x Redis commands on insert(`SADD`) and ([LPUSH](https://redis.io/commands/lpush/)), and
+- 1x on execution ([BPOP](https://redis.io/commands/brpop/))
+
+`perform_at` is SLOW 🐌 and is often used to "smear" load into the future: 
+```ruby
+perform_at(Time. now + rand(100))
+```
+On insert: it calls [`ZADD`](https://redis.io/commands/zadd/) Redis command which adds to a sorted list and uses `O(log (N))`
+On execution: moves jobs from the scheduled set to a queue with 3
+commands:
+```
+ZRANGEBYSCORE   O(log(N)+M)
+ZREM            O(M*log(N))
+LPUSH           0(1)
+```
+
+In summary:
+> perform_at turns
+3 fast commands into
+5 slow ones.
+
+Redis is single-threaded and can only exec 1 command at a time
+
+Job uniqueness checks also add lots of Redis back-and-forth(whether this is sidekiq pro/enterprise or 3rd party uniqness plugin)
+
+Locks can be another source of extra Redis commands(locks from other plug ins or pro/entrprs) -> SUPER SLOW
+
+
+Fan-outs(when a job schedules other jobs) create extra Redis load, but not that much
+
+`push_bulk` use push bulk anywhere
+possible - but the benefit is mostly in eliminating Round Trip Time (RTT)
+Redis RTT matters here, too
 ---
 
 # Ch2: Understanding Queueing Systems
