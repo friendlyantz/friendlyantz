@@ -1,5 +1,5 @@
 ---
-title: "100 Days of Code: day_4-15"
+title: "100 Days of Code: day_4-19+"
 categories:
   - software_engineering
   - learning
@@ -57,3 +57,8 @@ Connected to Dev Board I got from Alim which is great and shiny, but I suspect t
 Also managed to fire-up oled.
 Still struggling with CO2 sensor, connecting MicroPython with Adafruit hardware that originally designed for their CircuitPy is not straight forward. 
 
+Day 18 n 19 bash scripting
+translating your solution is bash syntax is not easy. Learned basic control flow, bit or regex and args handling.  I think i might switch to something more useful
+
+Day 20, 21
+Ruby Exercism - love the mentoring and focusing on perfecting simle problems
