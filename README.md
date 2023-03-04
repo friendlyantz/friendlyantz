@@ -12,7 +12,7 @@
   [![Linkedin Badge](https://img.shields.io/badge/-panteleev-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/panteleev/)](https://www.linkedin.com/in/panteleev/)
   
   
- ### [![my_favicon](favicon.ico) My blog :tada: ](http://friendlyantz.me/)
+ ### [![my_favicon](favicon.ico) My Personal Website :tada:  https://friendlyantz.me/](https://friendlyantz.me/)
 
 </div>
 <br>
