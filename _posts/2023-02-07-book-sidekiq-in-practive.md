@@ -76,9 +76,19 @@ Queueing theory provides a few bits of useful terminology:
 Little’s Law is a very simple equation: it simply says that the number of “units of work” (e.g. customers in a line, jobs in our Sidekiq queues) in a queueing system is equal to the average amount of time required to process that work, multiplied by the average rate of arrival of work (how many customers arrive per minute, how many jobs arrive per minute).
 The result of Little’s Law is also called offered traffic.
 
+Queue Length Exponentially Increases as Utilization Increases
+
+Generally, we can divide queueing systems into two regimes: low utilization and high utilization. When utilization of the system is between 0 and 70%, queue wait times increase quite slowly as utilization increases. But, when utilization increases beyond 70%, the exponential effects take over and queue latency increases quickly.
+
 ---
 
-A stable system when load rapidly increases
+Wait Time Is Proportional to 1/Servers
+
+The “knee” can be made “deeper” by increasing the number of servers pulling from the queue. This is because wait time is inversely proportional to how many servers there are.
+---
+
+#### A stable system when load rapidly increases
+
 As load increases (jobs are enqueued more rapidly), the length of the queue will increase. Rapid growth of a queue can effectively cause a “brownout”, where the system is not technically down (it’s still online and processing jobs), but the queue has become so deep that by the time jobs execute, they may be completely irrelevant!
 
 ### USE Method
@@ -86,10 +96,12 @@ Utilization
 Utilization metrics are just ratios: resources used divided by resources available.
 In a queueing system, the most important resources are not memory or CPU, but the servers which can do work.
 
-Saturation
+#### Saturation
 Saturation is what occurs when our system is 100% utilized at any given moment: that is, saturation is the growth of the queue. In systems without queues, or with queues of limited length, saturation leads to rejection/denial of service.
 
-Errors
+Saturation metrics are all about queues. The most important one for Sidekiq will generally be the length of the queue in seconds, calculated by taking the next job in our queue and subtracting when it was enqueued from the current time.
+
+#### Errors
 All errors are wasted capacity: wasted work that could have been spent doing something productive. Keeping errors low means we keep our server capacity available for useful work.
 Useful error metrics to track for Sidekiq include:
 - Size of the retry queue 
