@@ -1,5 +1,5 @@
 ---
-title: "Book: 'Sidekiq in Practice'"
+title: "notes on Book: 'Sidekiq in Practice'"
 excerpt: "Queueing system for Ruby"
 collection: learning
 categories:
@@ -12,8 +12,11 @@ tags:
   - book
 ---
 
-# Ch 1
-These three components - work, queues, and threads
+* Table of contents (do not remove this line)
+{:toc}
+
+# Ch 1: How Sidekiq works
+Sidekiq components: work, queues, and threads
 
 - A number of computers (that is, your servers or VPSs or Kubernetes nodes or whatever) contain a number of Sidekiq _processes_, referred to in Sidekiq as “server” processes. Sidekiq processes “do the work”, as opposed to...
 - Sidekiq _clients_ place jobs into queues. Sidekiq clients are simply Ruby objects which can enqueue jobs. They are usually in a seperate process from the Sidekiq server process, but Sidekiq clients can be instantiated anywhere (jobs can enqueue other jobs, for example). They place jobs into queues by adding keys to a Redis queue structure.
@@ -23,7 +26,8 @@ These three components - work, queues, and threads
 
 ---
 
-Sidekiq’s Redis commands are generally executed serially, so we wait for a reply from the database before sending the next command. That means that 2 commands generally take 2 times as long to execute. It also means that we’re imposing 2 times as much load on the Redis database.
+## Sidekiq’s Redis commands
+are generally executed serially, so we wait for a reply from the database before sending the next command. That means that 2 commands generally take 2 times as long to execute. It also means that we’re imposing 2 times as much load on the Redis database.
 
 Another important thing when considering the Redis command required to queue or execute a job is time complexity (commonly notated with Big O notation). See also [Big O cheatsheet](https://www.bigocheatsheet.com/)
 
@@ -45,9 +49,10 @@ LPUSH           0(1)
 ```
 
 In summary:
-> perform_at turns
-3 fast commands into
-5 slow ones.
+>
+	perform_at turns
+	3 fast commands into
+	5 slow ones.
 
 Redis is single-threaded and can only exec 1 command at a time
 
@@ -55,13 +60,12 @@ Job uniqueness checks also add lots of Redis back-and-forth(whether this is side
 
 Locks can be another source of extra Redis commands(locks from other plug ins or pro/entrprs) -> SUPER SLOW
 
-
 Fan-outs(when a job schedules other jobs) create extra Redis load, but not that much
 
 `push_bulk` use push bulk anywhere
 possible - but the benefit is mostly in eliminating Round Trip Time (RTT)
 Redis RTT matters here, too
----
+
 
 # Ch2: Understanding Queueing Systems
 
@@ -115,3 +119,18 @@ The Ideal Sidekiq
 3. Errors are low, so that the maximum amount of capacity is being used on useful, not wasteful, work.
 4. The system can respond quickly to changes in load, keeping job “total time” within parameters even when lots of jobs arrive at once, without downtime.
 
+# CH 3: Concurrency
+**threads cost a lot of memory in CRuby**
+When there is more than one thread in a process, multiple threads can be ready to run Ruby code, but only one can run it at a time. This creates queueing for the Global VM Lock, as threads wait for the GVL to free up. As we covered in the previous chapter, queueing increases latency.
+
+
+**Setting higher than your database setting can slow down your Sidekiq by 100x.**
+
+---
+Video takeaways
+- handfull of queues are better making SLO easier to read and monitor
+- Floods of a particular job type can be solved with weighting + longer SLOs
+- read-replica queues is a good stratagey. Consider Replica lagDB => read global txn_id to takle it (`perform(args, txn_id`) OR read replica lag(but this is not 100% accurate)
+
+VID
+---
