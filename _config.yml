@@ -106,7 +106,7 @@ analytics:
 author:
   name             : "Anton, Friendlyantz"
   avatar           : "/images/friendlyantz.jpg"
-  bio              : "Software Engineer; Passionate about back_end; love ML"
+  bio              : "Software Engineer; back_end; ML; TDD"
   location         : "Melbourne, Australia"
   email            : "panteleev23@gmail.com"
   links:
