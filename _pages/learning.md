@@ -11,6 +11,7 @@ classes: wide
 
 - [Exercism](https://exercism.org/) - exercises and mentoring ([Hackerrank](https://www.hackerrank.com/) is similar, but without mentoring and CLI)
 - [Hack The Box](https://www.hackthebox.com/) - classic pentesting sandbox and exercises
+- [HACKING: THE ART OF EXPLOITATION](https://repo.zenk-security.com/Magazine%20E-book/Hacking-%20The%20Art%20of%20Exploitation%20(2nd%20ed.%202008)%20-%20Erickson.pdf)
 - [Graceful Dev](https://graceful.dev/) - Superb bite-sized tutorials, tips and tricks on Ruby
 - [Failure Driven](https://failure-driven.com/) - learn from the best, to be the best... right Mike & Selena?
 - [Uncle Bob](https://blog.cleancoder.com) - Robert Cecil Martin
