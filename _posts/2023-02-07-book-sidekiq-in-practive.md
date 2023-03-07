@@ -33,7 +33,7 @@ Another important thing when considering the Redis command required to queue or 
 
 `perform_async` is fast `O(2)`, it uses:
 - 2x Redis commands on insert(`SADD`) and ([LPUSH](https://redis.io/commands/lpush/)), and
-- 1x on execution ([BPOP](https://redis.io/commands/brpop/))
+- 1x on execution ([BRPOP](https://redis.io/commands/brpop/))
 
 `perform_at` is SLOW 🐌 and is often used to "smear" load into the future: 
 ```ruby
