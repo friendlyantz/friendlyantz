@@ -16,7 +16,7 @@ minimal_mistakes_skin    : "dark" # "air", "aqua", "contrast", "dark", "dirt", "
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Friendlyantz Personal Blog!"
+title                    : "Friendlyantz Personal Blog"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
 name                     : "Anton"
@@ -106,35 +106,35 @@ analytics:
 author:
   name             : "Anton, Friendlyantz"
   avatar           : "/images/friendlyantz.jpg"
-  bio              : "Software Engineer; back_end; ML; TDD"
+  bio              : "Software Engineer, interested in back-end and TDD, AI and CyberSec"
   location         : "Melbourne, Australia"
   email            : "panteleev23@gmail.com"
   links:
-    - label: "Email"
-      icon: "fas fa-fw fa-envelope-square"
-      # url: "mailto:panteleev23@gmail.com" # not required, as stated above
-    - label: "Website"
-      icon: "fas fa-fw fa-link"
-      # url: "https://github.com/friendlyantz"
-    - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/friendlyantz"
-    - label: "Facebook"
-      icon: "fab fa-fw fa-facebook-square"
-      # url: "https://facebook.com/"
-    - label: "LinkedIn"
-      icon: "fas fa-fw fa-link"
-      url: "https://www.linkedin.com/in/panteleev/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/friendlyantz"
+    - label: "Twitter"
+      icon: "fab fa-fw fa-twitter-square"
+      url: "https://twitter.com/friendlyantz"
+    - label: "LinkedIn"
+      icon: "fas fa-fw fa-link"
+      url: "https://www.linkedin.com/in/panteleev/"
     - label: "Exercism"
       icon: "fa fa-code"
       url: "https://exercism.org/profiles/friendlyantz"
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
       url: "https://www.instagram.com/friendlyantz/"
-
+    - label: "Facebook"
+      icon: "fab fa-fw fa-facebook-square"
+      # url: "https://facebook.com/"
+    - label: "Email"
+      icon: "fas fa-fw fa-envelope-square"
+      # url: "mailto:panteleev23@gmail.com" # not required, as stated above
+    - label: "Website"
+      icon: "fas fa-fw fa-link"
+      # url: "https://github.com/friendlyantz"
+ 
 # Site Footer
 footer:
   links:
@@ -225,6 +225,9 @@ collections:
     output: true
     permalink: /:collection/:path/
   learning:
+    output: true
+    permalink: /:collection/:path/
+  hacking:
     output: true
     permalink: /:collection/:path/
 
@@ -330,8 +333,18 @@ defaults:
       path: ""
       type: learning
     values:
-      layout: single
+      layout: splash
       author_profile: false
       share: true
       # sidebar:
         # nav: "learning"
+  # _hacking
+  - scope:
+      path: ""
+      type: hacking
+    values:
+      layout: splash
+      author_profile: false
+      # share: true
+      # sidebar:
+      #   nav: "hacking"

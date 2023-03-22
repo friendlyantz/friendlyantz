@@ -26,9 +26,20 @@ classes: wide
 
 ## Books
 - [ ] [Why's (Poignant) Guide to Ruby](https://poignant.guide/)
-- [ ] 99 Bottles - WIP
+- [x] 99 Bottles
+- [ ] [Sidekiq in Practice](https://nateberk.gumroad.com/l/sidekiqinpractice) 👀
 - [ ] [https://martinfowler.com/books/refactoring.html](https://martinfowler.com/books/refactoring.html)
 
+
 ## Tools
-- [ ] [C4 Diagram](https://c4model.com/)
+- [C4 Diagram](https://c4model.com/)
+
 ---
+## Quotes
+
+### Adam Boas wisdom: 3 tips from a great engineer and leader
+
+I had a privilage to work with a great engineer and leader - Adam Boas, I asked him for 3 tips for fellow professionals:
+> 1. don’t forget technical underpinnings - it’s not just about shipping code
+> 1. always refactor - your first or second cut is never going to be perfect, be willing to keep improving the code
+> 1. be critical of yourself and others - but not the people - create a robust culture where you can focus on ideas but be ready to let them go
