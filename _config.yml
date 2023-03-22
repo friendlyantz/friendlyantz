@@ -131,9 +131,9 @@ author:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
       # url: "mailto:panteleev23@gmail.com" # not required, as stated above
-    - label: "Website"
+    - label: "Bussiness Card"
       icon: "fas fa-fw fa-link"
-      # url: "https://github.com/friendlyantz"
+      url: "https://hihello.me/p/db5da52c-99b3-4945-b2f9-259e398f6541"
  
 # Site Footer
 footer:
