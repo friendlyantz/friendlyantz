@@ -28,6 +28,7 @@ classes: wide
 - [ ] [Why's (Poignant) Guide to Ruby](https://poignant.guide/)
 - [x] 99 Bottles
 - [ ] [Sidekiq in Practice](https://nateberk.gumroad.com/l/sidekiqinpractice) 👀
+also see [my notes]({% post_url 2023-02-07-book-sidekiq-in-practice %})
 - [ ] [https://martinfowler.com/books/refactoring.html](https://martinfowler.com/books/refactoring.html)
 - [ ] [Polished Ruby Programming](https://www.oreilly.com/library/view/polished-ruby-programming/9781801072724/)
 
