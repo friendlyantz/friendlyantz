@@ -128,9 +128,9 @@ author:
     - label: "Facebook"
       icon: "fab fa-fw fa-facebook-square"
       # url: "https://facebook.com/"
-    - label: "Email"
+    - label: "CV"
       icon: "fas fa-fw fa-envelope-square"
-      # url: "mailto:panteleev23@gmail.com" # not required, as stated above
+      url: "https://friendlyantz.github.io/cv/" 
     - label: "Bussiness Card"
       icon: "fas fa-fw fa-link"
       url: "https://hihello.me/p/db5da52c-99b3-4945-b2f9-259e398f6541"
@@ -236,6 +236,7 @@ sass:
   sass_dir: _sass
   style: compressed # https://sass-lang.com/documentation/file.SASS_REFERENCE.html#output_style
 
+style: kjhealy
 
 # Outputting
 permalink: /:categories/:title/

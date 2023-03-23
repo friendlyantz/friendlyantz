@@ -4,8 +4,8 @@ main:
     url: /learning/
   - title: "Art"
     url: /art/
-  # - title: "Categories"
-  #   url: /categories/
+  # - title: "CV"
+  #   url: /cv/
   # - title: "Tags"
   #   url: /tags/
   - title: "Hacking"
