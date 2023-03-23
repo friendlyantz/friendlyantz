@@ -29,6 +29,7 @@ classes: wide
 - [x] 99 Bottles
 - [ ] [Sidekiq in Practice](https://nateberk.gumroad.com/l/sidekiqinpractice) 👀
 - [ ] [https://martinfowler.com/books/refactoring.html](https://martinfowler.com/books/refactoring.html)
+- [ ] [Polished Ruby Programming](https://www.oreilly.com/library/view/polished-ruby-programming/9781801072724/)
 
 
 ## Tools
