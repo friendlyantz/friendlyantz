@@ -122,5 +122,34 @@ Still struggling with CO2 sensor, connecting MicroPython with Adafruit hardware 
 ## Day 18 - 19 bash scripting
 translating your solution is bash syntax is not easy. Learned basic control flow, bit or regex and args handling.  I think i might switch to something more useful
 
-## Day 20, 21 exercism
+## Day 20 - 24 exercism
 Ruby Exercism - love the mentoring and focusing on perfecting simle problems
+
+## Day 25 PostreSQL
+```sql
+CREATE DATABASE test
+`\l`
+```
+### Connect opt 1
+```sh
+psql -h localhost -U friendlyantz -p 5432 test
+```
+### Connect via SQL / `psql`
+```sql
+\c test
+```
+
+### Delete
+```sql
+DROP DATABASE test;
+```
+This is very dangerous
+
+### add table
+```sql
+CREATE TABLE test (
+  id INT,
+  name VARCHAR(30),
+  note TEXT,
+  dob DATE );
+```

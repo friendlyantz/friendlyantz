@@ -18,6 +18,7 @@ classes: wide
 - [Martin Fowler](https://martinfowler.com/)
 - [SyntaxFM Podcasts](https://syntax.fm/) - podcasts recommended by Mike
 - [Destroy All Software](https://www.destroyallsoftware.com/) - another classic set highly recommended by Gus
+- [Video: FUN TO IMAGINE with Richard Feynman](https://www.youtube.com/watch?v=P1ww1IXRfTA)
 
 
 ## Terminal, vi and tools
