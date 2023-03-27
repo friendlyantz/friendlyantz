@@ -25,7 +25,7 @@ class Anton
   def initialize
     @name = 'Anton Panteleev'
     @dob = "1987-04-01T04:15:00"
-    @work = 'Full-Stack Software Engineer and Data Scientist'
+    @work = 'FinTech Software Engineer'
     @education = [ 'Auckland University of Technology',
                    'Moscow State University of Civil Engineering',
                    'Le Wagon' 
