@@ -20,14 +20,12 @@ class Anton
     @work = 'FinTech Software Engineer'
     @education = [ 'Auckland University of Technology',
                    'Moscow State University of Civil Engineering',
-                   'Le Wagon' 
-                  ]
-    @hobbies = [  'Kitesurfing', 
-                  'Camping',
-                  'Art Photography',
-                  'Motorcycling',
-                  'Longboarding'
-                ]
+                   'Le Wagon' ]
+    @hobbies = [ 'Kitesurfing', 
+                 'Camping',
+                 'Art Photography',
+                 'Motorcycling',
+                 'Longboarding' ]
   end
 
   def current_location
@@ -37,8 +35,7 @@ class Anton
   def previous_locations
     [ 'Brisbane, Australia',
       'Auckland, New Zealand',
-      'Moscow, Russia'
-    ]
+      'Moscow, Russia' ]
   end
 end
 ```
