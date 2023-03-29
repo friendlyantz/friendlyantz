@@ -73,8 +73,6 @@ _it's like `cat`, but for images😽_
 
 ##### SUCCESS MESSAGE
 
-![[iTerm2.URfnwc.jpeg]]
-
 ```bash
 SUCCESS=$(curl -s https://avatars.steamstatic.com/e924aab1db76fe96f490b51eeed2893571c5d41b_full.jpg | imgcat)
 ```
@@ -100,6 +98,8 @@ fi
 ```
 
 ---
+
+##### CI/CD it via GitHub Action Workflow
 
 ```bash
 if curl -s -N 'https://github.com/terry-d-4tw/' | grep -q "I love Ruby too"; then
