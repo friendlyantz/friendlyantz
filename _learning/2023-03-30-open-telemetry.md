@@ -9,9 +9,9 @@ tags:
   - learning
   - open_telemetry
 ---
-
 * Table of contents (do not remove this line)
 {:toc}
+
 
 ### MELT - data types required for monitoring
 [MELT 101](https://newrelic.com/platform/telemetry-data-101)
@@ -20,6 +20,7 @@ Events
 Logs
 Tracing
 
+[metrics, tracing and logging article](https://peter.bourgon.org/blog/2017/02/21/metrics-tracing-and-logging.html)
 ## My Ruby sandbox
 
 [My Ruby sandbox](https://github.com/friendlyantz/open-telemetry-sandbox)
