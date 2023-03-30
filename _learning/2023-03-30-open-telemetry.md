@@ -1,11 +1,6 @@
 ---
-# title: "Vi Everywhere"
-# permalink: /life/pages/
 excerpt: "My open telemetry notes"
-# last_modified_at: 2016-11-03T11:13:12-04:00
 collection: learning
-
-# TODO not sure if categories and tags are supported outside of `_posts` dir
 categories:
   - software_engineering
   - learning
