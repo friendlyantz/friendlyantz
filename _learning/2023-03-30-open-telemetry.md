@@ -16,6 +16,8 @@ tags:
 
 [My Ruby sandbox](https://github.com/friendlyantz/open-telemetry-sandbox)
 
+# Great Intro Video
+[https://www.youtube.com/watch?v=Txe4ji4EDUA](https://www.youtube.com/watch?v=Txe4ji4EDUA)
 
 # MELT - data types required for monitoring
 [MELT 101](https://newrelic.com/platform/telemetry-data-101)
