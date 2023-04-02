@@ -31,3 +31,24 @@ use `fg` to list all jobs in the background, or switch into a job(tab after `fg`
 ```sh
 jobs -p | ag lala | awk '{print $3}' | xargs kill -9
 ```
+
+---
+
+```
+chmod 666
+```
+
+In Unix-based systems, file permissions are represented by a series of three numbers, each representing a different group of users: the owner, the group, and everyone else. 
+
+The "chmod" command stands for "change mode," and "666" is a code that represents the permissions being granted.
+
+> Remember only, 1-execute, 2-write, 4-read. The sum of these will result in appropriate permission level
+
+    0: No permissions
+    1: Execute permission
+    2: Write permission
+    3: Write and execute permissions
+    4: Read permission
+    5: Read and execute permissions
+    6: Read and write permissions
+    7: Read, write, and execute permissions
