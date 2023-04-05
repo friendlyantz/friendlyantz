@@ -1,9 +1,9 @@
 # main links
 main:
+  - title: "CV"
+    url: https://friendlyantz.github.io/cv/
   - title: "Learn"
     url: /learning/
-  # - title: "CV"
-  #   url: /cv/
   # - title: "Tags"
   #   url: /tags/
   - title: "Hacking"
