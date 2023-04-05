@@ -2,8 +2,6 @@
 main:
   - title: "Learn"
     url: /learning/
-  - title: "Art"
-    url: /art/
   # - title: "CV"
   #   url: /cv/
   # - title: "Tags"
@@ -12,5 +10,7 @@ main:
     url: /hacking/
   # - title: "GitHub"
   #   url: https://github.com/friendlyantz
+  - title: "Art"
+    url: /art/
   - title: "About"
     url: /about/
