@@ -1,5 +1,5 @@
 ---
-title: "TDD Yourself And Make An Awesome Github Landing Page "
+title: "My talk at Ruby on Rails Oceania in Melbourne slides"
 permalink: /roro-melbourne-tdd-and-github-landing-page/
 # last_modified_at: 2016-11-03T11:13:12-04:00
 collection: learning
@@ -16,6 +16,8 @@ tags:
 
 * Table of contents (do not remove this line)
 {:toc}
+
+# TDD Yourself And Make An Awesome Github Landing Page
 
 ##### You don't need anything to start TDD
 
