@@ -14,6 +14,11 @@ tags:
 
 # Exercism takeaways
 
+[GitHub exercism/ruby solutions with some comments in commit](https://github.com/friendlyantz/exercism/tree/master/ruby)
+Interesting exercises:
+- Two Fer
+- Resistor Color Duo
+
 ### `class` vs `instance` methods
 
 The class level method is there for convenience only, and it should stay inflexible, as it is there for convenience not power. We will see this decision in use in our "expansion", below.
