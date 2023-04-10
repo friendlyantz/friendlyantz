@@ -10,6 +10,8 @@ classes: wide
 * Table of contents (do not remove this line)
 {:toc}
 
+[Check privacy of your browser by EFF foundation](https://coveryourtracks.eff.org/)
+
 [100 Days of Code Challange]({% post_url 2022-10-29-100-days-of-code-day-1 %})
 
 [notes on Book: 'How to hack like a ghost']({% post_url 2023-03-25-book-how-to-hack-like-a-ghost %})
