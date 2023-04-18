@@ -20,6 +20,8 @@ Mike's talk. loved it!
 # Further Read {#further-read}
 BUT, you might still want to invest in learning some basic shortcuts of EMACS, as VI binding are not always available, also look further into [ReadLine](https://readline.kablamo.org/emacs.html)
 
+Also, some useful tips on Readline in [this video](https://www.youtube.com/watch?app=desktop&v=MxRTh8wlmJk)
+
 Shortcuts I use on Mac that I think are useful and does not cause conflicts with other shortcuts(Note: `Alt` is `Option` key):
 
 |Command|Description|
