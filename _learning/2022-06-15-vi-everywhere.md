@@ -19,3 +19,28 @@ Mike's talk. loved it!
 
 # Further Read
 BUT, you might still want to invest in learning some basic shortcuts of EMACS, as VI binding are not always available, also look further into [ReadLine](https://readline.kablamo.org/emacs.html)
+
+Shortcuts I use in mac that are useful and does not cause conflicts with other shortcuts:
+
+|Command|Description|
+|:---|:---|
+|Ctrl-a|Move to the start of the current line.|
+Ctrl-e|Move to the end of the line.
+Alt-f|Move forward to the end of the next word. Words are alphanumeric.
+Alt-b|Move back to the start of the current or previous word. Words are alphanumeric.
+Ctrl-l|Clear the screen.
+|||
+Ctrl-k|Kill (cut) forwards to the end of the line.
+Ctrl-u|Kill (cut) backwards to the start of the line.
+|
+Alt-d|Kill (cut) forwards to the end of the current word.
+Ctrl-w|Kill (cut) backwards to the start of the current word.
+|
+Ctrl-y|Yank (paste) the top of the kill ring.
+|
+Ctrl-d|Delete the character under the cursor.
+Delete|Delete the character before the cursor.
+|
+Alt-u|Uppercase till the end of the current word.
+|
+Alt-t|Transpose(switch order) 2 words.
