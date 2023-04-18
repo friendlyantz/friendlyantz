@@ -17,10 +17,10 @@ Mike's talk. loved it!
 > Source:
 [https://failure-driven.com/presentations/20180627-vi-everywhere-whats-your-superpower/](https://failure-driven.com/presentations/20180627-vi-everywhere-whats-your-superpower/)
 
-# Further Read
+# Further Read {#further-read}
 BUT, you might still want to invest in learning some basic shortcuts of EMACS, as VI binding are not always available, also look further into [ReadLine](https://readline.kablamo.org/emacs.html)
 
-Shortcuts I use in mac that are useful and does not cause conflicts with other shortcuts:
+Shortcuts I use on Mac that I think are useful and does not cause conflicts with other shortcuts:
 
 |Command|Description|
 |:---|:---|
