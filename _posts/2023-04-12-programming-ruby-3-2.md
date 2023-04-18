@@ -20,3 +20,7 @@ My takeaways:
 # Part 1
 
 ## Chapter 2: Ruby.new
+
+## Chapter 3: 
+
+Whenever you’re designing an Object-Oriented system, a good first step is to identify the domain concepts you’re dealing with.
