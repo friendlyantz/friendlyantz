@@ -1,6 +1,6 @@
 ---
-# title: "Vi Everywhere"
-# permalink: /life/pages/
+title: "SHell"
+permalink: /SHell/
 excerpt: "a place for my `sh` scripts and tricks I discover"
 # last_modified_at: 2016-11-03T11:13:12-04:00
 collection: learning
@@ -16,7 +16,6 @@ tags:
 
 * Table of contents (do not remove this line)
 {:toc}
-k
 # Background jobs / Vi sesssion / etc
 
 you can send current session into the background by `ctrl +z` (at least in `VI`)

@@ -7,5 +7,4 @@ entries_layout: grid
 classes: wide
 ---
 
-Seek and you shall find.
-Walk and you shall reach.
+My notes, tips and tutorials on various technologies I use.
