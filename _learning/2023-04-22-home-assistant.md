@@ -25,3 +25,15 @@ tags:
 ## Get the correct image
 
 [make sure you get specific Proxmox image, not just x86 install or other VM image via this link](https://www.home-assistant.io/installation/alternative)
+
+## Unzip and Copy image to the Proxmox server
+
+use rsync, scp - refer my SSH tutorial
+
+## Create VM
+
+## copy the image to the VM
+
+```sh
+qm importdisk 100 /root/haos_image local-lvm --format qcow2
+```
