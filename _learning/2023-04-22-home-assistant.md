@@ -18,21 +18,17 @@ tags:
 * Table of contents (do not remove this line)
 {:toc}
 
-# Via Proxmox
+# Tutorial 
 
 [Great video tutorial](https://www.youtube.com/watch?app=desktop&v=1Un4zJJWUTE)
 
+# Notes
 ## Get the correct image
 
 [make sure you get specific Proxmox image, not just x86 install or other VM image via this link](https://www.home-assistant.io/installation/alternative)
 
-## Unzip and Copy image to the Proxmox server
-
-use rsync, scp - refer my SSH tutorial
-
-## Create VM
-
-## copy the image to the VM
+## copy the image to the VM and create a VM(follow video tutorial)
+use `rsync`, `scp` - refer my SSH notes
 
 ```sh
 qm importdisk 100 /root/haos_image local-lvm --format qcow2
