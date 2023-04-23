@@ -24,12 +24,14 @@ and then use the Home Assistant integration to connect to your other devices VMs
 Action Plan:
 - [x] Install Proxmox(refer my notes on [Proxmox]({% link _learning/2023-04-22-proxmox.md %}))
 - [x] [Install HAOS on a VM](#install-haos);
-- [x] Install Linux on a VM;
+- [x] Install Linux on a VM [Refer Debian Proxmox]({% link _learning/2023-04-22-proxmox.md %});
 - [ ] Install InfluxDB on Linux VM;
 - [ ] Install Grafana on Linux VM;
 - [ ] Install Mosquitto on Linux VM;
 - [ ] Install Node-RED on Linux VM;
 - [ ] Install Zigbee2MQTT on Linux VM;
+
+---
 
 * Table of contents (do not remove this line)
 {:toc}
