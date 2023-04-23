@@ -25,6 +25,9 @@ Action Plan:
 - [x] Install Proxmox(refer my notes on [Proxmox]({% link _learning/2023-04-22-proxmox.md %}))
 - [x] [Install HAOS on a VM](#install-haos);
 - [x] Install Linux on a VM [Refer Debian Proxmox]({% link _learning/2023-04-22-proxmox.md %});
+- [x] First Automations:
+  - [x] Create simple automation to turn on/off a light;
+  - [x] Create simple automation to notify on done laundry
 - [ ] Install InfluxDB on Linux VM;
 - [ ] Install Grafana on Linux VM;
 - [ ] Install Mosquitto on Linux VM;
@@ -51,3 +54,7 @@ use `rsync`, `scp` - refer my SSH notes
 ```sh
 qm importdisk 100 /root/haos_image local-lvm --format qcow2
 ```
+
+# Automations
+
+## Laundry
