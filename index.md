@@ -11,6 +11,8 @@ author_profile: true
 
 <p>I am focused on FinTech back-end, CyberSecurity and Machine Learning. I very much enjoy what I do.</p>
 
+I try to takes notes of the technologies I play with and record them in ['Learning']({% link _pages/learning.md %}) section
+
 <!-- <h3 id="how-id-define-myselfliterally">How I’d define myself…literally</h3>
 <div class="language-ruby highlighter-rouge">
   <div class="highlight">
