@@ -1,7 +1,7 @@
 ---
 title: "Vi Everywhere"
 # permalink: /life/pages/
-excerpt: "give me a right tool, and I shall move the world?"
+excerpt: "visual editor tricks outside of VIM"
 # last_modified_at: 2016-11-03T11:13:12-04:00
 collection: learning
 
