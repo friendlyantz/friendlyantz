@@ -12,7 +12,6 @@ tags:
   - learning
 ---
 
-### Good learning resources
 
 - [Exercism](https://exercism.org/) - exercises and mentoring ([Hackerrank](https://www.hackerrank.com/) is similar, but without mentoring and CLI)
 - [Graceful Dev](https://graceful.dev/) - Superb bite-sized tutorials, tips and tricks on Ruby
@@ -26,11 +25,11 @@ tags:
 
 ---
 
-## Terminal, vi and tools
+# Terminal, vi and tools
 - [https://failure-driven.com/presentations/20180627-vi-everywhere-whats-your-superpower/](https://failure-driven.com/presentations/20180627-vi-everywhere-whats-your-superpower/)
 - [VIM Adventures](https://vim-adventures.com/) - learn VI shortcuts game
 
-## Books
+# Books
 - [ ] [Why's (Poignant) Guide to Ruby](https://poignant.guide/)
 - [x] 99 Bottles
 - [ ] [Sidekiq in Practice](https://nateberk.gumroad.com/l/sidekiqinpractice) 👀
@@ -38,6 +37,5 @@ also see [my notes]({% post_url 2023-02-07-book-sidekiq-in-practice %})
 - [ ] [https://martinfowler.com/books/refactoring.html](https://martinfowler.com/books/refactoring.html)
 - [ ] [Polished Ruby Programming](https://www.oreilly.com/library/view/polished-ruby-programming/9781801072724/)
 
-
-## Tools
+# Tools
 - [C4 Diagram](https://c4model.com/)
