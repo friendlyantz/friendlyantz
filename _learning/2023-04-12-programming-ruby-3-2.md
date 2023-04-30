@@ -9,11 +9,6 @@ tags:
   - learning
   - ruby
 ---
-Contents:
-
-* Table of contents (do not remove this line)
-{:toc}
-
 Book Link: [https://pragprog.com/titles/ruby5/programming-ruby-3-2-5th-edition/](https://pragprog.com/titles/ruby5/programming-ruby-3-2-5th-edition/)
 
 My takeaways:
