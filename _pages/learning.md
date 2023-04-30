@@ -5,6 +5,7 @@ permalink: /learning/
 collection: learning
 entries_layout: grid
 classes: wide
+sort_order: reverse
 ---
 
 My notes and discoveries on various technologies I learn.
