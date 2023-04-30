@@ -20,6 +20,10 @@ tags:
 
 * Table of contents (do not remove this line)
 {:toc}
+# action plan
+
+learn xargs, parallel, grep, find, sed, awk
+
 # Background jobs / Vi sesssion / etc
 
 you can send current session into the background by `ctrl +z` (at least in `VI`)
