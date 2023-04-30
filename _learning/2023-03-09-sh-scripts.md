@@ -18,8 +18,6 @@ tags:
   - scripting
 ---
 
-* Table of contents (do not remove this line)
-{:toc}
 # action plan
 
 learn xargs, parallel, grep, find, sed, awk

@@ -19,9 +19,6 @@ tags:
 
 > WIP
 
-* Table of contents (do not remove this line)
-{:toc}
-
 # Considerations
 
 The way I see the most optimal setup is to have several dedicated VMs:

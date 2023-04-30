@@ -9,9 +9,6 @@ tags:
   - docker
 ---
 
-* Table of contents (do not remove this line)
-{:toc}
-
 # 3 tips from a great engineer and leader
 
 > 1. don’t forget technical underpinnings - it’s not just about shipping code

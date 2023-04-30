@@ -337,9 +337,10 @@ defaults:
       path: ""
       type: learning
     values:
-      layout: splash
+      layout: single
       author_profile: false
       share: true
+      toc: true
       # sidebar:
         # nav: "learning"
   # _hacking

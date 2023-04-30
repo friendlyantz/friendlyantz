@@ -10,9 +10,6 @@ tags:
   - exercism
 ---
 
-* Table of contents (do not remove this line)
-{:toc}
-
 # Exercism takeaways
 
 [GitHub exercism/ruby solutions with some comments in commit](https://github.com/friendlyantz/exercism/tree/master/ruby)

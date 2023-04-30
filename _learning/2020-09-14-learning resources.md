@@ -12,9 +12,6 @@ tags:
   - learning
 ---
 
-* Table of contents (do not remove this line)
-{:toc}
-
 ### Good learning resources
 
 - [Exercism](https://exercism.org/) - exercises and mentoring ([Hackerrank](https://www.hackerrank.com/) is similar, but without mentoring and CLI)

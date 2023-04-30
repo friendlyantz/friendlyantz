@@ -12,9 +12,6 @@ tags:
 
 # Table Of Contens
 
-* Table of contents (do not remove this line)
-{:toc}
-
 # My Ruby sandbox
 
 [My Ruby sandbox](https://github.com/friendlyantz/open-telemetry-sandbox)
