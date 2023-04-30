@@ -341,6 +341,7 @@ defaults:
       author_profile: false
       share: true
       toc: true
+      toc_sticky: true
       # sidebar:
         # nav: "learning"
   # _hacking
@@ -348,8 +349,10 @@ defaults:
       path: ""
       type: hacking
     values:
-      layout: splash
+      layout: single
       author_profile: false
+      toc: true
+      toc_sticky: true
       # share: true
       # sidebar:
       #   nav: "hacking"
