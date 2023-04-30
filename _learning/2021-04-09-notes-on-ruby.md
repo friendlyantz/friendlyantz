@@ -6,7 +6,8 @@ categories:
 tags:
   - software_engineering
   - learning
-  - docker
+  - ruby
+  - exercism
 ---
 
 * Table of contents (do not remove this line)

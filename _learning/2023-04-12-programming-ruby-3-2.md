@@ -7,6 +7,7 @@ collection:
 tags:
   - software_engineering
   - learning
+  - ruby
 ---
 Contents:
 

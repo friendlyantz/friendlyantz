@@ -5,7 +5,15 @@ excerpt: "visual editor tricks outside of VIM"
 # last_modified_at: 2016-11-03T11:13:12-04:00
 collection: learning
 
-# categories: travel
+categories:
+  - software_engineering
+  - learning
+tags:
+  - software_engineering
+  - learning
+  - vi
+  - vim
+  - emacs
 header:
   video:
     id: l6dwu6cCfkM
@@ -17,7 +25,7 @@ Mike's talk. loved it!
 > Source:
 [https://failure-driven.com/presentations/20180627-vi-everywhere-whats-your-superpower/](https://failure-driven.com/presentations/20180627-vi-everywhere-whats-your-superpower/)
 
-# Further Read {#further-read}
+# Further Read and EMACS {#further-read}
 BUT, you might still want to invest in learning some basic shortcuts of EMACS, as VI binding are not always available, also look further into [ReadLine](https://readline.kablamo.org/emacs.html)
 
 Shortcuts I use on Mac that I think are useful and does not cause conflicts with other shortcuts(Note: `Alt` is `Option` key):

@@ -12,6 +12,10 @@ categories:
 tags:
   - software_engineering
   - learning
+  - shell
+  - sh
+  - bash
+  - scripting
 ---
 
 * Table of contents (do not remove this line)
