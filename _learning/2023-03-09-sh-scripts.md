@@ -33,6 +33,12 @@ echo 's/hello/world/' > myscript.sed
 sed -f myscript.sed input.txt > output.txt
 ```
 
+## pbcopy
+
+```sh
+cat file.txt | pbcopy
+```
+
 ## Background jobs / Vi session
 
 you can send current session into the background by `ctrl +z` (at least in `VI`)
