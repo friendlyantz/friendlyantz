@@ -11,13 +11,12 @@ categories:
 tags:
   - software_engineering
   - learning
+toc: true
 # layout: posts
 ---
 
-* Table of contents (do not remove this line)
-{:toc}
+## TDD Yourself And Make An Awesome Github Landing Page
 
-# TDD Yourself And Make An Awesome Github Landing Page
 
 ##### You don't need anything to start TDD
 
