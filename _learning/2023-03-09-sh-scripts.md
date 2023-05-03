@@ -39,6 +39,17 @@ sed -f myscript.sed input.txt > output.txt
 cat file.txt | pbcopy
 ```
 
+## xargs + find
+
+```sh
+find . -name "*.md" -maxdepth 1 | xargs tail
+find . -name "*.txt" | xargs rm
+ls | xargs rm
+echo "dir1 dir2 dir3" | xargs mkdir
+# Parallelizing commands:
+find . -name "*.txt" | xargs -P 4 gzip
+```
+
 ## Background jobs / Vi session
 
 you can send current session into the background by `ctrl +z` (at least in `VI`)
