@@ -2,7 +2,7 @@
 <div  align="center">
   <p>I'm a software engineer, based in Melbourne, Australia. </p>
   <p>
-    I switched into tech after more than a decade in Civil Engineering and Project Management consulting - I rediscovered my passion and living the dream now, building digital products and hoping to make the world a better place.
+    I switched into tech after more than a decade in Civil Engineering and Project Management consulting - I rediscovered my passion and living the dream now, building digital products and hoping to make the world a better place. 🧀
   </p>
   <p>I am focused on FinTech back-end, CyberSecurity and Machine Learning. I do enjoy very very much what I do</p>
 </div>
