@@ -6,8 +6,8 @@ main:
     url: /learning/
   # - title: "Tags"
   #   url: /tags/
-  - title: "Hacking"
-    url: /hacking/
+  # - title: "Hacking"
+  #   url: /hacking/
   # - title: "GitHub"
   #   url: https://github.com/friendlyantz
   - title: "Art"
