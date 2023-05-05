@@ -21,7 +21,7 @@ toc: true
 ##### You don't need anything to start TDD
 
 ```bash
-if True; then                                                                                      
+if True; then
  echo 'yolo'
 fiπ
 ```
