@@ -10,7 +10,7 @@ tags:
   - career
   - learning
   - book
-
+toc: true
 ---
 > WIP
 # Part I: Foundations of Data Systems
