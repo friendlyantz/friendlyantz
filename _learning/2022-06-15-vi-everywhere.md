@@ -54,3 +54,15 @@ Delete|Delete the character before the cursor.
 Alt-u|Uppercase till the end of the current word.
 |
 Alt-t|Transpose(switch order) 2 words.
+
+---
+
+VIM combos:
+
+- replace `:%s/ladida/dududu`
+- Ruby linting `:! rubocop -A %`
+- `va{V` - select all in {}block and switch to line mode, press `o` to jump between {}
+- regex command to bulk replace selected: `:` auto-incerts this`:'<,'>` then type the following`s/\(\w.*\)/your new data = \1;`
+- increment sequentially the selection `g<C-a>`
+- fix indentation of all paragraph `=ap`
+- jump to prev file `<C-^>`
