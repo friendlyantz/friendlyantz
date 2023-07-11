@@ -129,3 +129,29 @@ The "chmod" command stands for "change mode," and "666" is a code that represent
 6. `netstat`: "netstat" is a command-line tool used to display active network connections, routing tables, and various network interface statistics. It can provide information about open ports, established connections, and network-related statistics.
 7. `dmesg`: "dmesg" displays the kernel ring buffer, which contains messages related to the system's hardware and software. It can be useful for troubleshooting hardware-related issues, device initialization problems, or kernel-level error messages.
 8. `gdb`: "gdb" is a powerful debugger that allows you to analyze and debug programs. It enables you to inspect variables, set breakpoints, step through code, and track down the root cause of program crashes or abnormal behavior.
+
+## Cron
+
+```sh
+crontab -l # list
+
+crontab -e 
+crontab -u root -e # for specific user, you can also set cron jobs for other users that you can't log into
+
+@hourly echo 'hourly cron'
+@reboot echo 'cron message triggered by reboot'
+
+* * * * * echo "hello world"
+* * 1 * * echo "happy new month!"
+0 9 * * 1 echo "happy Monday"
+
+
+0 9 * * 1 /usr/local/bin/script.sh # state full path of a command for other users
+# save and exit! tail and see your echos
+
+tail -f /var/log/syslog | grep echo
+
+```
+
+Cheatsheet / generator [https://crontab.guru](https://crontab.guru)
+

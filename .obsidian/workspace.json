@@ -11,12 +11,8 @@
             "id": "7a443318b67551a5",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "_posts/2023-02-07-book-sidekiq-in-practive.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           },
           {
@@ -25,7 +21,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/2023-02-07-book-sidekiq-in-practive.md",
+                "file": "_learning/2023-03-09-unix-and-shell.md",
                 "mode": "source",
                 "source": false
               }
@@ -77,6 +73,14 @@
               "type": "starred",
               "state": {}
             }
+          },
+          {
+            "id": "71dc04d6d4b0a9ff",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
           }
         ]
       }
@@ -98,7 +102,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/2023-02-07-book-sidekiq-in-practive.md",
+                "file": "_learning/2023-03-09-unix-and-shell.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +119,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_posts/2023-02-07-book-sidekiq-in-practive.md",
+                "file": "_learning/2023-03-09-unix-and-shell.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/2023-02-07-book-sidekiq-in-practive.md"
+                "file": "_learning/2023-03-09-unix-and-shell.md"
               }
             }
           }
@@ -161,6 +165,7 @@
   },
   "active": "2a1080ce1046ce9e",
   "lastOpenFiles": [
+    "_pages/4913",
     "_posts/2023-06-05-queueing_theory.md",
     "_posts/2023-02-07-book-sidekiq-in-practive.md",
     "_site/software_engineering/presentation/queueing_theory/index.html",
