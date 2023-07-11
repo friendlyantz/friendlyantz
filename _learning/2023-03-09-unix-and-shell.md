@@ -155,3 +155,10 @@ tail -f /var/log/syslog | grep echo
 
 Cheatsheet / generator [https://crontab.guru](https://crontab.guru)
 
+## Signals
+
+```sh
+kill -l # list signals
+
+kill(3123, 15) # this is for sending signal 15 to a process 3123, but the syntax to shell is different in an opposite order
+raise(signum) # to send a signal yourself
