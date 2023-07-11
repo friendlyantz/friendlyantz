@@ -1,6 +1,6 @@
 ---
-title: "SHell"
-permalink: /SHell/
+title: "UNIX SHell"
+permalink: /unix/
 excerpt: "a place for my `sh` scripts and tricks I discover"
 ## last_modified_at: 2016-11-03T11:13:12-04:00
 collection: learning
@@ -118,3 +118,14 @@ The "chmod" command stands for "change mode," and "666" is a code that represent
     5: Read and execute permissions
     6: Read and write permissions
     7: Read, write, and execute permissions
+
+## Error debugging tools
+
+1. `lsof`: "lsof" stands for "list open files." It displays information about files and network connections that processes have open on the system. It can help identify which processes are using specific files, sockets, or network connections.
+2. `htop`: "htop" is an interactive process viewer that provides a real-time overview of system resource usage. It displays CPU and memory utilization, running processes, and allows for easy process management, such as killing processes or changing their priorities.
+3. `ps`: "ps" is a command-line tool used to view information about running processes. It provides a snapshot of active processes, their resource usage, and process attributes like process IDs (PIDs), parent PIDs, CPU and memory usage, and more.
+4. `strace`: "strace" is a powerful diagnostic tool that traces and records system calls made by a process and the signals received by it. It helps in analyzing the behavior of a program or troubleshooting issues related to system calls.
+5. `tcpdump`: "tcpdump" is a network packet analyzer that captures and displays network traffic` in real-time. It can help debug network-related issues by capturing packets and allowing you to analyze their contents and flow.
+6. `netstat`: "netstat" is a command-line tool used to display active network connections, routing tables, and various network interface statistics. It can provide information about open ports, established connections, and network-related statistics.
+7. `dmesg`: "dmesg" displays the kernel ring buffer, which contains messages related to the system's hardware and software. It can be useful for troubleshooting hardware-related issues, device initialization problems, or kernel-level error messages.
+8. `gdb`: "gdb" is a powerful debugger that allows you to analyze and debug programs. It enables you to inspect variables, set breakpoints, step through code, and track down the root cause of program crashes or abnormal behavior.
