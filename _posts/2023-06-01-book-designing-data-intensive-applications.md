@@ -12,8 +12,7 @@ tags:
   - book
 toc: true
 ---
-> WIP
->
+
 # Part I: Foundations of Data Systems
 
 --- 
@@ -44,7 +43,7 @@ toc: true
  ![image](https://github.com/friendlyantz/friendlyantz/assets/70934030/c3813031-48a2-4d5e-ab69-819aad5fab62)
 ---
 
-- role of Software Engineer now also includes DataSystem designer (Arrch?)
+- role of Software Engineer now also includes DataSystem designer (Arch?)
 	- We have to address:
 		- keeping data correct and complete during storm
 		- providing consistent performance to clients, when sys is degraded
@@ -57,12 +56,30 @@ toc: true
 		- risk appetite
 		- regulatory
 		- etc etc
+	- Note: what is legacy? assumptions/conventions w/o data
 
 ---
 
 ![image](https://github.com/friendlyantz/friendlyantz/assets/70934030/196bac3a-4fea-4371-ae52-71a51182f043)
 
 ## Reliability
+- fault-tolerant (aka resilient)
+- fault vs failure
+- Define scope of faults - we can't tackle them all (i.e diff region? alien invasion?)
+- Essentially we build reliable sys from unreliable parts (i.e. my Mec*ano kit)
+- we need to deliberatly trigger faults (i.e. kill processe w/o warning). Many bugs are due to poor error handling
+- Netflix Chaos Monkey
+- we prever tolerating faults over preventing faults
+
+---
+
+### Hardware Faults
+-1st response: add redundancy - as it is well understood
+	until recently hardware redundancy was sufficient, but it changes with the rise of flexibility and elasticity priorities, over single machine reliability
+	Hence the move is towards systems that can tolerate the loss of machines, by using software fault-tolerance techniques (in preference OR in addition to hardware redundancy)
+ 
+### Software Errors
+### Human Error
 
 ![image](https://github.com/friendlyantz/friendlyantz/assets/70934030/31e08bf2-6550-4e52-bfc9-2e469b1c4852)
 
@@ -74,6 +91,8 @@ toc: true
 
 ![image](https://github.com/friendlyantz/friendlyantz/assets/70934030/382f7bda-fcdd-43b4-9544-29db78ca0cf6)
 ##### Simplicity - managing complexity
+- Explosion of the state space
+	accidental complexity vs essential complexity
 ##### Evolvability - making changes easy
 
 ---
