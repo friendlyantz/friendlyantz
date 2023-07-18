@@ -15,8 +15,15 @@ toc: true
 > WIP
 # Part I: Foundations of Data Systems
 ## Ch 1: Relible, Scalable and Maintanable Apps
+### Data intensive vs Process Intensive
+![image](https://github.com/friendlyantz/friendlyantz/assets/70934030/c3749b37-7609-4ab9-b301-a3fca7ab9cbd)
+
 ![image](https://github.com/friendlyantz/friendlyantz/assets/70934030/8b78b6a8-fd07-40af-ba77-1bcec699255d)
+
 ### components
+ ![image](https://github.com/friendlyantz/friendlyantz/assets/70934030/c3813031-48a2-4d5e-ab69-819aad5fab62)
+
+
 ![image](https://github.com/friendlyantz/friendlyantz/assets/70934030/196bac3a-4fea-4371-ae52-71a51182f043)
 
 #### Reliability
@@ -28,6 +35,7 @@ toc: true
 #### Maintainability
 ![image](https://github.com/friendlyantz/friendlyantz/assets/70934030/382f7bda-fcdd-43b4-9544-29db78ca0cf6)
 
+> Your solution will be custom
 
 ## Ch 2: Data Models and Query lang-s
 ### Abstraction
