@@ -26,6 +26,11 @@ tags:
 - [ ] sed
 - [ ] awk
 
+```shell
+# thank me later
+mkdir ruby_ls && cd $_
+```
+
 ```sh
 # bulk file renaming
 for f in ./*; do mv "$f" "${f/Silicon_Valley/S01E01}"; done
