@@ -52,12 +52,22 @@ cat file.txt | pbcopy
 ## xargs + find
 
 ```sh
-find . -name "*.md" -maxdepth 1 | xargs tail
+find . -maxdepth 1 -name "*.md" | xargs tail
 find . -name "*.txt" | xargs rm
 ls | xargs rm
 echo "dir1 dir2 dir3" | xargs mkdir
 # Parallelizing commands:
 find . -name "*.txt" | xargs -P 4 gzip
+```
+
+## Parallel
+
+```sh
+echo "file1 file2 file3" | parallel command-to-run {}
+parallel echo "Hello, {}" ::: Alice Bob Charlie
+ls *.txt | parallel wc -l
+find *.md | xargs tail | parallel echo '------------------' | less
+
 ```
 
 ## Background jobs / Vi session
