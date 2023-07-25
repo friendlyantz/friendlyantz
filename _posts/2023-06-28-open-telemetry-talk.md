@@ -13,10 +13,26 @@ tags:
   - learning
 toc: true
 # layout: posts
+header:
+  video:
+    id: kmnyIO--rbE
+    provider: youtube
 ---
 
-> [OpenTelemetry Sandbox Repo with code examples](https://github.com/friendlyantz/open-telemetry-sandbox)
+Sauce: [OpenTelemetry Sandbox Repo with code examples](https://github.com/friendlyantz/open-telemetry-sandbox)
  
+ ---
+
+> UPD: There is a way to include sidekiq supspan into a calling parent Span.
+> To override default instrumentation options, in `OpenTelemetry::SDK.configure do |c|` block you need  to specify propagation style in the following format:
+> ```ruby
+> c.use 'OpenTelemetry::Instrumentation::Sidekiq', {
+>   propagation_style:  :child
+> }
+> ```
+
+---
+
 ## Action Plan
 
 - Part I
@@ -186,6 +202,7 @@ http://localhost:16686
 - [ ] Still in active development
 - [ ] Traces are implemented, Metrics & Logs yet to come
 - [ ] challenge Anton to match a talk
+
 ---
 
 ### Resources:
@@ -194,3 +211,4 @@ http://localhost:16686
 3. https://youtu.be/Txe4ji4EDUA - fantastic tutorial by NGNIX, which this talk is based on
 4. https://github.com/open-telemetry/opentelemetry-demo - official demo of a shopping app using various languages (mail service is in Ruby)
 5. https://github.com/friendlyantz/open-telemetry-sandbox - my sandbox
+
