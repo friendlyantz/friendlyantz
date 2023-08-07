@@ -4,14 +4,15 @@ author_profile: true
 ---
 
 <h1 align="center">🤠 G'Day! I'm Anton</h1>
+
 I’m a fullstack software engineer, based in Melbourne, Australia.
 
 I switched into tech after more than a decade in Civil Engineering and Project Management consulting - I rediscovered
   my passion and living the dream now, building digital products and hoping to make the world a better place. 🧀
 
-I am focused on FinTech back-end, CyberSecurity and Machine Learning. I very much enjoy what I do.
+I am focused on back-end / full-stack and Machine Learning. I very much enjoy what I do.
 
-I try to takes notes of the technologies I play with and record them in ['Learning']({% link _pages/learning.md %}) section
+I keep my discoveries in ['Learning']({% link _pages/learning.md %}) section
 
 <!-- <h3 id="how-id-define-myselfliterally">How I’d define myself…literally</h3>
 <div class="language-ruby highlighter-rouge">
