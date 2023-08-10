@@ -13,6 +13,8 @@ tags:
 toc: true
 ---
 
+[My Book Club notes](https://github.com/friendlyantz/book-notes-designing-data-intensive-apps) 
+
 # Part I: Foundations of Data Systems
 
 --- 
