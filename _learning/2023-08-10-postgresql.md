@@ -66,3 +66,14 @@ VALUES ('Antz', 9, date '1987-04-01');
 psql
 \i  /Users/somepath.sql
 ```
+
+# Select
+```sh
+SELECT name, fav_num FROM person;
+SELECT name, fav_num FROM person ORDER BY fav_num DESC;
+
+
+SELECT DISTINCT fav_num FROM person;
+SELECT * FROM person WHERE fav_num = 1;
+
+```
