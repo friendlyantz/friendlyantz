@@ -75,5 +75,58 @@ SELECT name, fav_num FROM person ORDER BY fav_num DESC;
 
 SELECT DISTINCT fav_num FROM person;
 SELECT * FROM person WHERE fav_num = 1;
+SELECT * FROM person WHERE fav_num = 1 AND name = 'coke';
+SELECT * FROM person WHERE fav_num >= 5 OFFSET 1 LIMIT 2
+```
+
+## LIMIT
+
+> `LIMIT` is non-orthodox SQL format / keyword
+```
+SELECT * FROM person WHERE fav_num >= 5 LIMIT 2
+# or using FETCH
+SELECT * FROM person WHERE fav_num >= 5 FETCH FIRST 2 ROW ONLY;
+```
+
+## IN / Between
+
+```
+SELECT * FROM person WHERE fav_num = 1 OR fav_num = 5 OR fav_num = 7;
+# but below is better
+SELECT * FROM person WHERE fav_num IN (1, 5, 7);
+# or between
+SELECT * FROM person WHERE fav_num BETWEEN 5 AND 7;
+```
+
+# Comparator
+
+```sql
+SELECT true = true;
+ ?column? 
+----------
+ t
+(1 row)
+
+sandbox=# SELECT true = TRUE;
+ ?column? 
+----------
+ t
+(1 row)
+
+sandbox=# SELECT 'la' = 'LA';
+ ?column? 
+----------
+ f
+(1 row)
+
+```
+
+## not eql
+```
+SELECT 1 <> 2;
+ ?column? 
+----------
+ t
+(1 row)
 
 ```
