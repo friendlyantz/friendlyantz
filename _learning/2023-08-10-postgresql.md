@@ -98,6 +98,16 @@ SELECT * FROM person WHERE fav_num IN (1, 5, 7);
 SELECT * FROM person WHERE fav_num BETWEEN 5 AND 7;
 ```
 
+## LIKE / ILIKE'
+
+> `%` - wildcard
+> `_` - single char
+```
+SELECT * FROM person WHERE name LIKE 'A_t%';
+# or case insensitive =-> ILIKE
+SELECT * FROM person WHERE name ILIKE 'a_t%';
+```
+
 # Comparator
 
 ```sql
