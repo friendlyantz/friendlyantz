@@ -98,7 +98,7 @@ SELECT * FROM person WHERE fav_num IN (1, 5, 7);
 SELECT * FROM person WHERE fav_num BETWEEN 5 AND 7;
 ```
 
-## LIKE / ILIKE'
+## LIKE / ILIKE
 
 > `%` - wildcard
 > `_` - single char
@@ -106,6 +106,24 @@ SELECT * FROM person WHERE fav_num BETWEEN 5 AND 7;
 SELECT * FROM person WHERE name LIKE 'A_t%';
 # or case insensitive =-> ILIKE
 SELECT * FROM person WHERE name ILIKE 'a_t%';
+```
+
+## GROUP BY
+
+remember `SELECT DISTINCT fav_num FROM person;`
+
+```
+SELECT fav_num, COUNT(*) FROM person GROUP BY fav_num;
+
+ fav_num | count 
+---------+-------
+       9 |     1
+       5 |     1
+      99 |     1
+       7 |     1
+     777 |     1
+       1 |     3
+(6 rows)
 ```
 
 # Comparator
