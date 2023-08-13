@@ -15,7 +15,7 @@ tags:
   - databases
   - postgres
 # toc: true
-# toc_sticky: true
+toc_sticky: true
 # toc_label: "My Table of Contents"
 # toc_icon: "cog"
 ---
@@ -88,7 +88,7 @@ SELECT * FROM person WHERE fav_num >= 5 LIMIT 2
 SELECT * FROM person WHERE fav_num >= 5 FETCH FIRST 2 ROW ONLY;
 ```
 
-## IN / Between
+## IN / BETWEEN
 
 ```
 SELECT * FROM person WHERE fav_num = 1 OR fav_num = 5 OR fav_num = 7;
@@ -121,9 +121,22 @@ SELECT fav_num, COUNT(*) FROM person GROUP BY fav_num;
        5 |     1
       99 |     1
        7 |     1
-     777 |     1
+     777 |     2
        1 |     3
 (6 rows)
+```
+## HAVING
+
+> `HAVING` must be before ORDER BY
+
+```sql
+SELECT fav_num, COUNT(*) FROM person GROUP BY fav_num HAVING COUNT(*) >= 2;
+
+ fav_num | count 
+---------+-------
+     777 |     2
+       1 |     3
+(2 rows)
 ```
 
 # Comparator
