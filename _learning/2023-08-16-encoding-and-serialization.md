@@ -15,6 +15,6 @@ tags:
   - protobuf
 ---
 
-- https://programmathically.com/avro-vs-protobuf-which-data-serialization-format-is-best-for-your-use-case/
+- [Avro vs Protobuf](https://programmathically.com/avro-vs-protobuf-which-data-serialization-format-is-best-for-your-use-case/)
 
 Avro seems like a forgotten but very useful format providing superior forward and backward compatability with slightly more compact bin size, it is great for ML. But Protobuf is faster to serialize and great for JIT processing
