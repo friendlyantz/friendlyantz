@@ -27,7 +27,7 @@ class Anton
   def initialize
     @name = 'Anton Panteleev'
     @dob = "1987-04-01T04:15:00"
-    @work = 'FinTech Software Engineer'
+    @work = 'FullStack Software Engineer'
     @education = [ 'Auckland University of Technology',
                    'Moscow State University of Civil Engineering',
                    'Le Wagon' ]
@@ -95,11 +95,18 @@ end
 
 ### Books I read / recommend
 
-- 'Working with Legacy Code by Michael Feathers ', 
+- Design Data Intensive Applications
 - '99 Bottles of OOP by Sandi Metz', 
 - 'Object Oriented Design Principles by Sandi Metz',
-- ['Ruby Under a Microscope'](https://github.com/friendlyantz/ruby_under_microscope)
+- 'Working with Legacy Code by Michael Feathers', 
 
+
+```ruby
+def ruby_books
+    'Ruby Under a Microscope'
+    'Programming Ruby'
+end
+```
 
 ```python
 def python_books(x):
@@ -111,8 +118,6 @@ def python_books(x):
 | Github Stats | Top Languages |
 | --- | --- |
 | ![Anton's github stats](https://github-readme-stats.vercel.app/api?username=friendlyantz&show_icons=true&title_color=f6c32c&icon_color=f6c32c&text_color=9f9f9f&bg_color=151515&count_private=true) | ![Anton's top languages](https://github-readme-stats.vercel.app/api/top-langs/?username=friendlyantz&show_icons=true&title_color=f6c32c&icon_color=f6c32c&text_color=9f9f9f&bg_color=151515&count_private=true&layout=compact) |
-
-
 
 
 ![Visitors](https://visitor-badge.glitch.me/badge?page_id=friendlyantz.friendlyantz) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat&logo=github)](https://github.com/friendlyantz?tab=repositories) [![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/friendlyantz?tab=stars)
