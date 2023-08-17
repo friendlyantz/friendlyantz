@@ -20,6 +20,14 @@ toc_sticky: true
 # toc_icon: "cog"
 ---
 
+# Resources:
+
+[pganalyze_Best-Practices-for-Optimizing-Postgres-Query-Performance](https://resources.pganalyze.com/pganalyze_Best-Practices-for-Optimizing-Postgres-Query-Performance.pdf)
+[Advanced Database Programming with Rails and Postgres](https://pganalyze.com/ebooks/advanced-database-programming-rails-postgres) - Tiny 'marketing' ebook covering subqueries, materialized views, and custom data types.
+
+---
+
+
 > Pay Attention: command execution happens only after `;`-char. 'Enter' only helps with formatting on a new line
 
 # Creation
