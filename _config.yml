@@ -335,6 +335,7 @@ defaults:
       layout: single
       author_profile: false
       share: true
+      comments: true
   # _learning
   - scope:
       path: ""
@@ -343,6 +344,7 @@ defaults:
       layout: single
       author_profile: false
       share: false
+      comments: true
       toc: true
       toc_sticky: true
       # sidebar:
@@ -354,6 +356,7 @@ defaults:
     values:
       layout: single
       author_profile: false
+      comments: true
       toc: true
       toc_sticky: true
       # share: true
