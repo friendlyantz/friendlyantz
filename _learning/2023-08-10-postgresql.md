@@ -2,7 +2,7 @@
 # layout: posts
 # author_profile: true
 title: "PostreSQL"
-permalink: /postgres/
+permalink: /psql/
 excerpt: "my findings and tricks"
 # last_modified_at: 2016-11-03T11:13:12-04:00
 collection: learning
@@ -118,7 +118,8 @@ SELECT * FROM person WHERE name ILIKE 'a_t%';
 
 ## GROUP BY
 
-remember `SELECT DISTINCT fav_num FROM person;`
+> further `SELECT DISTINCT fav_num FROM person;` to
+> which only fetches 'distinct' values from that column. we can count them too using COUNT / GROUP BY
 
 ```
 SELECT fav_num, COUNT(*) FROM person GROUP BY fav_num;
