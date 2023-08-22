@@ -9,12 +9,11 @@ author_profile: true
 
 {% include group-by-array collection=site.documents field='tags' %}
 
-<ul>
+<div>
     {% for tag in group_names %}
     {% assign posts = group_items[forloop.index0] %}
 
-    <li>
-        <h2>{{ tag }}</h2>
+        <h2 id="{{tag}}">{{ tag }}</h2>
         <ul>
             {% for post in posts %}
             <li>
@@ -22,6 +21,5 @@ author_profile: true
             </li>
             {% endfor %}
         </ul>
-    </li>
     {% endfor %}
-</ul>
+</div>
