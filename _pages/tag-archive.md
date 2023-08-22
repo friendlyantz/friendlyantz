@@ -13,7 +13,8 @@ author_profile: true
     {% for tag in group_names %}
     {% assign posts = group_items[forloop.index0] %}
 
-        <h2 id="{{tag}}">{{ tag }}</h2>
+        {% assign tag_with_replaced_undescores = tag | replace: "_", "-" %}
+        <h2 id="{{tag_with_replaced_undescores }}">{{ tag_with_replaced_undescores }}</h2>
         <ul>
             {% for post in posts %}
             <li>
