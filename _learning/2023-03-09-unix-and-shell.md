@@ -186,3 +186,12 @@ kill -9 <PID>
 # or
 lsof -i :9292 | grep IP | awk '{print $2}' | xargs kill -9
 ```
+
+## Append to file using `cat` and `HEREDOC`
+
+```sh
+cat <<EOF >> filename.txt
+This is the first line to append.
+This is the second line to append.
+EOF
+```
