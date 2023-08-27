@@ -20,13 +20,6 @@ toc_sticky: true
 # toc_icon: "cog"
 ---
 
-# Resources:
-
-[pganalyze_Best-Practices-for-Optimizing-Postgres-Query-Performance](https://resources.pganalyze.com/pganalyze_Best-Practices-for-Optimizing-Postgres-Query-Performance.pdf)
-[Advanced Database Programming with Rails and Postgres](https://pganalyze.com/ebooks/advanced-database-programming-rails-postgres) - Tiny 'marketing' ebook covering subqueries, materialized views, and custom data types.
-
----
-
 
 > Pay Attention: command execution happens only after `;`-char. 'Enter' only helps with formatting on a new line
 
@@ -180,3 +173,14 @@ SELECT 1 <> 2;
 (1 row)
 
 ```
+
+# Resources
+
+PGAnayle Books:
+- [Advanced Database Programming with Rails and Postgres](https://resources.pganalyze.com/pganalyze_Advanced+Database+Programming+with+Rails.pdf)
+- [pganalyze_Best-Practices-for-Optimizing-Postgres-Query-Performance](https://resources.pganalyze.com/pganalyze_Best-Practices-for-Optimizing-Postgres-Query-Performance.pdf)
+- [pganalyze_Effective_Indexing_in_Postgres.](https://resources.pganalyze.com/pganalyze_Effective_Indexing_in_Postgres.pdf)
+- [pganalyze_Efficient-Search-in-Rails-with-Postgres](https://resources.pganalyze.com/pganalyze_Efficient-Search-in-Rails-with-Postgres.pdf)
+- [pganalyze_Finding_the_root_cause_of_slow_Postgres_queries_using_EXPLAIN.](https://resources.pganalyze.com/pganalyze_Finding_the_root_cause_of_slow_Postgres_queries_using_EXPLAIN.pdf)
+- [pganalyze_The-Most-Important-Events-To-Monitor-In-Your-Postgres-Logs.](https://resources.pganalyze.com/pganalyze_The-Most-Important-Events-To-Monitor-In-Your-Postgres-Logs.pdf)
+
