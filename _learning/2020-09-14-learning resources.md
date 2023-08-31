@@ -14,6 +14,7 @@ tags:
 
 
 - [Exercism](https://exercism.org/) - exercises and mentoring ([Hackerrank](https://www.hackerrank.com/) is similar, but without mentoring and CLI)
+- [Refactoring Guru](https://refactoring.guru) - Design Patterns made simple, fantastic resource!!!
 - [Graceful Dev](https://graceful.dev/) - Superb bite-sized tutorials, tips and tricks on Ruby
 - [Failure Driven](https://failure-driven.com/) - learn from the best, to be the best... right Mike & Selena?
 - [Uncle Bob](https://blog.cleancoder.com) - Robert Cecil Martin
@@ -26,10 +27,12 @@ tags:
 ---
 
 # Terminal, vi and tools
+
 - [https://failure-driven.com/presentations/20180627-vi-everywhere-whats-your-superpower/](https://failure-driven.com/presentations/20180627-vi-everywhere-whats-your-superpower/)
 - [VIM Adventures](https://vim-adventures.com/) - learn VI shortcuts game
 
 # Books
+
 - [ ] [Why's (Poignant) Guide to Ruby](https://poignant.guide/)
 - [x] 99 Bottles
 - [ ] [Sidekiq in Practice](https://nateberk.gumroad.com/l/sidekiqinpractice) 👀
@@ -39,3 +42,5 @@ also see [my notes]({% post_url 2023-02-07-book-sidekiq-in-practice %})
 
 # Tools
 - [C4 Diagram](https://c4model.com/)
+- [Offline Docs - Linux](https://zealdocs.org/)
+- [Offline Docs - Mac(subscription)](https://kapeli.com/dash)
