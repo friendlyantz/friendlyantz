@@ -23,6 +23,7 @@ tags:
 - [Destroy All Software](https://www.destroyallsoftware.com/) - another classic set highly recommended by Gus
 - [Hack The Box](https://www.hackthebox.com/) - classic pentesting sandbox and exercises
 - [Video: FUN TO IMAGINE with Richard Feynman](https://www.youtube.com/watch?v=P1ww1IXRfTA)
+- [what make a good CLI tool]](https://www.youtube.com/watch?app=desktop&v=ztsOwk1zB3o)
 
 ---
 
