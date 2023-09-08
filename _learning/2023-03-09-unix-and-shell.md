@@ -63,10 +63,16 @@ some_command | awk 'NR==1'
 some_command | head -n 1
 ```
 
-## pbcopy
+## `pbcopy` Apple and `xclip` Linux
+
 
 ```sh
 cat file.txt | pbcopy
+```
+
+### combo with jq / head / copy
+```sh
+bat db/tickets.json | jq '.[]._id' -r | head -n 1 | xclip -selection clipboard
 ```
 
 ## xargs + find
