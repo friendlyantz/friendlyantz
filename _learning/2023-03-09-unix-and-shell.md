@@ -17,6 +17,11 @@ tags:
   - scripting
 ---
 
+```shell
+# thank me later
+mkdir new_dir && cd $_
+```
+
 ## TODO / Master
 
 - [ ] xargs
@@ -25,11 +30,6 @@ tags:
 - [ ] find
 - [ ] sed
 - [ ] awk
-
-```shell
-# thank me later
-mkdir ruby_ls && cd $_
-```
 
 ```sh
 # bulk file renaming
@@ -48,6 +48,19 @@ cat db/tickets.json | jq '.[].submitter_id' | wc -l
 ```sh
 echo 's/hello/world/' > myscript.sed
 sed -f myscript.sed input.txt > output.txt
+```
+
+### take the first line
+
+```sh
+# take the first line returned
+some_command | sed -n '1p'
+
+# or awk 
+some_command | awk 'NR==1'
+
+# or head
+some_command | head -n 1
 ```
 
 ## pbcopy
