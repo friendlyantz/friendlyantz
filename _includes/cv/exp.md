@@ -5,7 +5,7 @@
 
 - Built Anti-Money Laundering and financial crime compliance infrastructure using Ruby on Rails for AI and Machine Learning processing using Ruby on Rails, PostgreSQL, Datadog, Terraform
 - Built Digital Ledger prototype, using Event Bus on Amazon AWS
-- Improved security via DataDog Observability, Okta, CrownStrike and GitHub advanced sec resulting in ISO compliance
+- Improved security via DataDog Observability, Okta, CrowdStrike and GitHub advanced sec resulting in ISO compliance
 - Improved documentation and structurised in Atlassian Confluence
 
 ### __ReadyTech__, Software Engineer. Melbourne, AUS
