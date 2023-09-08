@@ -36,6 +36,13 @@ mkdir ruby_ls && cd $_
 for f in ./*; do mv "$f" "${f/Silicon_Valley/S01E01}"; done
 ```
 
+## `jq`
+
+```sh
+cat db/tickets.json | jq '.[].submitter_id' | wc -l
+```
+
+
 ## `sed`
 
 ```sh
