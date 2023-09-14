@@ -1,3 +1,13 @@
+---
+categories:
+  - software_engineering
+  - learning
+tags:
+  - software_engineering
+  - career
+  - reflections
+  - learning
+---
 It has been two years now since I switched into tech/quit commercial consulting, here is the gist:
 joined FinTech world, 1st promotion before probation, 1st burnout, deepened security mindset, TDD, BDD and DDD understanding, developed taste for a functional-style programming, working with true professionals, learning a lot and truly loving what I do.
 
