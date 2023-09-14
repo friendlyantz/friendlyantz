@@ -9,8 +9,6 @@ tags:
   - learning
 ---
 It has been three years now since I switched into tech, here is the gist:
-
-My reflections on the 3rd year in tech:
 1. Your words carry tremendous weight!
 2. In the journey of becoming a well-rounded engineer, consider adopting a 'T-shaped' approach.
 3. Short-term vision and lack of ethics are disheartening, but there is hope...
