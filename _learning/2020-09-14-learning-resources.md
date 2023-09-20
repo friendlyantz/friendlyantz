@@ -12,7 +12,6 @@ tags:
   - learning
 ---
 
-
 - [Exercism](https://exercism.org/) - exercises and mentoring ([Hackerrank](https://www.hackerrank.com/) is similar, but without mentoring and CLI)
 - [Refactoring Guru](https://refactoring.guru) - Design Patterns made simple, fantastic resource!!!
 - [Graceful Dev](https://graceful.dev/) - Superb bite-sized tutorials, tips and tricks on Ruby
@@ -27,7 +26,14 @@ tags:
 
 ---
 
-# Terminal, vi and tools
+# Interview
+
+- [Algo primer](https://frontendmasters.com/courses/algorithms/)
+- [system design interview prep](https://github.com/donnemartin/system-design-primer)
+- [anki flash card for system design](https://apps.ankiweb.net/``)
+
+
+# Terminal, vi
 
 - [https://failure-driven.com/presentations/20180627-vi-everywhere-whats-your-superpower/](https://failure-driven.com/presentations/20180627-vi-everywhere-whats-your-superpower/)
 - [VIM Adventures](https://vim-adventures.com/) - learn VI shortcuts game
@@ -42,6 +48,6 @@ also see [my notes]({% post_url 2023-02-07-book-sidekiq-in-practice %})
 - [ ] [Polished Ruby Programming](https://www.oreilly.com/library/view/polished-ruby-programming/9781801072724/)
 
 # Tools
-- [C4 Diagram](https://c4model.com/)
+
 - [Offline Docs - Linux](https://zealdocs.org/)
 - [Offline Docs - Mac(subscription)](https://kapeli.com/dash)
