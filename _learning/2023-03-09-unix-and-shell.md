@@ -20,6 +20,8 @@ tags:
 ```shell
 # thank me later
 mkdir new_dir && cd $_
+
+mkdir -p /not_yet_created_dir/new_dir && cd $_
 ```
 
 ## TODO / Master
