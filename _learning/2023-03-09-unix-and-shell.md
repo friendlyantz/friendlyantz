@@ -223,3 +223,10 @@ This is the first line to append.
 This is the second line to append.
 EOF
 ```
+
+## Calendar
+
+```sh
+cal 2018
+cal -3
+```
