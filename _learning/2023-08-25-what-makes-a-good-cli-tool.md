@@ -1,5 +1,6 @@
 ---
 collection: learning
+excerpt: "How to structure your CLI and not only"
 categories:
   - software_engineering
   - learning
@@ -8,10 +9,9 @@ tags:
   - learning
   - cli
   - unix
-header:
-  video:
-    id: ztsOwk1zB3o
-    provider: youtube
 ---
 
-![image](https://github.com/friendlyantz/friendlyantz/assets/70934030/0315f3f0-e291-45cc-9469-eaa6f424a989)
+{% include video id="ztsOwk1zB3o" provider="youtube" %}
+
+![image](https://github.com/friendlyantz/zendesk-challenge/assets/70934030/5153b245-210c-4829-a5ee-57d04bbbe4f8)
+
