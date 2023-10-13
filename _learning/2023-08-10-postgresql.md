@@ -174,6 +174,16 @@ SELECT 1 <> 2;
 
 ```
 
+# Explain Analyze
+
+```sh
+EXPLAIN ANALYZE SELECT COUNT("debits"."amount") 
+FROM "debits"
+WHERE "debits"."account_id" = '123' 
+AND "debits"."state" IN (1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 12) 
+AND "debits"."category" = 0 AND "debits"."matures_at" BETWEEN '2021-11-24 13:00:00' AND '2021-11-25 12:59:59.999999';
+```
+
 # Resources
 
 PGAnayle Books:

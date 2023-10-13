@@ -44,7 +44,6 @@ for f in ./*; do mv "$f" "${f/Silicon_Valley/S01E01}"; done
 cat db/tickets.json | jq '.[].submitter_id' | wc -l
 ```
 
-
 ## `sed`
 
 ```sh
@@ -119,15 +118,9 @@ ps aux | grep ruby | awk '{ print $2 }'
 echo foo$(you_script)bar
 ```
 
-## Data Streams `stdin` `stdout` `stderr`
+# Data Streams `stdin` `stdout` `stderr`
 
 [Great Tutorial](https://www.youtube.com/watch?app=desktop&v=zMKacHGuIHI)
-
-## read
-
-```sh
-man signal
-```
 
 ```sh
 ## stdin 0<
@@ -141,7 +134,7 @@ find /qwerty -type f 1> ./lala 2> ./err
 find /qwerty -type f 1>> ./lala 2>> ./err
 ```
 
-## Permissions
+# Permissions
 
 ```sh
 chmod 666
@@ -162,7 +155,7 @@ The "chmod" command stands for "change mode," and "666" is a code that represent
     6: Read and write permissions
     7: Read, write, and execute permissions
 
-## Error debugging tools
+# Error debugging tools
 
 1. `lsof`: "lsof" stands for "list open files." It displays information about files and network connections that processes have open on the system. It can help identify which processes are using specific files, sockets, or network connections.
 2. `htop`: "htop" is an interactive process viewer that provides a real-time overview of system resource usage. It displays CPU and memory utilization, running processes, and allows for easy process management, such as killing processes or changing their priorities.
@@ -173,7 +166,29 @@ The "chmod" command stands for "change mode," and "666" is a code that represent
 7. `dmesg`: "dmesg" displays the kernel ring buffer, which contains messages related to the system's hardware and software. It can be useful for troubleshooting hardware-related issues, device initialization problems, or kernel-level error messages.
 8. `gdb`: "gdb" is a powerful debugger that allows you to analyze and debug programs. It enables you to inspect variables, set breakpoints, step through code, and track down the root cause of program crashes or abnormal behavior.
 
-## Cron
+
+```sh
+lsof -i -P | grep -i "listen"
+# or
+ps aux | grep postgres
+```
+
+brew services issues might be down and need / (re)starting
+```sh
+brew services list
+
+brew services start postgres@12
+```
+
+sometimes temp file record  `pid` needs to be cleared manually
+
+```sh
+cat /opt/homebrew/var/postgres@12/postmaster.pid
+rm /opt/homebrew/var/postgres@12/postmaster.pid
+brew info postgresql@12
+```
+
+# Cron
 
 ```sh
 crontab -l # list
@@ -198,7 +213,7 @@ tail -f /var/log/syslog | grep echo
 
 Cheatsheet / generator [https://crontab.guru](https://crontab.guru)
 
-## Signals
+# Signals
 
 ```sh
 kill -l # list signals
@@ -215,7 +230,11 @@ kill -9 <PID>
 lsof -i :9292 | grep IP | awk '{print $2}' | xargs kill -9
 ```
 
-## Append to file using `cat` and `HEREDOC`
+# handy quirks
+
+## cat
+
+Append to file using `cat` and `HEREDOC`
 
 ```sh
 cat <<EOF >> filename.txt
@@ -224,7 +243,20 @@ This is the second line to append.
 EOF
 ```
 
-## Calendar
+## rename
+
+ rename
+```sh
+mv db/{oldName,newName}_structure.sql
+```
+
+## send session into the background / jobs
+`In VIM ctrl + Z`	Backgrounds the job
+`jobs`	To list all jobs
+`fg` 	Foreground last job (fg 1 or 2 to select specific)
+
+
+# Calendar
 
 ```sh
 cal 2018

@@ -66,3 +66,8 @@ VIM combos:
 - increment sequentially the selection `g<C-a>`
 - fix indentation of all paragraph `=ap`
 - jump to prev file `<C-^>`
+
+
+- `gww`  - auto format line width
+- `ctrl + w + v / s` open in tab
+- `ctrl + 6` last file toggle
