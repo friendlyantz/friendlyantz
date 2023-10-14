@@ -4,31 +4,22 @@
     "type": "split",
     "children": [
       {
-        "id": "953b59e57ff8004e",
+        "id": "7db9f15acc28621a",
         "type": "tabs",
         "children": [
           {
-            "id": "7a443318b67551a5",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {}
-            }
-          },
-          {
-            "id": "2a1080ce1046ce9e",
+            "id": "376a4e1d9da72444",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_learning/2023-03-09-unix-and-shell.md",
+                "file": "_drafts/2099-06-29-template.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -57,7 +48,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "tag:learning",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -102,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_learning/2023-03-09-unix-and-shell.md",
+                "file": "_drafts/2099-06-29-template.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -119,7 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_learning/2023-03-09-unix-and-shell.md",
+                "file": "_drafts/2099-06-29-template.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -142,7 +133,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_learning/2023-03-09-unix-and-shell.md"
+                "file": "_drafts/2099-06-29-template.md"
               }
             }
           }
@@ -163,27 +154,43 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "2a1080ce1046ce9e",
+  "active": "376a4e1d9da72444",
   "lastOpenFiles": [
+    "docs/_pages/splash-page.md",
+    "_drafts/splash-page.md",
+    "_drafts/2099-06-29-template.md",
+    "docs/_posts/2009-10-05-edge-case-very-long-title.md",
+    "docs/_recipes/oatmeal-cookies.md",
+    "_learning/2023-08-02-git.md",
+    "docs/_recipes/peanut-butter-cookies.md",
+    "docs/_recipes/chocolate-chip-cookies.md",
+    "docs/_posts/2017-11-28-post-exclude-search.md",
+    "docs/_posts/2017-01-23-layout-header-video.md",
+    "docs/_posts/2016-10-06-gemified-theme-beta.md",
+    "docs/_posts/2016-09-21-gemified-theme-alpha.md",
+    "docs/_pages/pets.md",
+    "docs/_pages/page-a.md",
+    "docs/_pages/lorem-ipsum.md",
+    "docs/_pages/edge-case.md",
+    "docs/_pages/category-archive.md",
+    "docs/_posts/2009-06-01-edge-case-many-tags.md",
+    "docs/_posts/2009-08-06-edge-case-no-body-content.md",
+    "docs/_pets/lhasa-apso.md",
+    "docs/_posts/2010-02-05-post-quote.md",
+    "docs/_posts/2010-02-05-post-notice.md",
+    "docs/_posts/2009-10-05-edge-case-multiline-excerpt.md",
+    "docs/_portfolio/baz-boom-identity.md",
+    "docs/_posts/2010-08-05-post-header-image-og-override.md",
+    "docs/_posts/2010-03-07-post-link.md",
+    "_site/software_engineering/learning/book-designing-data-intensive-applications/index.html",
+    "_site/software_engineering/learning/book-designing-data-intensive-applications",
+    "_site/software_engineering/book-designing-data-intensive-applications/index.html",
+    "_site/software_engineering/book-designing-data-intensive-applications",
     "_learning/4913",
     "_pages/4913",
-    "_posts/2023-06-05-queueing_theory.md",
-    "_posts/2023-02-07-book-sidekiq-in-practive.md",
     "_site/software_engineering/presentation/queueing_theory/index.html",
     "_site/software_engineering/presentation/queueing_theory",
     "_site/software_engineering/presentation",
-    "_site/categories/presentation/index.html",
-    "_site/categories/presentation",
-    "_site/tags/queueing/index.html",
-    "_site/tags/queueing",
-    "_site/queueing_theory/index.html",
-    "_site/queueing_theory",
-    "_posts/2020-09-14-descision-made.md",
-    "_posts/2022-09-14-2-year-anniversary.md",
-    "_learning/2022-07-01-adam-boas-wisdom.md",
-    "_learning/2022-09-15-book-package-based-rails-applications.md",
-    "_pages/tag-archive.md",
-    "_posts/2021-06-01-1st-job.md",
-    "_posts/2022-07-15-2022-learnings.md"
+    "_site/categories/presentation/index.html"
   ]
 }
