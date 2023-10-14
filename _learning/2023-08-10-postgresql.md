@@ -20,6 +20,22 @@ toc_sticky: true
 # toc_icon: "cog"
 ---
 
+# [types of DBs refresher](https://youtu.be/W2Z7fbCLSTw)
+
+1. KEY-VALUE pair only: Redis- in RAM, EXTREMELY FAST
+2. WIDE COOLUM: Cassandra, HBASE - no schema, CQL language, decentralized, can scale horizontally,
+	a. Weather, history
+	b. Frequent rights/infrequent updates
+3. DOCUMENT DB: Mongo, firestorm, couch db, dyno db
+	a. Unstructured/no schema
+	b. Collections
+4. RELATIONAL DB: MySQL, Postges
+	a. Tedd codd from IBM invented 
+5. Graph db: neo4j, d graph
+	a. No join tables required
+6. Search
+	a. Based on Apache Lucene: elastic search, solr, Aprilia, meili search
+7. MULTI MODEL DB
 
 > Pay Attention: command execution happens only after `;`-char. 'Enter' only helps with formatting on a new line
 

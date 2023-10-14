@@ -33,8 +33,12 @@ tags:
 also see [my notes]({% post_url 2023-02-07-book-sidekiq-in-practice %})
 - [ ] [https://martinfowler.com/books/refactoring.html](https://martinfowler.com/books/refactoring.html)
 - [ ] [Polished Ruby Programming](https://www.oreilly.com/library/view/polished-ruby-programming/9781801072724/)
+
+# Articles
+
 - [ ] [ORM Hate by Martin Fowler](https://www.martinfowler.com/bliki/OrmHate.html)
 - [ ] [The Vietnam of Computer Science](https://www.odbms.org/wp-content/uploads/2013/11/031.01-Neward-The-Vietnam-of-Computer-Science-June-2006.pdf)
+- further to above [Ruby ORM](https://rom-rb.org/learn/#the-problem-with-orms)
 
 
 # Tools
