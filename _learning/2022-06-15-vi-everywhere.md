@@ -71,3 +71,8 @@ VIM combos:
 - `gww`  - auto format line width
 - `ctrl + w + v / s` open in tab
 - `ctrl + 6` last file toggle
+
+---
+
+- [VIM Adventures](https://vim-adventures.com/) - learn VI shortcuts game
+
