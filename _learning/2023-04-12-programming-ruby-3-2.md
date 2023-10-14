@@ -1,12 +1,10 @@
 ---
-title: "Notes on 'Programming Ruby 3.2' book"
-excerpt: "The Pragmatic Programmers' Guide"
-collection: 
+title: Notes on 'Programming Ruby 3.2' book
+excerpt: The Pragmatic Programmers' Guide
+collection:
   - software_engineering
   - learning
 tags:
-  - software_engineering
-  - learning
   - ruby
 ---
 Book Link: [https://pragprog.com/titles/ruby5/programming-ruby-3-2-5th-edition/](https://pragprog.com/titles/ruby5/programming-ruby-3-2-5th-edition/)

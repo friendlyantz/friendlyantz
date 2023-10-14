@@ -1,16 +1,11 @@
 ---
-# title: "Vi Everywhere"
-# permalink: /life/pages/
-excerpt: "list of deployment platforms"
-# last_modified_at: 2016-11-03T11:13:12-04:00
+excerpt: list of deployment platforms
 collection: learning
 categories:
   - software_engineering
   - learning
 tags:
-  - software_engineering
   - deployment
-  - learning
 ---
 
 - <https://vercel.com/pricing>

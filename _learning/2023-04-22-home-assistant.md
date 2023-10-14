@@ -1,16 +1,11 @@
 ---
-# layout: posts
-# title: "Vi Everywhere"
 permalink: /home-assistant/
-excerpt: "home-assistant notes via Proxmox"
-# last_modified_at: 2016-11-03T11:13:12-04:00
+excerpt: home-assistant notes via Proxmox
 collection: learning
 categories:
   - software_engineering
   - learning
 tags:
-  - software_engineering
-  - learning
   - home-assistant
   - proxmox
   - linux

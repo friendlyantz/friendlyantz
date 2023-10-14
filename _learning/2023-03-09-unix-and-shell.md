@@ -1,18 +1,13 @@
 ---
-title: "UNIX SHell"
+title: UNIX SHell
 permalink: /unix/
-excerpt: "a place for my `sh` scripts and tricks I discover"
-## last_modified_at: 2016-11-03T11:13:12-04:00
+excerpt: a place for my `sh` scripts and tricks I discover
 collection: learning
-
 categories:
   - software_engineering
   - learning
 tags:
-  - software_engineering
-  - learning
   - shell
-  - sh
   - bash
   - scripting
 ---

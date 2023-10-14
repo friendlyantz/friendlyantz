@@ -1,15 +1,12 @@
 ---
-title: "Learning Resources, Books, Notes and ToDos"
-# permalink: /life/pages/
-excerpt: "Collection of my links and notes on learning"
-# last_modified_at: 2016-11-03T11:13:12-04:00
+title: Learning Resources, Books, Notes and ToDos
+excerpt: Collection of my links and notes on learning
 collection: learning
 categories:
   - software_engineering
   - learning
 tags:
-  - software_engineering
-  - learning
+  - resources
 ---
 
 - [Exercism](https://exercism.org/) - exercises and mentoring ([Hackerrank](https://www.hackerrank.com/) is similar, but without mentoring and CLI)

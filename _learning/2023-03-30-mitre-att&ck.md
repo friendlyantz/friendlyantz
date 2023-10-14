@@ -1,11 +1,11 @@
 ---
-# title: "HackTheBox"
-# permalink: /life/pages/
-excerpt: "Mitre Att&Ck security framework"
-# last_modified_at: 2016-11-03T11:13:12-04:00
+excerpt: Mitre Att&Ck security framework
 collection: hacking
 categories:
   - software_engineering
+  - hacking
+tags:
+  - security
   - hacking
 ---
 

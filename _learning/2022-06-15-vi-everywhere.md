@@ -1,17 +1,11 @@
 ---
-title: "Vi Everywhere"
-# permalink: /life/pages/
-excerpt: "visual editor tricks outside of VIM"
-# last_modified_at: 2016-11-03T11:13:12-04:00
+title: Vi Everywhere
+excerpt: visual editor tricks outside of VIM
 collection: learning
-
 categories:
   - software_engineering
   - learning
 tags:
-  - software_engineering
-  - learning
-  - vi
   - vim
   - emacs
 header:

@@ -1,13 +1,11 @@
 ---
 title: "notes on Book: 'Designing Data Intensive Applications'"
-excerpt: "fantastic book structurising knowledgebase for data intensive apps"
+excerpt: fantastic book structurising knowledgebase for data intensive apps
 collection: learning
 categories:
   - software_engineering
   - learning
 tags:
-  - software_engineering
-  - career
   - learning
   - book
 toc: true

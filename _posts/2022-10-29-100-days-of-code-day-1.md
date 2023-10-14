@@ -1,30 +1,28 @@
 ---
-title: "100 Days of Code"
+title: 100 Days of Code
 categories:
   - software_engineering
   - learning
 tags:
-  - software_engineering
-  - career
   - learning
   - 100DaysOfCode
   - android
   - kali
   - hacking
-
+  - professional_growth
 gallery:
-- url: assets/images/100_days_of_code_2021/Screenshot_20221031-055158_Termux.png
-  image_path: assets/images/100_days_of_code_2021/Screenshot_20221031-055158_Termux.png
-  alt: "Kali Nethunter install via Termux"
-  title: "Kali Nethunter install via Termux"
-- url: assets/images/100_days_of_code_2021/Screenshot_20221031-061524_Termux_NH.png
-  image_path: assets/images/100_days_of_code_2021/Screenshot_20221031-061524_Termux_NH.png
-  alt: "NetHunter success"
-  title: "NetHunter success"
-- url: assets/images/100_days_of_code_2021/Screenshot_20221031-063654_NetHunter KeX.png
-  image_path: assets/images/100_days_of_code_2021/Screenshot_20221031-063654_NetHunter KeX.png
-  alt: "Kali NetHunter run"
-  title: "Kali NetHunter run"
+  - url: assets/images/100_days_of_code_2021/Screenshot_20221031-055158_Termux.png
+    image_path: assets/images/100_days_of_code_2021/Screenshot_20221031-055158_Termux.png
+    alt: Kali Nethunter install via Termux
+    title: Kali Nethunter install via Termux
+  - url: assets/images/100_days_of_code_2021/Screenshot_20221031-061524_Termux_NH.png
+    image_path: assets/images/100_days_of_code_2021/Screenshot_20221031-061524_Termux_NH.png
+    alt: NetHunter success
+    title: NetHunter success
+  - url: assets/images/100_days_of_code_2021/Screenshot_20221031-063654_NetHunter KeX.png
+    image_path: assets/images/100_days_of_code_2021/Screenshot_20221031-063654_NetHunter KeX.png
+    alt: Kali NetHunter run
+    title: Kali NetHunter run
 ---
 * Table of contents (do not remove this line)
 {:toc}

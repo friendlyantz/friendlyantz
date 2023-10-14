@@ -3,10 +3,9 @@ categories:
   - software_engineering
   - learning
 tags:
-  - software_engineering
-  - career
   - reflections
   - learning
+  - professional_growth
 ---
 It has been three years now since I switched into tech, here is the gist:
 1. Your words carry tremendous weight!

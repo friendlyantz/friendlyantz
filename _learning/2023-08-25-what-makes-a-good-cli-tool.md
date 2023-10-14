@@ -1,12 +1,10 @@
 ---
 collection: learning
-excerpt: "How to structure your CLI and not only"
+excerpt: How to structure your CLI and not only
 categories:
   - software_engineering
   - learning
 tags:
-  - software_engineering
-  - learning
   - cli
   - unix
 ---

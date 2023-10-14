@@ -1,15 +1,13 @@
 ---
 title: "notes on Book: 'Sidekiq in Practice'"
-excerpt: "Queueing system for Ruby"
+excerpt: Queueing system for Ruby
 collection: learning
 categories:
   - software_engineering
   - learning
 tags:
-  - software_engineering
-  - career
-  - learning
   - book
+  - background_jobs
 ---
 
 * Table of contents (do not remove this line)

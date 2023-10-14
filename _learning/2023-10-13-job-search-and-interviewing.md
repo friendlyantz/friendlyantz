@@ -1,22 +1,11 @@
 ---
-# layout: posts
-# author_profile: true
-# title: "Vi Everywhere"
-# permalink: /life/pages/
-excerpt: "tip and tricks to help with interviewing"
-# last_modified_at: 2016-11-03T11:13:12-04:00
+excerpt: tip and tricks to help with interviewing
 collection: learning
 categories:
   - software_engineering
   - learning
 tags:
-  - software_engineering
-  - learning
-# toc: true
-# toc_sticky: true
-# toc_label: "My Table of Contents"
-# toc_icon: "cog"
-
+  - professional_growth
 ---
 
 # Useful resources

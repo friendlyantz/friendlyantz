@@ -1,12 +1,10 @@
 ---
-excerpt: "My open telemetry notes"
+excerpt: My open telemetry notes
 collection: learning
 categories:
   - software_engineering
   - learning
 tags:
-  - software_engineering
-  - learning
   - open_telemetry
 ---
 

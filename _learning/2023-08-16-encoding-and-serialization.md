@@ -1,15 +1,10 @@
 ---
-# title: "Vi Everywhere"
-# permalink: /life/pages/
-excerpt: "Protobuf, Avro, Thrift and other experiments and notes"
-# last_modified_at: 2016-11-03T11:13:12-04:00
+excerpt: Protobuf, Avro, Thrift and other experiments and notes
 collection: learning
 categories:
   - software_engineering
   - learning
 tags:
-  - software_engineering
-  - learning
   - serializitaion
   - avro
   - protobuf

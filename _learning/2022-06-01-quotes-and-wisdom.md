@@ -4,9 +4,8 @@ categories:
   - software_engineering
   - learning
 tags:
-  - software_engineering
-  - learning
-  - docker
+  - wisdom
+  - professional_growth
 ---
 
 # 3 tips from a great engineer and leader

@@ -1,23 +1,15 @@
 ---
-# layout: posts
-# author_profile: true
-title: "PostreSQL"
+title: PostreSQL
 permalink: /psql/
-excerpt: "my findings and tricks"
-# last_modified_at: 2016-11-03T11:13:12-04:00
+excerpt: my findings and tricks
 collection: learning
 categories:
   - software_engineering
   - learning
 tags:
-  - software_engineering
-  - learning
   - databases
   - postgres
-# toc: true
 toc_sticky: true
-# toc_label: "My Table of Contents"
-# toc_icon: "cog"
 ---
 
 # [types of DBs refresher](https://youtu.be/W2Z7fbCLSTw)
