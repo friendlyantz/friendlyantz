@@ -95,17 +95,21 @@ end
 
 ### Books I read / recommend
 
-- Design Data Intensive Applications
-- '99 Bottles of OOP by Sandi Metz', 
-- 'Object Oriented Design Principles by Sandi Metz',
-- 'Working with Legacy Code by Michael Feathers', 
-
 
 ```ruby
 def ruby_books
-    'Ruby Under a Microscope'
+    '99 Bottles of OOP by Sandi Metz'
     'Programming Ruby'
+    'Layered Design for Ruby on Rails Applications'
+    'Object Oriented Design Principles by Sandi Metz'
+    'Ruby Under a Microscope'
+    'Sidekiq in Practice by Nate Berkopec'
 end
+```
+
+```java
+system_design:
+    'Design Data Intensive Applications'
 ```
 
 ```python
