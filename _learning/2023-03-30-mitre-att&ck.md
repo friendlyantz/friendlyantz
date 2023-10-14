@@ -8,10 +8,6 @@ tags:
   - security
   - hacking
 ---
-
-* Table of contents (do not remove this line)
-{:toc}
-
 The MITRE ATTACK Framework is a curated knowledge base that tracks cyber adversary tactics and techniques
 
 TTPs (Tactics, Techniques, and Procedures):

@@ -7,7 +7,6 @@ categories:
 tags:
   - professional_growth
 ---
-
 # Useful resources
 
 - [How to Prepare for Tech Interviews](https://www.reddit.com/r/cscareerquestions/comments/1jov24/heres_how_to_prepare_for_tech_interviews)

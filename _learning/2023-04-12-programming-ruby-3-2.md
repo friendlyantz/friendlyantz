@@ -15,8 +15,8 @@ My takeaways:
 
 ## Chapter 2: Ruby.new
 
-Ruby is a pure object-ori- ented language with no basic types.
-> all Ruby types are objects, and there are no non-object basic types that behave differently. However, many languages claim to be object-oriented, and those languages often have a different interpreta- tion of what object-oriented means and a different terminology for the concepts they employ.
+Ruby is a pure object oriented language with no basic types.
+> all Ruby types are objects, and there are no non-object basic types that behave differently. However, many languages claim to be object-oriented, and those languages often have a different interpretation of what object-oriented means and a different terminology for the concepts they employ.
 ```ruby
 histogram = Hash.new(0) # The default value is zero
 regerx_comparator =~ /Ru(by|st)/

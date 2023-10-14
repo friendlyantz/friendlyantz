@@ -7,9 +7,6 @@ categories:
 tags:
   - open_telemetry
 ---
-
-# Table Of Contens
-
 # My Ruby sandbox
 
 [My Ruby sandbox](https://github.com/friendlyantz/open-telemetry-sandbox)
