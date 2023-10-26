@@ -8,6 +8,7 @@ categories:
 tags:
   - professional_growth
 toc: true
+permalink: /big-o-complexity-of-the-job-search/
 ---
 # Action Plan
 
