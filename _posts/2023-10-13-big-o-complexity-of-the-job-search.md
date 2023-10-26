@@ -82,8 +82,8 @@ class Friendlyantz
 ---
 ## don't waste time tailoring every application
 	HR's don't care, just get a meeting
-	- linkedin
-	- indeed
+	- linkedin jobs
+	- indeed.com
 
 ---
 # Screening - HR / Manager
@@ -125,6 +125,7 @@ Understand basic algorithms (contested topic)
 ## understand basic search algos
 	- Binary Search
 	- Linear Search
+
 ---
 ## understand recursion
 	- preparetion / check
@@ -150,13 +151,14 @@ Understand basic algorithms (contested topic)
 ---
 BigO basic rules:
 - constants are ignored
-- every loop is an n-complexity. loop = O(n), loop-withi-a-loo = 0(n^2), etc
 - worst case is generally is considered
+- every loop is an n-complexity. loop = O(n), loop-withi-a-loop = 0(n^2), etc
+- if you half your input in every iteration, it's generally O(log n)
 
 ---
 ## do basic LeetCode challenges
 - focus on hottest challenges. don't just do everything LeetCode gives you
-- https://neetcode.io/ - do all EASY challenges, then some MEDIUM, and then try HARD
+- [https://neetcode.io/](https://neetcode.io/) - do all EASY challenges, then some MEDIUM, and then try HARD
 
 ---
 familiarise with HackerRank platform
@@ -172,13 +174,13 @@ Put MAJOR effort with any coding assignments
 - provide a test suite, 
 - review before submitting.
 - have good README and ideally [Makefile](https://gist.github.com/friendlyantz/3b92838e1e0361c78b23b05abdd17086)
--  may be add basic [CI script / makefile](https://gist.github.com/friendlyantz/7b7075525fe67719202648374fcf1325)
+- may be add basic [CI script / makefile](https://gist.github.com/friendlyantz/7b7075525fe67719202648374fcf1325) for GitHub Actions
 - search GitHub for already submitted solutions for some inspiration and ideas
 
 ---
 
 ## keep up with industry trends and news
-- https://rubyweekly.com/
+- [https://rubyweekly.com/](https://rubyweekly.com/)
 - [The Pragmatic Engineer](https://www.pragmaticengineer.com/)
 
 ---
