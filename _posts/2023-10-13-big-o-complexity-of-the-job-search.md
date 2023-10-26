@@ -226,6 +226,15 @@ Other resources
 - on the right you can load awesome icons
 
 ---
+
+## Typical System Design timing
+
+- 5-10min: define function and non-functional requirements
+- 10-15min: high-level system design of all components. from CDN down to DB
+- 10-15min: in-depth review of components
+- 10-15min: wrap up, review, discussion of changes
+
+---
 # Behavioural Interview
 - how you handle conflict / disagreement (EVERY interview)
 - have questions for them
