@@ -1,6 +1,6 @@
 ---
 title: My talk at Ruby Oceania in Melbourne - BigO complexity of the job search
-excerpt: tip and tricks to help with interviewing
+excerpt: tip and tricks to help with interviewing or how to become a FAANG CTO in 10 easy steps
 collection: learning
 categories:
   - software_engineering
@@ -154,7 +154,7 @@ BigO basic rules:
 
 ---
 ## do basic LeetCode challenges
-- focus on hottest challenges. don't just do every LeetCode gives you
+- focus on hottest challenges. don't just do everything LeetCode gives you
 - https://neetcode.io/ - do all EASY challenges, then some MEDIUM, and then try HARD
 
 ---
@@ -185,7 +185,8 @@ Put MAJOR effort with any coding assignments
 - Structural
 - Behavioural
 - Creational
-https://refactoring.guru
+
+[https://refactoring.guru](https://refactoring.guru)
 
 ---
 Other resources
