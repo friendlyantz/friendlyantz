@@ -216,9 +216,9 @@ Other resources
 - skim [system design primer](https://github.com/donnemartin/system-design-primer)
 
 ---
-## [Design Data Intensive book](https://dataintensive.net/) -
-- quick youTube overview of all chapters -> https://www.youtube.com/watch?v=W5cWSNZY3l8
--  quite rich, but gives a lot of food for thought for modern distributed system design that will put you way ahead of competition. 
+## [Design Data Intensive book](https://dataintensive.net/)
+- quick [youTube overview of all chapters](https://www.youtube.com/watch?v=PdtlXdse7pw&list=PL4KdJM8LzAMecwInbBK5GJ3Anz-ts75RQ) 
+- quite rich book, but gives a lot of food for thought for modern distributed system design that will put you way ahead of competition. 
 
 ---
 ## Familiarise yourself with [Excalidraw](https://excalidraw.com/) 
