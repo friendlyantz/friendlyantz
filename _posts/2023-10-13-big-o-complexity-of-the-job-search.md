@@ -9,7 +9,12 @@ tags:
   - professional_growth
 toc: true
 permalink: /big-o-complexity-of-the-job-search/
+header:
+  video:
+    id: _mrF0pp8LIE
+    provider: youtube
 ---
+
 # Action Plan
 
 - stages of job search
