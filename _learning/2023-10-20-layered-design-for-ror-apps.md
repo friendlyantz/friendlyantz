@@ -18,3 +18,11 @@ tags:
 Adapter vs Plugin vs Wrapper patterns
 >  The key difference between adapters and plugins is that plugins provide additional functionality, not just an expected interface.
 >  The wrapper pattern could be seen as a degenerate case of the adapter pattern. With a wrapper object, we have both an application-level interface and the implementation encapsulation. Wrappers are usually much easier to deal with in tests than implementations.
+
+# Chapter 4
+
+- Callbacks, callbacks everywhere
+- Concerning Rails concerns
+- On global and current states
+
+> 	can quickly turn into anti-patterns, since they tend to cross the boundaries between layers and lead to code that attracts many responsibilities
