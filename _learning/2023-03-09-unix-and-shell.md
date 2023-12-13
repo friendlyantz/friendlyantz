@@ -32,6 +32,21 @@ mkdir -p /not_yet_created_dir/new_dir && cd $_
 # bulk file renaming
 for f in ./*; do mv "$f" "${f/Silicon_Valley/S01E01}"; done
 ```
+## PIPESTATUS (Bash and ZSH differ)
+
+```bash
+return 213 | grep 2 | echo 'lala'
+
+# BASH
+echo ${PIPESTATUS[@]}
+# 1 1 0
+
+# ZSH
+echo $pipestatus[@]
+# 213 1 0
+```
+
+---
 
 ## `jq`
 
