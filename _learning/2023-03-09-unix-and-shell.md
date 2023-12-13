@@ -37,15 +37,16 @@ for f in ./*; do mv "$f" "${f/Silicon_Valley/S01E01}"; done
 is an array variable in Bash that holds the exit status of the last foreground pipeline (a sequence of one or more commands separated by the pipe `|` operator). Each element of the array corresponds to the exit status of a command in the pipeline.
 
 ```bash
-return 213 | grep 2 | echo 'lala'
+echo 'lala' | grep 'da' |  curl non_existent.com
+# curl: (6) Could not resolve host: non_existent.com
 
 # BASH
 echo ${PIPESTATUS[@]}
-# 1 1 0
+# 0 1 6
 
 # ZSH
 echo $pipestatus[@]
-# 213 1 0
+# 0 1 6
 ```
 
 ---
