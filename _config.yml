@@ -110,6 +110,9 @@ author:
   location         : "Melbourne, Australia"
   email            : "panteleev23@gmail.com"
   links:
+    - label: "GPT me"
+      icon: "fa fa-comments"
+      url: "https://chat.openai.com/g/g-DGAmMaqvN-friendlyantz"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/friendlyantz"
