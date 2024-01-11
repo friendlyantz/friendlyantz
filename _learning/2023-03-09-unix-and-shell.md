@@ -34,11 +34,22 @@ for f in ./*; do mv "$f" "${f/Silicon_Valley/S01E01}"; done
 ```
 
 ## Every Bash script
+a must do for every `bash` script. (However consider Ruby for anything that is harder than elementary)
+(massive credit to Mr. SE)
 
 ```bash example
 #!/usr/bin/env bash
 set -euo pipefail
 ```
+also can add 'debugger' to show what scripts are running
+```bash
+set -x
+```
+
+> - Always use `[[ ]]` instead of `[ ]`
+> - Always quote your variables
+> - Always use latest bash (as of 2024-jan I had 3.2.57(1) Mac M2, brew'ed it to 5.2.21)
+
 ## `PIPESTATUS` (Bash and ZSH differ)
 
 is an array variable in Bash that holds the exit status of the last foreground pipeline (a sequence of one or more commands separated by the pipe `|` operator). Each element of the array corresponds to the exit status of a command in the pipeline.
