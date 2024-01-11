@@ -32,6 +32,13 @@ mkdir -p /not_yet_created_dir/new_dir && cd $_
 # bulk file renaming
 for f in ./*; do mv "$f" "${f/Silicon_Valley/S01E01}"; done
 ```
+
+## Every Bash script
+
+```bash example
+#!/usr/bin/env bash
+set -euo pipefail
+```
 ## `PIPESTATUS` (Bash and ZSH differ)
 
 is an array variable in Bash that holds the exit status of the last foreground pipeline (a sequence of one or more commands separated by the pipe `|` operator). Each element of the array corresponds to the exit status of a command in the pipeline.
