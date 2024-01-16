@@ -37,12 +37,16 @@ for f in ./*; do mv "$f" "${f/Silicon_Valley/S01E01}"; done
 a must do for every `bash` script. (However consider Ruby for anything that is harder than elementary)
 (massive credit to Mr. SE)
 
-```bash example
+```sh
 #!/usr/bin/env bash
 set -euo pipefail
 ```
+The `-e` option stands for "exit immediately"
+The `-u` option stands for "unbound (or unset) variables". This causes the script to exit with an error if it attempts to use a variable that has not been set. By default, bash would use an empty string as the value for such variables, which can lead to subtle bugs.
+The `-o` is required `pipefail`
+
 also can add 'debugger' to show what scripts are running
-```bash
+```sh
 set -x
 ```
 
