@@ -62,6 +62,12 @@ yes | some_command
 # or provide an ARG, which will type 'no' in this case
 yes no | some_command 
 ```
+
+# pwd
+
+```sh
+basename $(pwd)
+```
 ## `PIPESTATUS` (Bash and ZSH differ)
 
 is an array variable in Bash that holds the exit status of the last foreground pipeline (a sequence of one or more commands separated by the pipe `|` operator). Each element of the array corresponds to the exit status of a command in the pipeline.
