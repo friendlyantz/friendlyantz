@@ -311,3 +311,47 @@ mv db/{oldName,newName}_structure.sql
 cal 2018
 cal -3
 ```
+
+# start on boot DIY service
+
+1. Create new service
+```sh
+
+vi /etc/systemd/system/my_services.service
+```
+
+Often it is important to include user, I had python scripts not working since by default it was executed by system and not my `User`
+```
+[Unit]
+Description=MyServices
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /full/path/app.py
+User=anton
+Restart=always
+WorkingDirectory=/full/path/dir/
+
+[Install]
+WantedBy=multi-user.target
+```
+> Here are the available options for the `Restart`:
+
+- `no`: Do not automatically restart the service.
+- `on-success`: Restart the service only if it exits with a clean (zero) exit status.
+- `on-failure`: Restart the service only if it exits with a non-zero exit status.
+- `on-abnormal`: Restart the service if it exits with a non-zero exit status, or if it terminates unexpectedly (e.g., due to a signal).
+- `on-abort`: Restart the service only if it was terminated due to a signal.
+- `always`: Always restart the service regardless of the exit status or how it was terminated.
+3. daemon reload
+```bash
+sudo systemctl daemon-reload
+```
+4. enable service
+```bash
+sudo systemctl enable my_services.service
+```
+5. start service
+```bash
+sudo systemctl start my_services.service
+```
