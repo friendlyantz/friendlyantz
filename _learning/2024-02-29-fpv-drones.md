@@ -77,8 +77,8 @@ set exlanding
 
 ### OSD
 
+- DJI goggles 2 (not o3 unit) need to be on v1.05 firmware
 <img width="1498" alt="image" src="https://github.com/friendlyantz/friendlyantz/assets/70934030/b2e11603-24a0-42ae-a21f-f4af48b5320e">
-
 
 ### LED
 
