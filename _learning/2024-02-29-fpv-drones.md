@@ -57,6 +57,10 @@ set exlanding
 
 <img width="1515" alt="image" src="https://github.com/friendlyantz/friendlyantz/assets/70934030/899fb0f3-8623-4267-8c47-959f7a4a1ffd">
 
+### Presets
+
+<img width="1482" alt="image" src="https://github.com/friendlyantz/friendlyantz/assets/70934030/252fc61d-8a3e-42bd-87f4-4ebd918f7381">
+
 
 ### PID
 
