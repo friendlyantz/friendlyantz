@@ -15,6 +15,11 @@ tags:
   - radio
 
 ---
+# TODO / MEMOs
+
+- [ ] ExpressLRS presets mights be required after flashing new firmware!
+- [ ] BetaFlight ports -> might be required to be re-anabled (check below)
+- [ ] BetaFlight PID -> throttle and motor setting -> reduce from 100% to 60-70%. don't go below 50%
 # Batteries
 
 ## Li-Ion
@@ -31,6 +36,22 @@ ELRS configurator app builds RX and TX
 
 # BeteFlight
 
+## scripts
+
+
+```sh
+# HD display
+set osd_displayport_device = MSP
+
+# GPS rating on OSD
+set osdgp-TODO
+
+# soft landing
+set exlanding
+
+# DO NOT FORGET TO SAVE
+save
+```
 ## Ports
  after update RX port might need to be enabled
 
@@ -46,6 +67,7 @@ set exlanding
 
 ### ports
 
+UART2 used by TX/RX
 <img width="1497" alt="image" src="https://github.com/friendlyantz/friendlyantz/assets/70934030/1708ea95-128d-4e90-89fe-06190ce8c635">
 
 ### configuration
@@ -64,6 +86,11 @@ set exlanding
 
 ### PID
 
+- throttle and motor setting
+	- -> reduce from 100% to 60-70%. don't go below 50%
+	- dynamic idle value `20` * 100
+
+https://youtu.be/ShnYLKmFTog?si=69ox5MCgrGgmayzk
 <img width="1479" alt="image" src="https://github.com/friendlyantz/friendlyantz/assets/70934030/c1537a08-2814-4025-bbca-19d5aa713751">
 <img width="1473" alt="image" src="https://github.com/friendlyantz/friendlyantz/assets/70934030/8c1d3a51-7035-4428-9f55-e91ba0667b73">
 
@@ -82,6 +109,12 @@ set exlanding
 ### OSD
 
 - DJI goggles 2 (not o3 unit) need to be on v1.05 firmware
+- in order to enable
+```
+get osd_displayport_device
+
+set osd_displayport_device = MSP
+```
 <img width="1498" alt="image" src="https://github.com/friendlyantz/friendlyantz/assets/70934030/b2e11603-24a0-42ae-a21f-f4af48b5320e">
 
 ### LED
