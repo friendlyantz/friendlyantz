@@ -10,14 +10,15 @@ tags:
 
 # iTerm
 
-| key       |                  cmd |
-| ---------------- | ---------------- |
-| CTRL + u / y |	clear line / undo clear
-| CMD + SHIFT + H	| list of copy-pastes
-| CMD + D	| new tab in pane 
-| CMD + ENTER	| full screen switch
-| CMD + OPT + Arrows |	 navigate between panes(CMD + D)
-| CTRL + CMD + Arrows	| resize pane |
+| key                 | cmd                             |
+| ------------------- | ------------------------------- |
+| CTRL + u / y        | clear line / undo clear         |
+| CMD + SHIFT + H     | list of copy-pastes             |
+| CMD + D             | new tab in pane                 |
+| CMD + ENTER         | full screen switch              |
+| CMD + OPT + Arrows  | navigate between panes(CMD + D) |
+| CTRL + CMD + Arrows | resize pane                     |
+| CMD + Shift + .     | edit command                    |
 
 # Obsidian
 
