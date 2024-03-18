@@ -19,6 +19,11 @@ Mike's talk. loved it!
 > Source:
 [https://failure-driven.com/presentations/20180627-vi-everywhere-whats-your-superpower/](https://failure-driven.com/presentations/20180627-vi-everywhere-whats-your-superpower/)
 
+TLDR
+```bash
+set -o | egrep -e 'emacs|vi '
+set -o vi
+```
 # Further Read and EMACS {#further-read}
 BUT, you might still want to invest in learning some basic shortcuts of EMACS, as VI binding are not always available, also look further into [ReadLine](https://readline.kablamo.org/emacs.html)
 
@@ -69,4 +74,7 @@ VIM combos:
 ---
 
 - [VIM Adventures](https://vim-adventures.com/) - learn VI shortcuts game
+
+
+---
 
