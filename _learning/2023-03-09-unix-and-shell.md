@@ -312,7 +312,7 @@ cal 2018
 cal -3
 ```
 
-# `start on boot` DIY service
+# `auto start on boot` DIY service
 
 1. Create new service
 ```sh
@@ -358,7 +358,13 @@ sudo systemctl enable my_services.service
 ```bash
 sudo systemctl start my_services.service
 ```
+5. check status
 
+```bash
+sudo systemctl status my_services.service
+```
+
+---
 # soft reboot
 ```sh
 sudo shutdown -r now
