@@ -31,8 +31,13 @@ mkdir -p /not_yet_created_dir/new_dir && cd $_
 ```sh
 # bulk file renaming
 for f in ./*; do mv "$f" "${f/Silicon_Valley/S01E01}"; done
+# works well
+sr app State::ProductItems::ProductItemMapping State::BaseUnitMapping
 ```
-
+# basic rename of strings in files
+```sh
+sr () { ag -0 -l $2 $1 | xargs -0 sed -i '' -e "s/$2/$3/g" }
+```
 ## Every Bash script
 a must do for every `bash` script. (However consider Ruby for anything that is harder than elementary)
 (massive credit to Mr. SE)

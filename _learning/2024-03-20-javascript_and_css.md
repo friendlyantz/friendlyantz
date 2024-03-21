@@ -26,5 +26,49 @@ tags:
 # Day 3: CSS variables
 
 ```css
+<style>
+      :root {
+        --base: #00ff55;
+        --spacing: 30px;
+        --blur: 10px;
+      }
 
+      img {
+        padding: var(--spacing);
+        background: var(--base);
+        filter: blur(var(--blur));
+      }
+
+      .hl {
+        color: var(--base);
+      }
+/* etc */
+```
+basic console log
+```js
+    <script>
+      // returns nodeList
+      const inputs = document.querySelectorAll(".controls input");
+
+      function handleUpdate() {
+        // console.log(this.value);
+        // console.log(this.dataset); // data from 'data-xxx' class element
+        
+        const suffix = this.dataset.sizing || "";
+        document.documentElement.style.setProperty(
+          `--${this.name}`,
+          this.value + suffix
+        );
+      }
+
+      inputs.forEach((input) => input.addEventListener("change", handleUpdate));
+      // or mouse move (when dragging while changing)
+      inputs.forEach((input) =>
+        input.addEventListener("mousemove", handleUpdate)
+      );
+```
+
+also can override CSS variables
+```html
+<h2 style="--base:#BADA55">...
 ```
