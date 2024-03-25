@@ -22,6 +22,9 @@ tags:
 
 [JavaScript30 challange by WesBos](https://courses.wesbos.com/)
 [My Repo](https://github.com/friendlyantz/JavaScript30)
+ # Notes 
+- Array operations from D4 is really useful fundamentals
+- alternative to `console.log()` is `console.table(fullNames);`
 
 # Day 3: CSS variables
 
@@ -53,7 +56,7 @@ basic console log
       function handleUpdate() {
         // console.log(this.value);
         // console.log(this.dataset); // data from 'data-xxx' class element
-        
+
         const suffix = this.dataset.sizing || "";
         document.documentElement.style.setProperty(
           `--${this.name}`,
