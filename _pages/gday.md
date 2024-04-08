@@ -12,4 +12,6 @@ I switched into tech after more than a decade in Civil Engineering and Project M
 
 I am focused on back-end / full-stack and Machine Learning. I very much enjoy what I do.
 
+I currently learn Rust🦀, while practicing _"Extreme Programming"_ in Ruby and shipping it daily🛳️
+
 I keep my discoveries in ['Learning']({% link _pages/learning.md %}) section. (_btw, this intro block was ajax loaded using HTMX!_)
