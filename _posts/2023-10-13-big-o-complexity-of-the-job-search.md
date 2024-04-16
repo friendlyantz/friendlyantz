@@ -7,6 +7,9 @@ categories:
   - learning
 tags:
   - professional_growth
+  - software_engineering
+  - learning
+  - talks
 toc: true
 permalink: /big-o-complexity-of-the-job-search/
 header:
