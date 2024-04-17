@@ -105,9 +105,9 @@ bundle install
 
 ---
 
-## Bundler advance
+## Bundle more
 
-```sh
+```ruby
 bundle show # show all gems in Gemfile
 bundle show [gemname] # show path
 bundle info [gemname]
@@ -119,11 +119,16 @@ bundle console # open irb with gems loaded
 
 ---
 
-# Rake / Rakefile / Raketasks
+# Rake
 
-Rake is a build automation tool written in Ruby. It allows you to specify tasks and describe dependencies as well as to group tasks in a namespace.
+---
 
-Rake is similar to Make in Unix. However, Rake uses Ruby syntax, which allows for more flexibility and complexity in defining tasks.
+Rake is a build automation tool written in Ruby, similar to Make in Unix. 
+However, Rake uses Ruby syntax, which allows for more flexibility and complexity in defining tasks.
+- specify tasks 
+- describe dependencies 
+- group tasks in a namespace.
+
 [free course by Avdi Grim](https://graceful.dev/courses/the-freebies/modules/rake-and-project-automation/topic/episode-129-rake/)
 
 ---
@@ -147,11 +152,18 @@ files = Rake::FileList.new('**/*.md') do |fl|
   fl.exclude(/^excluded_dir/)
 end
 
-task html: files.ext('.html')
+multitask html: files.ext('.html')
 
 rule '.html' => '.md' do |t|
   sh "pandoc -o #{t.name} #{t.source}"
 end
+```
+
+---
+
+read more
+```sh
+ri FileUtils
 ```
 
 ---
@@ -167,9 +179,10 @@ run do |env|
 end
 ```
 
-```zsh
+```ruby
 gem install rack
 rackup # starts your default web server on 9292
+
 # or specify alternative webserver, i.e. 'webrick'
 rackup -s webrick
 ```
@@ -188,9 +201,14 @@ curl -i http://127.0.0.1:9292
 
 ```ruby
 require 'active_support'
+
+# then
 require 'active_support/core_ext/hash/indifferent_access'
+# or
 require 'active_support/core_ext'
 ```
+
+---
 
 ```ruby
 - `with_option`
@@ -198,11 +216,10 @@ require 'active_support/core_ext'
 - `hash_with_indifferent_access`
 - `in?`
 - `prsenece` / `blank?` / `present?`
-
 ```
 
 ---
-prsenece` / `blank?` / `present?`
+`presence` / `blank?` / `present?`
 ![image](https://github.com/friendlyantz/friendlyantz/assets/70934030/01430dd0-cc21-42fe-a007-58910a373bc7)
 
 ---
@@ -210,8 +227,20 @@ prsenece` / `blank?` / `present?`
 ## Other Ext
 
 - [`delegate`](https://guides.rubyonrails.org/active_support_core_extensions.html#delegate) and `delegate_missing_to`
-- `squish`
+```ruby
+class User < ApplicationRecord
+  has_one :profile
+
+  delegate :name, to: :profile
+end
+```
+- [squish](https://guides.rubyonrails.org/active_support_core_extensions.html#squish)
+```ruby
+" \n  foo\n\r \t bar \n".squish # => "foo bar"
+```
 - singularize, pluralize, camelize / underscore, titleize / dasherize, demodulize, deconstantize, parameterize, humanize, constantize
+
+---
 
 ```ruby
 "Admin::Hotel::ReservationUtils".demodulize # => "ReservationUtils"
@@ -223,6 +252,7 @@ prsenece` / `blank?` / `present?`
 ```
 
 ---
+
 Ext to Enumerables
 
 - pluck
@@ -233,19 +263,17 @@ Ext to Enumerables
 - exclude?
 
 ----
+
 Ext to Array
 
 - extract
-
 ```ruby
 numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 odd_numbers = numbers.extract! { |number| number.odd? } # => [1, 3, 5, 7, 9]
 numbers # => [0, 2, 4, 6, 8]
 ```
-
- `to`, `from`, `third`, `excluding`
-
-- `.in_groups_of`
+-  `to`, `from`, `third`, `excluding`
+- `.in_groups_of(3)`
 
 ----
 
