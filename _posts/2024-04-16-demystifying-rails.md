@@ -26,8 +26,6 @@ toc: true
 
 # Action Plan
 
-- 
-
 ---
 # About me
 
@@ -47,21 +45,10 @@ class Friendlyantz
 
 ## Thailand
 
-{% include figure image_path="/assets/images/unsplash-image-10.jpg" alt="this is a placeholder image" caption="This is a figure caption." %}
-
-<!-- {% include video id="XsxDH4HcOWA" provider="youtube" %} -->
-
-{% include feature_row id="intro" type="center" %}
-
-{% include feature_row %}
-
-{% include feature_row id="feature_row2" type="left" %}
-
-{% include feature_row id="feature_row3" type="right" %}
-
-{% include feature_row id="feature_row4" type="center" %}
+---
 
 ---
+
 # RubyConf2024
 
 ---
