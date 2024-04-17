@@ -1,5 +1,5 @@
 ---
-title: Notes on 'Programming Ruby 3.2' book
+title: Notes on 'Programming Ruby' book
 excerpt: The Pragmatic Programmers' Guide
 collection:
   - software_engineering
@@ -24,7 +24,7 @@ regerx_comparator =~ /Ru(by|st)/
 
 the braces bind more tightly than the do/end pairs
 
-## Chapter 3: 
+## Chapter 3: Classes, Objects, and Variables
 
 Whenever you’re designing an Object-Oriented system, a good first step is to identify the domain concepts you’re dealing with.
 
