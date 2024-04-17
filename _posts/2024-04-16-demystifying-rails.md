@@ -174,3 +174,6 @@ curl -I http://127.0.0.1:9292
 
 ---
 ---
+
+![image](https://github.com/friendlyantz/friendlyantz/assets/70934030/01430dd0-cc21-42fe-a007-58910a373bc7)
+
