@@ -26,46 +26,63 @@ toc: true
 
 # Action Plan
 
+- how to demystify Ruby on Rails
+- parts that form Rails
+	- bundler, rake, rack
+	- *Active*Support, *Active*Record, *Active*Model
+	- *Active*Mailer, *Active*Job
+	- **Action**Cable, **Action**Cable, **Action**Cable
+	- Routes, DSLs
+- some demo code, my favourite parts
+
 ---
 # About me
 
 ```ruby
 class Friendlyantz
   def initialize
-    @name = 'Anton' || :friendlyantz
+    @name = 'Anton Panteleev' || :friendlyantz
     @title = 'Extreme Programmer'
     @location = 'Melbourne, Australia'
     @work = FRESHO🌶️
   end
   
-  def find_more = 'https://friendlyantz.me/''
+  def find_more = 'https://friendlyantz.me/'
+  def twitter = 'https://twitter.com/friendlyantz/'
 ```
 
 ---
 
 ## Thailand
 
+<img height="500" alt="image" src="https://github.com/friendlyantz/friendlyantz/assets/70934030/442c5a59-9abd-4df3-a02d-103d552a40ae">
+<img height="500" alt="image" src="https://github.com/friendlyantz/friendlyantz/assets/70934030/d49db1de-4d0e-497f-bbda-1434d51ce9ec">
+<img height="500" alt="image" src="https://github.com/friendlyantz/friendlyantz/assets/70934030/c55adaf5-b703-40ee-bd72-a7a6d7067818">
+
+---
 ![fit_2048](https://github.com/friendlyantz/friendlyantz/assets/70934030/8eb5626b-bea8-4266-8966-e0803ff3fffb)
 
 ---
 
-<img height="600" alt="image" src="https://github.com/friendlyantz/friendlyantz/assets/70934030/442c5a59-9abd-4df3-a02d-103d552a40ae">
-<img height="600" alt="image" src="https://github.com/friendlyantz/friendlyantz/assets/70934030/d49db1de-4d0e-497f-bbda-1434d51ce9ec">
-<img height="600" alt="image" src="https://github.com/friendlyantz/friendlyantz/assets/70934030/c55adaf5-b703-40ee-bd72-a7a6d7067818">
+Ruby Conf AU - Sydney2024
+
+<img height="500" alt="image" src="https://pbs.twimg.com/media/GK-BCCTawAAzlHT?format=jpg&name=large">
+https://twitter.com/friendlyantz/status/1778782252035678544/photo/1
 
 ---
 
-# RubyConf2024
+<img height="500" alt="image" src="https://pbs.twimg.com/media/GK-AOCWaAAA0zXP?format=jpg&name=large">
+https://twitter.com/friendlyantz/status/1778781359248683376/photo/1
 
 ---
 
-
-> RubyConfTH 2022 - Dissecting Rails 
-https://www.youtube.com/watch?v=gXwRs-FwcmE
+# Demystifying Rails
 
 ---
-key concepts
-<img width="1011" alt="image" src="https://github.com/friendlyantz/friendlyantz/assets/70934030/89ccfb1a-15dd-4f16-990e-ac6422274fb4">
+
+RubyConfTH 2022 - Dissecting Rails 
+
+> https://www.youtube.com/watch?v=gXwRs-FwcmE
 
 ---
 
@@ -87,7 +104,8 @@ bundle install
 
 ---
 
-## Bundler advance
+## Bundle more 
+
 ```sh
 bundle show # show all gems in Gemfile
 bundle show [gemname] # show path
@@ -99,14 +117,16 @@ bundle console # open irb with gems loaded
 ```
 
 ---
+# Rake
 
-# Rake / Rakefile / Raketasks
+---
 
-Rake is a build automation tool written in Ruby. It allows you to specify tasks and describe dependencies as well as to group tasks in a namespace.
-
-Rake is similar to Make in Unix. However, Rake uses Ruby syntax, which allows for more flexibility and complexity in defining tasks.
-[free course by Avdi Grim](https://graceful.dev/courses/the-freebies/modules/rake-and-project-automation/topic/episode-129-rake/)
-
+Rake is a build automation tool written in Ruby, similar to Make in Unix. 
+However, Rake uses Ruby syntax, which allows for more flexibility and complexity in defining tasks.
+- specify tasks 
+- describe dependencies 
+- group tasks
+> [free course by Avdi Grim](https://graceful.dev/courses/the-freebies/modules/rake-and-project-automation/topic/episode-129-rake/)
 
 ---
 
@@ -146,7 +166,7 @@ run do |env|
 end
 ```
 
-```sh
+```zsh
 gem install rack
 rackup # starts your default web server on 9292
 # or specify alternative webserver, i.e. 'webrick'
@@ -154,7 +174,7 @@ rackup -s webrick
 ```
 
 ```sh
-curl -I http://127.0.0.1:9292
+curl -i http://127.0.0.1:9292
 ```
 
 ---
