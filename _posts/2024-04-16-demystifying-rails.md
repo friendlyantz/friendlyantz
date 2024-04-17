@@ -45,7 +45,18 @@ class Friendlyantz
 
 ## Thailand
 
+![fit_2048](https://github.com/friendlyantz/friendlyantz/assets/70934030/442c5a59-9abd-4df3-a02d-103d552a40ae)
+
+
 ---
+
+![fit_2048](https://github.com/friendlyantz/friendlyantz/assets/70934030/d49db1de-4d0e-497f-bbda-1434d51ce9ec)
+
+---
+
+beach
+
+![fit_2048](https://github.com/friendlyantz/friendlyantz/assets/70934030/8eb5626b-bea8-4266-8966-e0803ff3fffb)
 
 ---
 
