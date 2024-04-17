@@ -75,6 +75,12 @@ key concepts
 <img width="1011" alt="image" src="https://github.com/friendlyantz/friendlyantz/assets/70934030/89ccfb1a-15dd-4f16-990e-ac6422274fb4">
 
 ---
+
+key concepts
+<img width="1003" alt="image" src="https://github.com/friendlyantz/friendlyantz/assets/70934030/b449d797-0b96-43b6-b05e-9f2170d7af6f">
+
+---
+
 # Bundler
 
 ```sh
