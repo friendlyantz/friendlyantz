@@ -305,8 +305,59 @@ numbers # => [0, 2, 4, 6, 8]
 
 ---
 
+```ruby
+require 'active_record'
+
+ActiveRecord::Base.establish_connection(
+  adapter: 'sqlite3',
+  database: 'sample.sqlite3'
+)
+```
+
+---
+
+```ruby
+class CreateUsers < ActiveRecord::Migration[6.0]
+  def change
+    create_table :users do |t|
+      t.string :name
+    end
+  end
+end
+
+CreateUsers.new.migrate(:up)
+```
+
+---
+
+```ruby
+class User < ActiveRecord::Base
+  validates_presence_of :name, on: :create
+
+  has_many :posts
+end
+```
+
+---
+
+- [ ] ActiveRecord
+  - [ ] [basics](https://guides.rubyonrails.org/active_record_basics.html)
+  - [ ] [migrations](https://guides.rubyonrails.org/active_record_migrations.html)
+  - [ ] [validations](https://guides.rubyonrails.org/active_record_validations.html)
+  - [ ] [callbacks](https://guides.rubyonrails.org/active_record_callbacks.html)
+  - [ ] [Associations](https://guides.rubyonrails.org/association_basics.html)
+  - [ ] [Query Interface](https://guides.rubyonrails.org/active_record_querying.html)
+---
+
 # ActiveModel
 
+```ruby
+	include ActiveModel::API
+	include ActiveModel::AttributeMethods
+	include ActiveModel::Model
+	extend ActiveModel::Translation
+	include ActiveModel::SecurePassword
+```
 ---
 
 # ActiveJob
