@@ -24,14 +24,17 @@ tags:
 
 {{title}}
 
-|keys | command |
-|--|--|
-|cmd + enter | checkbox |
-|cmd + k | hprlink |
-|cmd + e | preview |
-|cmd + click_preview|see diff with preview|
-|cmd + P| cmd pallete|
-|cmd + opt + click| multiple cursors |
+sfjsdfjk
+
+
+| keys                | command               |
+| ------------------- | --------------------- |
+| cmd + enter         | checkbox              |
+| cmd + k             | hprlink               |
+| cmd + e             | preview               |
+| cmd + click_preview | see diff with preview |
+| cmd + P             | cmd pallete           |
+| cmd + opt + click   | multiple cursors      |
 
 
 ---
