@@ -70,6 +70,9 @@ class Friendlyantz
 > RubyConfTH 2022 - Dissecting Rails 
 https://www.youtube.com/watch?v=gXwRs-FwcmE
 
+---
+key concepts
+<img width="1011" alt="image" src="https://github.com/friendlyantz/friendlyantz/assets/70934030/89ccfb1a-15dd-4f16-990e-ac6422274fb4">
 
 ---
 # Bundler
