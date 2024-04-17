@@ -28,14 +28,15 @@ toc: true
 
 - how to demystify Ruby on Rails
 - parts that form Rails
-	- bundler, rake, rack
-	- *Active*Support, *Active*Record, *Active*Model
-	- *Active*Mailer, *Active*Job
-	- **Action**Cable, **Action**Cable, **Action**Cable
-	- Routes, DSLs
+ 	- bundler, rake, rack
+ 	- *Active*Support, *Active*Record, *Active*Model
+ 	- *Active*Mailer, *Active*Job
+ 	- **Action**Cable, **Action**Cable, **Action**Cable
+ 	- Routes, DSLs
 - some demo code, my favourite parts
 
 ---
+
 # About me
 
 ```ruby
@@ -80,9 +81,9 @@ https://twitter.com/friendlyantz/status/1778781359248683376/photo/1
 
 ---
 
-RubyConfTH 2022 - Dissecting Rails 
+RubyConfTH 2022 - Dissecting Rails
 
-> https://www.youtube.com/watch?v=gXwRs-FwcmE
+> <https://www.youtube.com/watch?v=gXwRs-FwcmE>
 
 ---
 
@@ -93,7 +94,7 @@ key concepts
 
 # Bundler
 
-```sh
+```ruby
 bundle exec [command]
 
 bundle init # create Gemfile
@@ -104,7 +105,7 @@ bundle install
 
 ---
 
-## Bundle more 
+## Bundler advance
 
 ```sh
 bundle show # show all gems in Gemfile
@@ -117,16 +118,13 @@ bundle console # open irb with gems loaded
 ```
 
 ---
-# Rake
 
----
+# Rake / Rakefile / Raketasks
 
-Rake is a build automation tool written in Ruby, similar to Make in Unix. 
-However, Rake uses Ruby syntax, which allows for more flexibility and complexity in defining tasks.
-- specify tasks 
-- describe dependencies 
-- group tasks
-> [free course by Avdi Grim](https://graceful.dev/courses/the-freebies/modules/rake-and-project-automation/topic/episode-129-rake/)
+Rake is a build automation tool written in Ruby. It allows you to specify tasks and describe dependencies as well as to group tasks in a namespace.
+
+Rake is similar to Make in Unix. However, Rake uses Ruby syntax, which allows for more flexibility and complexity in defining tasks.
+[free course by Avdi Grim](https://graceful.dev/courses/the-freebies/modules/rake-and-project-automation/topic/episode-129-rake/)
 
 ---
 
@@ -155,8 +153,11 @@ rule '.html' => '.md' do |t|
   sh "pandoc -o #{t.name} #{t.source}"
 end
 ```
+
 ---
+
 # Rack
+
 ---
 
 ```ruby
@@ -179,14 +180,109 @@ curl -i http://127.0.0.1:9292
 
 ---
 
----
+# Active Support
 
 ---
 
----
+## Core Ext
+
+```ruby
+require 'active_support'
+require 'active_support/core_ext/hash/indifferent_access'
+require 'active_support/core_ext'
+```
+
+```ruby
+- `with_option`
+- `try`
+- `hash_with_indifferent_access`
+- `in?`
+- `prsenece` / `blank?` / `present?`
+
+```
 
 ---
----
-
+prsenece` / `blank?` / `present?`
 ![image](https://github.com/friendlyantz/friendlyantz/assets/70934030/01430dd0-cc21-42fe-a007-58910a373bc7)
 
+---
+
+## Other Ext
+
+- [`delegate`](https://guides.rubyonrails.org/active_support_core_extensions.html#delegate) and `delegate_missing_to`
+- `squish`
+- singularize, pluralize, camelize / underscore, titleize / dasherize, demodulize, deconstantize, parameterize, humanize, constantize
+
+```ruby
+"Admin::Hotel::ReservationUtils".demodulize # => "ReservationUtils"
+1_234_567_890_123.to_fs(:human_size) # => 1.12 TB
+1_234_567_890.to_fs(:human) # => "1.23 Billion"
+(Date.today..Date.tomorrow).to_fs(:db) # => "BETWEEN '2009-10-25' AND '2009-10-26'"
+
+%w(Earth Wind Fire).to_sentence # => "Earth, Wind, and Fire"
+```
+
+---
+Ext to Enumerables
+
+- pluck
+- pick
+- `many?`
+- `index_by`
+- including / excluding
+- exclude?
+
+----
+Ext to Array
+
+- extract
+
+```ruby
+numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+odd_numbers = numbers.extract! { |number| number.odd? } # => [1, 3, 5, 7, 9]
+numbers # => [0, 2, 4, 6, 8]
+```
+
+ `to`, `from`, `third`, `excluding`
+
+- `.in_groups_of`
+
+----
+
+## Extensions to Hash
+
+- `deep_merge` / `merge` / `deep_dup`
+- `except`
+- `symbolize_keys` / `stringify_keys`
+
+```ruby
+{ a: 1, b: 1 }.merge(a: 0, c: 2)
+```
+
+---
+
+# and my fav
+
+`Array.forty_two`
+
+```ruby
+("A".."z").to_a.forty_two
+=> "j"
+# ("A".."z").to_a[41]
+```
+
+---
+
+# ActiveRecord
+
+---
+
+# ActiveModel
+
+---
+
+# ActiveJob
+
+---
+
+# ActiveMailer
