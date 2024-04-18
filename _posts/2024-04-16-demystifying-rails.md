@@ -27,12 +27,12 @@ toc: true
 # Action Plan
 
 - how to demystify Ruby on Rails
-- parts that form Rails
- 	- bundler, rake, rack
- 	- *Active*Support, *Active*Record, *Active*Model
- 	- *Active*Mailer, *Active*Job
- 	- **Action**Cable, **Action**Cable, **Action**Cable
- 	- Routes, DSLs
+- parts that form Rails:
+	 - bundler, rake, rack
+	 - *Active*Support, *Active*Model / *Active*Record
+	 - *Active*Mailer, *Active*Job
+	 - **Action**Cable, **Action**Cable, **Action**Cable
+	 - Routes, DSLs
 - some demo code, my favourite parts
 
 ---
@@ -42,7 +42,7 @@ toc: true
 ```ruby
 class Friendlyantz
   def initialize
-    @name = 'Anton Panteleev' || :friendlyantz
+    @name = 'Anton'  || :friendlyantz
     @title = 'Extreme Programmer'
     @location = 'Melbourne, Australia'
     @work = FRESHO🌶️
@@ -301,6 +301,48 @@ numbers # => [0, 2, 4, 6, 8]
 
 ---
 
+# [ActiveModel](https://guides.rubyonrails.org/active_model_basics.html) 
+
+
+```ruby
+	include ActiveModel::Model # similar to `ActiveRecord::Base`
+		include ActiveModel::API # validation
+			include ActiveModel::Validations
+			extend ActiveModel::Translation # i18n gem integration
+			include ActiveModel::Conversion # .persisted?
+```
+
+---
+
+```ruby
+	extend ActiveModel::Callbacks # before_update :reset_me
+
+	include ActiveModel::AttributeMethods # define meta attributes
+		attribute_method_prefix 'reset_'
+		define_attribute_methods 'age'
+		def reset_attribute(attribute) = # your nobel prize logic
+```
+
+---
+
+```ruby
+	include ActiveModel::Dirty # model.changed?
+
+	include ActiveModel::Serialization
+	include ActiveModel::Serializers::JSON
+```
+
+---
+
+```ruby
+	include ActiveModel::SecurePassword
+		has_secure_password
+		attr_accessor :password_digest
+```
+
+---
+
+
 # ActiveRecord
 
 ---
@@ -371,18 +413,9 @@ end
 
 ActiveRecord::LogSubscriber.attach_to :active_record
 ```
+
 ---
 
-# ActiveModel 
-
-
-```ruby
-	include ActiveModel::API
-	include ActiveModel::AttributeMethods
-	include ActiveModel::Model
-	extend ActiveModel::Translation
-	include ActiveModel::SecurePassword
-```
 ---
 
 # ActiveJob
