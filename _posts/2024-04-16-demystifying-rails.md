@@ -365,3 +365,11 @@ end
 ---
 
 # ActiveMailer
+
+---
+
+# References
+
+1. https://github.com/friendlyantz/demystifying-rails
+2. [RubyConfTH 2022 - Dissecting Rails Talk](https://www.youtube.com/watch?v=gXwRs-FwcmE) 
+4. 
