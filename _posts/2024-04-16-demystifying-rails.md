@@ -32,7 +32,7 @@ toc: true
 	 - *Active*Support, *Active*Model / *Active*Record
 	 - *Active*Mailer, *Active*Job
 	 - **Action**Cable, **Action**Cable, **Action**Cable
-	 - Routes, DSLs
+	 - Routes, DSLs, etc
 - some demo code, my favourite parts
 
 ---
@@ -98,7 +98,7 @@ key concepts
 bundle exec [command]
 
 bundle init # create Gemfile
-bundle add [gemname] # it adds versions, so remove them if required
+bundle add activesupport # it adds versions, so remove them if required
 bundle remove [gemname]
 bundle install
 ```
@@ -426,8 +426,66 @@ ActiveRecord::LogSubscriber.attach_to :active_record
 
 ---
 
+```ruby
+require 'action_mailer'
+require 'letter_opener'
+
+ActionMailer::Base.add_delivery_method :letter_opener, LetterOpener::DeliveryMethod, location: File.expand_path('../tmp/letter_opener', __FILE__)
+ActionMailer::Base.delivery_method = :letter_opener
+
+class LalaMailer < ActionMailer::Base
+  ## def notify
+    attachments['roo.png'] = File.read('./roo.png')
+    
+    mail(
+      to: 'ruby@australia.com',
+      from: 'friendlyantz@pm.me',
+      subject: 'Hello, World!'
+    ) do |format|
+      format.text { 'This is my text message' }
+      format.html { '<h1>this is my html message</h1>' }
+    end
+  end
+end
+
+LalaMailer.notify.deliver_now
+```
+
+---
+
+# [Zeitwerk](https://guides.rubyonrails.org/classic_to_zeitwerk_howto.html)
+
+Rails uses it to load code. Try it in you Ruby scripts
+
+---
+
+# Routing
+outside in
+- revisit Rack
+- try Sinatra
+- try Hanami
+- try Roda
+
+---
+# Rails Components impossible to dissect
+
+---
+
+- ActionCable
+- ActionView
+- ActionController
+- ActionPack
+- ActiveStorage
+
+---
+
+# Conclusion
+
+tbc
+
+----
 # References
 
-1. https://github.com/friendlyantz/demystifying-rails
-2. [RubyConfTH 2022 - Dissecting Rails Talk](https://www.youtube.com/watch?v=gXwRs-FwcmE) 
-4. 
+1. [rubyonrails guides](https://guides.rubyonrails.org)
+2. [my sandbox](https://github.com/friendlyantz/demystifying-rails)
+3. [RubyConfTH 2022 - Dissecting Rails Talk](https://www.youtube.com/watch?v=gXwRs-FwcmE) 
