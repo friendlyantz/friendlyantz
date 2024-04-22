@@ -27,12 +27,13 @@ toc: true
 # Action Plan
 
 - how to demystify *Ruby on Rails*
-- parts that form Rails:
+- `some demo code -> demo.friendlyantz.me`
+- parts used in Rails:
   - bundler, rake, rack
   - *Active*Support, *Active*Model / *Active*Record
   - **Action**Mailer, **Action**Cable, **Action**View, **Action**Controller
   - *Active*Job, Routes, DSLs, etc
-- `some demo code`
+
 ---
 
 # About me
@@ -42,12 +43,10 @@ class Friendlyantz
   def initialize
     @name = 'Anton'  || :friendlyantz
     @title = 'Extreme Programmer'
-    @location = 'Melbourne, Australia'
     @work = FRESHO🌶️
   end
   
   def find_more = 'https://friendlyantz.me/'
-  def twitter = 'https://twitter.com/friendlyantz/'
 ```
 
 ---
@@ -77,22 +76,7 @@ Ruby Conf AU - Sydney2024
 
 ---
 
-RubyConfTH 2022 - Dissecting Rails
-
-> <https://www.youtube.com/watch?v=gXwRs-FwcmE>
-
----
-
-# WHY?
-
-- become a better engineer,
-- be expert with your tools
-- Use the right tools for the right job
-
----
-
-key concepts
-<img width="1003" alt="image" src="https://github.com/friendlyantz/friendlyantz/assets/70934030/b449d797-0b96-43b6-b05e-9f2170d7af6f">
+<img width="1003" alt="image" src="https://github.com/friendlyantz/friendlyantz/assets/70934030/b449d797-0b96-43b6-b05e-9f2170d7af6f">> <https://www.youtube.com/watch?v=gXwRs-FwcmE>
 
 ---
 
@@ -129,17 +113,6 @@ bundle console # open irb with gems loaded
 
 ---
 
-Rake is a build automation tool written in Ruby, similar to Make in Unix.
-However, Rake uses Ruby syntax, which allows for more flexibility and complexity in defining tasks.
-
-- specify tasks
-- describe dependencies
-- group tasks in a namespace.
-
-[free course at 'graceful.dev'by Avdi Grim](https://graceful.dev/courses/the-freebies/modules/rake-and-project-automation/topic/episode-129-rake/)
-
----
-
 ```ruby
 task default: :create_files
 
@@ -148,34 +121,14 @@ directory 'ship_it🚢'
 task :touch => 'ship_it🚢' do
   touch 'ship_it🚢/file1.txt'
 end
-```
 
----
 
-```ruby
-task default: :html
 
-files = Rake::FileList.new('**/*.md') do |fl|
-  fl.exclude(/^excluded_dir/)
-end
-
-multitask html: files.ext('.html')
-
-rule '.html' => '.md' do |t|
-  sh "pandoc -o #{t.name} #{t.source}"
-end
-```
-
----
-
-read more
-
-```sh
+# RTFM
 ri FileUtils
 ```
 
 ---
-
 # Rack
 
 ---
@@ -188,11 +141,7 @@ end
 ```
 
 ```ruby
-gem install rack
-rackup # starts your default web server on 9292
-
-# or specify alternative webserver, i.e. 'webrick'
-rackup -s webrick
+rackup
 ```
 
 ```sh
@@ -205,146 +154,44 @@ curl -i http://127.0.0.1:9292
 
 ---
 
-## Core Exts to Ruby
-
-```ruby
-# `prsenece` / `blank?` / `present?` 
-OpenStruct.new(a: '')
-	.a.presence || "default" # => "default"
-
-# `in?`
-25.in?(30..50) # false
-
-# `try`      
-nil.try(:sum)
-```
-
----
 `presence` / `blank?` / `present?`
 ![image](https://github.com/friendlyantz/friendlyantz/assets/70934030/01430dd0-cc21-42fe-a007-58910a373bc7)
 
 ---
 
 ```ruby
-# `with_options`
+[{a:1, b: 2}, {a:2}].pluck(:b) # [3, nil]
+1_234_567_890_123.to_fs(:human_size) # => 1.12 TB
+{ a: 1, b: 1 }.merge(a: 0, c: 2)
+" \n  foo\n\r \t bar \n".squish # => "foo bar"
+numbers.extract! { |number| number.odd? } 
+invoices.index_by(&:number)
+[1,2,4].exclude? 5 # true
+```
+
+---
+
+```ruby
 class Account
- with_options dependent: :destroy do |assoc|
-    assoc.has_many :customers
-    assoc.has_many :products
-    assoc.has_many :invoices
-    assoc.has_many :expenses
+  with_options dependent: :destroy do |assoc|
+     assoc.has_many :customers
+     assoc.has_many :products
+     assoc.has_many :invoices
+     assoc.has_many :expenses
   end
+end
 
-# `hash_with_indifferent_access` 
-{ key: 'value' }.with_indifferent_access['key'] # => 'value'
-```
-
----
-
-```ruby
-require 'active_support'
-
-require 'active_support/core_ext'
-# or
-require 'active_support/core_ext/hash/indifferent_access'
-```
-
----
-
-## Other Ext
-
-- [`delegate`](https://guides.rubyonrails.org/active_support_core_extensions.html#delegate) and `delegate_missing_to`
-
-```ruby
 class User < ApplicationRecord
   has_one :profile
 
   delegate :name, to: :profile
 end
 ```
-
----
-
-- [squish](https://guides.rubyonrails.org/active_support_core_extensions.html#squish)
-```ruby
-" \n  foo\n\r \t bar \n".squish # => "foo bar"
-```
-
-- singularize, pluralize, camelize / underscore, titleize / dasherize, demodulize, deconstantize, parameterize, humanize, constantize
-
----
-
-```ruby
-"Admin::Hotel::ReservationUtils".demodulize # => "ReservationUtils"
-1_234_567_890_123.to_fs(:human_size) # => 1.12 TB
-1_234_567_890.to_fs(:human) # => "1.23 Billion"
-(Date.today..Date.tomorrow).to_fs(:db) # => "BETWEEN '2009-10-25' AND '2009-10-26'"
-
-%w(Earth Wind Fire).to_sentence # => "Earth, Wind, and Fire"
-```
-
----
-
-Ext to Enumerables
-
-```ruby
-[{a:1, b: 2}, {a:2}].pluck(:b) # [3, nil]
-```
-- pick
-- many?
-
----
-
-
-```ruby
-invoices.index_by(&:number)
-[1,2,4].including 5 #  [1, 2, 4, 5]
-[1,2,4].exclude? 5 # true
-```
-
-----
-
-# Ext to Array
-
-- extract
-```ruby
-numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-
-odd_numbers = numbers.extract! { |number| number.odd? } 
-# => [1, 3, 5, 7, 9]
-
-numbers # => [0, 2, 4, 6, 8]
-```
-
-- `to`, `from`, `third`, `excluding`
-- `.in_groups_of(3)`
-
-----
-
-## Extensions to Hash
-
-- `deep_merge` / `merge` / `deep_dup`
-- `except`
-- `symbolize_keys` / `stringify_keys`
-
-```ruby
-{ a: 1, b: 1 }.merge(a: 0, c: 2)
-# {:a=>0, :b=>1, :c=>2}
-```
-
----
-
-`Array.forty_two`
-
-```ruby
-("A".."z").to_a.forty_two
-=> "j"
-# ("A".."z").to_a[41]
-```
-
 ---
 
 # [ActiveModel](https://guides.rubyonrails.org/active_model_basics.html)
+
+---
 
 ```ruby
 # similar to `ActiveRecord::Base`
@@ -353,35 +200,11 @@ include ActiveModel::API
    extend ActiveModel::Translation # i18n gem integration
    include ActiveModel::Conversion # .persisted? and  `id` methods
 
-# can be used with `form_with`, `render` and any other Action View helper methods, just like Active Record objects.
-```
-
----
-
-```ruby
- extend ActiveModel::Callbacks # before_update :reset_me
-
- include ActiveModel::AttributeMethods # define meta attributes
-  attribute_method_prefix 'reset_'
-  define_attribute_methods 'age'
-  def reset_attribute(attribute) = # your nobel prize logic
-```
-
----
-
-```ruby
- include ActiveModel::Dirty # model.changed?
-
- include ActiveModel::Serialization
- include ActiveModel::Serializers::JSON
-```
-
----
-
-```ruby
- include ActiveModel::SecurePassword
-  has_secure_password
-  attr_accessor :password_digest
+extend ActiveModel::Callbacks # before_update :reset_me
+include ActiveModel::AttributeMethods # define meta attributes
+include ActiveModel::Dirty # model.changed?
+include ActiveModel::Serialization
+include ActiveModel::SecurePassword
 ```
 
 ---
@@ -391,7 +214,7 @@ include ActiveModel::API
 
 ```ruby
 ActiveRecord
-	.is_kind_of ActiveModel
+	.is_kind_of_an ActiveModel
 	.with DB persistence layer
 
 # named after a **Active Record** design pattern:
@@ -408,48 +231,17 @@ ActiveRecord::Base.establish_connection(
   adapter: 'sqlite3',
   database: 'sample.sqlite3'
 )
-```
 
----
-
-```ruby
-class CreateUsers < ActiveRecord::Migration[6.0]
-  def change
-    create_table :users do |t|
-      t.string :name
-    end
-  end
-end
-
-CreateUsers.new.migrate(:up)
-```
-
----
-
-```ruby
 class User < ActiveRecord::Base
   validates_presence_of :name, on: :create
 
   has_many :posts
 end
 ```
+ActiveRecord scripting can be used for data manipulation / relocation / sanitisation scripts
 
 ---
 
-good for data manipulation / relocation / sanitisation scripts
-
----
-
-- [ ] ActiveRecord
-  - [ ] [basics](https://guides.rubyonrails.org/active_record_basics.html)
-  - [ ] [migrations](https://guides.rubyonrails.org/active_record_migrations.html)
-  - [ ] [validations](https://guides.rubyonrails.org/active_record_validations.html)
-  - [ ] [callbacks](https://guides.rubyonrails.org/active_record_callbacks.html)
-  - [ ] [Associations](https://guides.rubyonrails.org/association_basics.html)
-  - [ ] [Query Interface](https://guides.rubyonrails.org/active_record_querying.html)
-
----
- Can't figure out what's causing a specific query in rails? [look no further]([https://www.mayerdan.com/ruby/2022/06/27/rails-query-tracing](https://www.mayerdan.com/ruby/2022/06/27/rails-query-tracing))
 ```ruby
 module ActiveRecord
   class LogSubscriber < ActiveSupport::LogSubscriber
@@ -464,18 +256,11 @@ end
 
 ActiveRecord::LogSubscriber.attach_to :active_record
 ```
+[sauce]([https://www.mayerdan.com/ruby/2022/06/27/rails-query-tracing](https://www.mayerdan.com/ruby/2022/06/27/rails-query-tracing))
 
 ---
 
 # ActiveJob
-
----
-
-Background Job layer abstraction that can plug various backends
-
-needs Rails.
-
-Use this if you don't want to vendor lock yourself into Sidekiq, GoodJob, Resque
 
 ---
 
@@ -496,10 +281,6 @@ Use this if you don't want to vendor lock yourself into Sidekiq, GoodJob, Resque
 
 ```ruby
 require 'action_mailer'
-require 'letter_opener'
-
-ActionMailer::Base.add_delivery_method :letter_opener, LetterOpener::DeliveryMethod, location: File.expand_path('../tmp/letter_opener', __FILE__)
-ActionMailer::Base.delivery_method = :letter_opener
 
 class LalaMailer < ActionMailer::Base
   def notify
@@ -521,100 +302,35 @@ LalaMailer.notify.deliver_now
 
 ---
 
-# [Zeitwerk](https://github.com/fxn/zeitwerk)
+# Other things to review
 
-Efficient and thread-safe code loader for Ruby
-
----
-
-# Routing
-
-outside in
-
-- revisit Rack
-- try Sinatra
-- try Hanami
-- try Roda
-- try [Jumpstart Rails template](https://github.com/excid3/jumpstart) 
-- try Elixir Phoenix
-
----
-
-# Rails Components hard to dissect
-
----
-
-- ActionCable
+- ActionCable 
 - ActionView
+- Templating
 - ActionController
 - ActionPack
-
 - ActiveStorage
+- Routing -> try Hanami, Sinatra, etc
+- [Zeitwerk](https://github.com/fxn/zeitwerk) code loader for Ruby, used in Rails now
+- [brakeman](https://github.com/presidentbeef/brakeman) - will be part of Rails 8 by default
 
 ---
-
-# Templating
-
-
----
-
-# Rails new - minimalistic
-
----
-
-| `--skip-git`    | Skip git init, .gitignore, and .gitattributes            |
-| --------------- | -------------------------------------------------------- |
-| `--skip-docker` | Skip Dockerfile, .dockerignore and bin/docker-entrypoint |
-| `--skip-keeps`  | Skip source control .keep files                          |
-
----
-
-| `--skip-action-mailer`  | Skip Action Mailer files |
-| ----------------------- | ------------------------ |
-| `--skip-action-mailbox` | Skip Action Mailbox gem  |
-|`--skip-action-text`|Skip Action Text gem|
-
----
-
-| `--skip-active-record`  | Skip Active Record files  |
-| ----------------------- | ------------------------- |
-| `--skip-active-job`     | Skip Active Job           |
-| `--skip-active-storage` | Skip Active Storage files |
-
----
-
-| `--skip-action-cable`   | Skip Action Cable files  |
-| ----------------------- | ------------------------ |
-| `--skip-asset-pipeline` | Skip Asset Pipeline      |
-| `--skip-javascript`     | Skip JavaScript files    |
-| `--skip-hotwire`        | Skip Hotwire integration |
-| `--skip-jbuilder`       | Skip jbuilder gem        |
-
----
-
-| `--skip-test`        | Skip test files              |
-| -------------------- | ---------------------------- |
-| `--skip-system-test` | Skip system test files       |
-| `--skip-bootsnap`    | Skip bootsnap gem            |
-| `--skip-dev-gems`    | Skip adding development gems |
+# run minimalistic rails
 
 ---
 
 ```sh
+rails new myapp --minimal # 5 sec to generate, vs 17 sec normal (hot start)
+
+rails new myapp --api
+rails new myapp --skip-action-mailer # etc
+
 rails new --help
 ```
 
 ---
 
-```sh
-rails new myapp --minimal # 5sec to generate, vs 17sec normal
-rails new myapp --api
-```
-
-```
-rails new myapp \
---css=tailwind
-```
+# Rails CLI
 
 ---
 
@@ -626,22 +342,14 @@ rails generate model --help
 
 ---
 
-# Other things
-
-- Security [brakeman](https://github.com/presidentbeef/brakeman)
-- FactoryGirl / FactoryBot
-- Rspec / MiniTest
-
----
 # Conclusion
 
-- try and build stuff in isolation
-- start simple and minimal.
-
-> “Brevity is the sister of talent.” - Anton Chekhov
-
-- Build app just with ActiveRecord + Rack
-- build as many micro apps using 
+- try and build stuff in isolation:
+	- `Rake` scripts, `Rack`up server,
+	- `bundle init/add/console`
+	- use `Active Support`  to extend Ruby for ypur code challenges
+	- user `ActiveRecord + Rack` to build a basic app
+- start simple and minimal, YAGNI, use minimal preset and add 
 ```sh
 rails new myapp --minimal
 ```
@@ -650,6 +358,9 @@ rails new myapp --minimal
 
 # References
 
-1. [rubyonrails guides](https://guides.rubyonrails.org)
-2. [my sandbox](https://github.com/friendlyantz/demystifying-rails)
-3. [RubyConfTH 2022 - Dissecting Rails Talk](https://www.youtube.com/watch?v=gXwRs-FwcmE)
+1. [free course at 'graceful.dev'by Avdi Grim](https://graceful.dev/courses/the-freebies/modules/rake-and-project-automation/topic/episode-129-rake/)
+2. [rubyonrails guides](https://guides.rubyonrails.org)
+3. 
+4. [Ruby on Rulers](https://github.com/noahgibbs/rulers)
+5. [RubyConfTH 2022 - Dissecting Rails Talk](https://www.youtube.com/watch?v=gXwRs-FwcmE)
+6. [my sandbox](https://github.com/friendlyantz/demystifying-rails)
