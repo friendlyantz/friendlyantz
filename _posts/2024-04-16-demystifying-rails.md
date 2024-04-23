@@ -25,14 +25,15 @@ toc: true
 ---
 
 # Action Plan
-
-- how to demystify *Ruby on Rails*
-- `some demo code -> demo.friendlyantz.me`
-- parts used in Rails:
-  - bundler, rake, rack
-  - *Active*Support, *Active*Model / *Active*Record
-  - **Action**Mailer, **Action**Cable, **Action**View, **Action**Controller
-  - *Active*Job, Routes, DSLs, etc
+```ruby
+1. how to demystify *Ruby on Rails*
+2. some demo code "demo.friendlyantz.me"
+3. parts forming *Ruby on Rails*:
+  - Bundler, Rake, Rack
+  - ActiveSupport, ActiveModel / ActiveRecord
+  - ActionMailer, ActionCable, ActionView, ActionController
+  - ActiveJob, Routes, DSLs, ...
+```
 
 ---
 
@@ -76,7 +77,21 @@ Ruby Conf AU - Sydney2024
 
 ---
 
-<img width="1003" alt="image" src="https://github.com/friendlyantz/friendlyantz/assets/70934030/b449d797-0b96-43b6-b05e-9f2170d7af6f">> <https://www.youtube.com/watch?v=gXwRs-FwcmE>
+# Why
+
+1. Understand where Ruby ends and Rails starts
+2. Make architectural decisions and when/how to use RoR
+3. Break RoR conventions, go outside MVC
+
+---
+
+<img width="1003" alt="image" src="https://github.com/friendlyantz/friendlyantz/assets/70934030/b449d797-0b96-43b6-b05e-9f2170d7af6f">
+DSL?
+> https://www.youtube.com/watch?v=gXwRs-FwcmE
+
+---
+
+# Active or Action?
 
 ---
 
@@ -122,8 +137,6 @@ task :touch => 'ship_it🚢' do
   touch 'ship_it🚢/file1.txt'
 end
 
-
-
 # RTFM
 ri FileUtils
 ```
@@ -146,6 +159,7 @@ rackup
 
 ```sh
 curl -i http://127.0.0.1:9292
+curl -i https://demo.friendlyantz.me/hello
 ```
 
 ---
@@ -179,6 +193,7 @@ class Account
      assoc.has_many :invoices
      assoc.has_many :expenses
   end
+  # has_many :customers, dependent: :destroy
 end
 
 class User < ApplicationRecord
@@ -302,10 +317,8 @@ LalaMailer.notify.deliver_now
 
 ---
 
-# Other things to review
-
-- ActionCable 
-- ActionView
+- ActionCable
+- ActionView 
 - Templating
 - ActionController
 - ActionPack
@@ -319,7 +332,7 @@ LalaMailer.notify.deliver_now
 
 ---
 
-```sh
+```ruby
 rails new myapp --minimal # 5 sec to generate, vs 17 sec normal (hot start)
 
 rails new myapp --api
@@ -344,13 +357,15 @@ rails generate model --help
 
 # Conclusion
 
+---
+```ruby
+
 - try and build stuff in isolation:
 	- `Rake` scripts, `Rack`up server,
 	- `bundle init/add/console`
-	- use `Active Support`  to extend Ruby for ypur code challenges
+	- use `Active Support`  to extend Ruby for code challenges
 	- user `ActiveRecord + Rack` to build a basic app
-- start simple and minimal, YAGNI, use minimal preset and add 
-```sh
+- start simple and minimal, YAGNI, use minimal presets
 rails new myapp --minimal
 ```
 
@@ -358,9 +373,9 @@ rails new myapp --minimal
 
 # References
 
-1. [free course at 'graceful.dev'by Avdi Grim](https://graceful.dev/courses/the-freebies/modules/rake-and-project-automation/topic/episode-129-rake/)
+1. [free Rake course at 'graceful.dev' by Avdi Grim](https://graceful.dev/courses/the-freebies/modules/rake-and-project-automation/topic/episode-129-rake/)
 2. [rubyonrails guides](https://guides.rubyonrails.org)
-3. 
-4. [Ruby on Rulers](https://github.com/noahgibbs/rulers)
+3. [Ruby on Rulers by Noah Gibbs](https://github.com/noahgibbs/rulers)
+4. [rebuilding Rails by Noah Gibbs](https://rubyandrails.info/books/rebuilding-rails)
 5. [RubyConfTH 2022 - Dissecting Rails Talk](https://www.youtube.com/watch?v=gXwRs-FwcmE)
-6. [my sandbox](https://github.com/friendlyantz/demystifying-rails)
+6. [My demo sandbox](https://github.com/friendlyantz/demystifying-rails)
