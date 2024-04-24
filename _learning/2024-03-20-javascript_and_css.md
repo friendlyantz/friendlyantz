@@ -1,9 +1,9 @@
 ---
 # layout: posts
 # author_profile: true
-# title: "Vi Everywhere"
+title: "JS notes"
 permalink: /js/
-excerpt: "tbc"
+excerpt: "JS challenge notes"
 # last_modified_at: 2016-11-03T11:13:12-04:00
 collection: learning
 categories:
@@ -20,9 +20,11 @@ tags:
 
 ---
 
-[JavaScript30 challange by WesBos](https://courses.wesbos.com/)
-[My Repo](https://github.com/friendlyantz/JavaScript30)
- # Notes 
+- [JavaScript30 challange by WesBos](https://courses.wesbos.com/)
+- [My Repo](https://github.com/friendlyantz/JavaScript30)
+
+# Notes
+
 - Array operations from D4 is really useful fundamentals
 - alternative to `console.log()` is `console.table(fullNames);`
 
@@ -47,7 +49,9 @@ tags:
       }
 /* etc */
 ```
+
 basic console log
+
 ```js
     <script>
       // returns nodeList
@@ -72,6 +76,7 @@ basic console log
 ```
 
 also can override CSS variables
+
 ```html
 <h2 style="--base:#BADA55">...
 ```
