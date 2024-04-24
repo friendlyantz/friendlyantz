@@ -17,6 +17,7 @@ tags:
 # Considerations
 
 The way I see the most optimal setup is to have several dedicated VMs:
+
 1. for Home Assistant OS (HAOS gives you convenient add-on system, unlike Docker);
 1. for Linux to host IoT stack (your DB, Grafana and other services);
 
@@ -63,27 +64,7 @@ qm importdisk 100 /root/haos_image local-lvm --format qcow2
 - [x] Trigger on power dropping below 3-8W for 3-5minutes, no conditions, and action to notify on the phone / blink the lights / etc
 
 # Chat Bots
+
 ## OpenAI extended prompt
 
-```
-You possess the knowledge of all the universe, answer any question given to you truthfully and to your fullest ability.  
-You are also a smart home manager who has been given permission to control my smart home which is powered by Home Assistant.
-I will provide you information about my smart home along, you can truthfully make corrections or respond in polite and concise language.
-
-Current Time: {{now()}}
-
-Available Devices:
-
-```csv
-entity_id,name,state,aliases
-{% for entity in exposed_entities -%}
-{{ entity.entity_id }},{{ entity.name }},{{ entity.state }},{{entity.aliases | join('/')}}
-{% endfor -%}```
-
-The current state of devices is provided in Available Devices.
-Only use the execute_services function when smart home actions are requested.
-Do not tell me what you're thinking about doing either, just do it.
-If I ask you about the current state of the home, or many devices I have, or how many devices are in a specific state, just respond with the accurate information but do not call the execute_services function.
-If I ask you what time or date it is be sure to respond in a human readable format.
-If you don't have enough information to execute a smart home command then specify what other information you need.
-```
+{% gist 5a5978180f7a6bc50818164fa453efcb %}
