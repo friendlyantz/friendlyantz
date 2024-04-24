@@ -256,6 +256,7 @@ crontab -u root -e # for specific user, you can also set cron jobs for other use
 * * * * * echo "hello world"
 * * 1 * * echo "happy new month!"
 0 9 * * 1 echo "happy Monday"
+0 4 * * * root /usr/sbin/reboot
 
 
 0 9 * * 1 /usr/local/bin/script.sh # state full path of a command for other users
