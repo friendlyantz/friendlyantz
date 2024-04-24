@@ -25,9 +25,10 @@ toc: true
 ---
 
 # Action Plan
+
 ```ruby
 1. how to demystify *Ruby on Rails*
-2. some demo code "demo.friendlyantz.me"
+2. some demo code
 3. parts forming *Ruby on Rails*:
   - Bundler, Rake, Rack
   - ActiveSupport, ActiveModel / ActiveRecord
@@ -159,7 +160,6 @@ rackup
 
 ```sh
 curl -i http://127.0.0.1:9292
-curl -i https://demo.friendlyantz.me/hello
 ```
 
 ---
@@ -176,11 +176,11 @@ curl -i https://demo.friendlyantz.me/hello
 ```ruby
 [{a:1, b: 2}, {a:2}].pluck(:b) # [3, nil]
 1_234_567_890_123.to_fs(:human_size) # => 1.12 TB
-{ a: 1, b: 1 }.merge(a: 0, c: 2)
+{ a: 1, b: 1 }.merge(a: 0, c: 2) # {:a=>0, :b=>1, :c=>2}
 " \n  foo\n\r \t bar \n".squish # => "foo bar"
 numbers.extract! { |number| number.odd? } 
 invoices.index_by(&:number)
-[1,2,4].exclude? 5 # true
+[1,2,4].exclude? 3 # true
 ```
 
 ---
@@ -194,6 +194,10 @@ class Account
      assoc.has_many :expenses
   end
   # has_many :customers, dependent: :destroy
+  
+  with_options on: :invoicing do
+    validates :something, presence: true
+  end
 end
 
 class User < ApplicationRecord
@@ -258,7 +262,7 @@ ActiveRecord scripting can be used for data manipulation / relocation / sanitisa
 ---
 
 ```ruby
-module ActiveRecord
+module ActiveRecord # add in spec_helper.rb, or other test setup files
   class LogSubscriber < ActiveSupport::LogSubscriber
     def sql(event)
       if /FROM "some_table" WHERE "some_condition"/.match?(event.payload[:sql])
@@ -290,7 +294,7 @@ ActiveRecord::LogSubscriber.attach_to :active_record
 - [Delayed Job](https://github.com/collectiveidea/delayed_job#active-job)
 
 ---
-# ActiveMailer
+# ActionMailer
 
 ---
 
