@@ -47,49 +47,54 @@ Sidekiq connects to Redis Pool, but never to Redis directly
 	1. push(item) --> raw_push(payloads) to @redis_pool
 		1. multi connection atomic push
 
----
 
 ## Sidekiq’s Redis commands
 
-are generally executed serially, so we wait for a reply from the database before sending the next command. That means that 2 commands generally take 2 times as long to execute. It also means that we’re imposing 2 times as much load on the Redis database.
+- commands executed serially. 
+- `Redis` is single-threaded and can only exec 1 command at a time
+	- for Redis scaling - we want a lot of small commands, instead of fewer long slow commands. don't lock the loop!!!
+- ✅`perform_async` is better than `perform_at`
+	- consider BigO of each command. See also [Big O cheatsheet](https://www.bigocheatsheet.com/)
+- 🛑`Job Uniqueness` libraries kill performance, avoid them. Job's should not rely on idempotency and should be written correctly
+- 🛑`Locks` can be another source of extra Redis commands(locks from other plug ins or pro/enterprise) -> SUPER SLOW.
+- 🚧`Fan-outs`(when a job schedules other jobs) create extra Redis load, but not that much
+- ✅`push_bulk` use it anywhere possible! it eliminates `Round Trip Time (RTT)` and waiting for connection
+- 🚧`Thread` count (therefore Redis connection count) slows down Redis:
+	- i.e. 100-connections DB can support twice ops/sec more that 3000-connections DB
 
-Another important thing when considering the Redis command required to queue or execute a job is time complexity (commonly notated with Big O notation). See also [Big O cheatsheet](https://www.bigocheatsheet.com/)
+---
 
-`perform_async` is fast `O(2)`, it uses:
+`perform_async` is fast `BigO(2)` ⚡️
+- On insert: ([SADD](https://redis.io/docs/latest/commands/sadd/)) and ([LPUSH](https://redis.io/commands/lpush/)), and
+- On execution: ([BRPOP](https://redis.io/commands/brpop/))
 
-- 2x Redis commands on insert(`SADD`) and ([LPUSH](https://redis.io/commands/lpush/)), and
-- 1x on execution ([BRPOP](https://redis.io/commands/brpop/))
+```
+SADD            0(1)
+LPUSH           0(1)
 
-`perform_at` is 🐌 `O(log (N))`and is often used to "smear" load into the future:
-
-```ruby
-perform_at(Time. now + rand(100))
+BRPOP           0(N)
 ```
 
-On insert: it calls [`ZADD`](https://redis.io/commands/zadd/) Redis command which adds to a sorted list
-On execution: moves jobs from the scheduled set to a queue with 3
+`perform_at` is 🐌 `O(log (N))`and is often used to "smear" load into the future:
+- On insert: it calls [`ZADD`](https://redis.io/commands/zadd/) Redis command which adds to a sorted list
+- On execution: moves jobs from the scheduled set to a queue with 3
 commands:
 
 ```
-ZRANGEBYSCORE   O(log(N)+M)
-ZREM            O(M*log(N))
+ZADD            O(log(N))           scheduling (instead of BigO(1) for SADD)
+
+ZRANGEBYSCORE   O(log(N)+M)         runs serally(not pipelined) with ZREM
+ZREM            O(M*log(N))         runs serallynot pipelined) with ZRANGEBYSCORE
 LPUSH           0(1)
 ```
 
 > `perform_at` turns 3 fast commands into 5 slow ones.
 
-`Redis` is single-threaded and can only exec 1 command at a time
 
-Job uniqueness checks also add lots of Redis back-and-forth(whether this is sidekiq pro/enterprise or 3rd party uniqness plugin)
 
-Locks can be another source of extra Redis commands(locks from other plug ins or pro/entrprs) -> SUPER SLOW
 
-Fan-outs(when a job schedules other jobs) create extra Redis load, but not that much
 
-`push_bulk` use push bulk anywhere
-possible - but the benefit is mostly in eliminating Round Trip Time (RTT)
-Redis RTT matters here, too
-
+---
 # Ch2: Understanding Queueing Systems
 
 Queueing theory provides a few bits of useful terminology:
@@ -127,7 +132,7 @@ Queue Length Exponentially Increases as Utilization Increases
 Generally, we can divide queueing systems into two regimes:
 1. low utilisation 
 2. high utilisation. 
-
+	
 ```ruby
 case utilization
 when 0..70%
