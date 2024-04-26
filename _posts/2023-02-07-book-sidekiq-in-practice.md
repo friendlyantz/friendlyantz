@@ -14,17 +14,27 @@ tags:
 {:toc}
 
 # Ch 1: How Sidekiq works
-Sidekiq components: work, queues, and threads
 
-- A number of computers (that is, your servers or VPSs or Kubernetes nodes or whatever) contain a number of Sidekiq _processes_, referred to in Sidekiq as “server” processes. Sidekiq processes “do the work”, as opposed to...
-- Sidekiq _clients_ place jobs into queues. Sidekiq clients are simply Ruby objects which can enqueue jobs. They are usually in a seperate process from the Sidekiq server process, but Sidekiq clients can be instantiated anywhere (jobs can enqueue other jobs, for example). They place jobs into queues by adding keys to a Redis queue structure.
-- _Jobs_ are Ruby classes which have the perform method defined and include Sidekiq::Worker. They represent the work we want done.
-- _Queues_ are data structures in Redis that hold tuples of [job_class, arguments]. They contain individual requests for running a job.
-- Each Sidekiq process has a number of _Processor threads_. So, many machines “have many” processes, which have many threads. These threads contain instances of the Sidekiq::Processor class, so we call them Processor threads or just server threads. The threads in a Sidekiq server pull jobs from one or more queues and perform the work. They pull they oldest job from the queues they are assigned to process; Sidekiq is “first in, first out” (FIFO).
+Main Sidekiq components: job/work, queues, and threads
+1. `Sidekiq::Job` alias for `Sidekiq::Worker` - a request to do work = tuple [JobClass, args],  Ruby classes have the `perform method` defined. 
+2. `Queues` are list data structures in Redis that hold tuples of [job_class, arguments]. They contain individual requests for running a job.
+3. threads = `Sidekiq::Processors` that pull for queues and perform work
+
+- `Jobs` `Sidekiq::Worker`. They represent the work we want done.
+- `Sidekiq clients` Ruby objects that place jobs into queues. essentially  which can enqueue jobs, by adding keys to a Redis queue structure.
+- `Sidekiq server` - A number of computers (that is, your servers or VPSs or Kubernetes nodes or whatever) contain a number of `Sidekiq processes`
+
+- more on `Processor Threads`. Each `Sidekiq process` has a number of `Processor threads`
+	- So, many machines “have many” `processes`, which have many `threads`. These threads contain instances of the `Sidekiq::Processor` class, so we call them `Processor threads` or just server threads. 
+	- The threads in a `Sidekiq server` pull jobs from one or more queues and perform the work. They pull they oldest job from the queues they are assigned to process; Sidekiq is “first in, first out” (FIFO).
 
 ---
 
+Sidekiq connects to Redis Pool, but never to Redis directly
+
+---
 ## Sidekiq’s Redis commands
+
 are generally executed serially, so we wait for a reply from the database before sending the next command. That means that 2 commands generally take 2 times as long to execute. It also means that we’re imposing 2 times as much load on the Redis database.
 
 Another important thing when considering the Redis command required to queue or execute a job is time complexity (commonly notated with Big O notation). See also [Big O cheatsheet](https://www.bigocheatsheet.com/)
