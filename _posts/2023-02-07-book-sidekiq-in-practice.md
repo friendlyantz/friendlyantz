@@ -27,7 +27,7 @@ end
 ```
 
 2. `Queues` are list data structures in Redis that hold tuples of [job_class, arguments]. They contain individual requests for running a job.
-3. `Threads`(aka `ServerThreds` or `ProcessorThreads`) - contain instances of `Sidekiq::Processors` that pull from queue or many queues and perform work. `Machines` have many `Processes`, and each `Process` has many `Threads`.
+3. `Threads`(aka `ServerThreds` or `ProcessorThreads`) - contain instances of `Sidekiq::Processors` that pull from queue or many queues and perform work. `Machines` have many `Processes`, and each `Process` has many `Threads`. Processors call `perform` method on workers
 
 - `Sidekiq clients` Ruby objects that place jobs into queues. essentially  which can enqueue jobs, by adding keys to a Redis queue structure.
 - `Sidekiq server` - A number of computers (that is, your servers or VPSs or Kubernetes nodes or whatever) contain a number of `Sidekiq processes` that do the work of pulling jobs from the queue and executing them.
@@ -37,6 +37,15 @@ end
 ---
 
 Sidekiq connects to Redis Pool, but never to Redis directly
+
+---
+
+1. Job/Worker:
+	1. SomeJob.set(queue: 'foo').perform_async(....)
+	2.  client_push(item)
+2. Client
+	1. push(item) --> raw_push(payloads) to @redis_pool
+		1. multi connection atomic push
 
 ---
 
@@ -51,13 +60,13 @@ Another important thing when considering the Redis command required to queue or 
 - 2x Redis commands on insert(`SADD`) and ([LPUSH](https://redis.io/commands/lpush/)), and
 - 1x on execution ([BRPOP](https://redis.io/commands/brpop/))
 
-`perform_at` is SLOW 🐌 and is often used to "smear" load into the future:
+`perform_at` is 🐌 `O(log (N))`and is often used to "smear" load into the future:
 
 ```ruby
 perform_at(Time. now + rand(100))
 ```
 
-On insert: it calls [`ZADD`](https://redis.io/commands/zadd/) Redis command which adds to a sorted list and uses `O(log (N))`
+On insert: it calls [`ZADD`](https://redis.io/commands/zadd/) Redis command which adds to a sorted list
 On execution: moves jobs from the scheduled set to a queue with 3
 commands:
 
@@ -67,13 +76,9 @@ ZREM            O(M*log(N))
 LPUSH           0(1)
 ```
 
-In summary:
->
- perform_at turns
- 3 fast commands into
- 5 slow ones.
+> `perform_at` turns 3 fast commands into 5 slow ones.
 
-Redis is single-threaded and can only exec 1 command at a time
+`Redis` is single-threaded and can only exec 1 command at a time
 
 Job uniqueness checks also add lots of Redis back-and-forth(whether this is sidekiq pro/enterprise or 3rd party uniqness plugin)
 
@@ -89,20 +94,48 @@ Redis RTT matters here, too
 
 Queueing theory provides a few bits of useful terminology:
 
-1. Unit of Work. In Sidekiq, this is one Job request. In a grocery store, it might be one customer in line.
-2. Server. In computers, we’re used to “server” meaning “one machine”. In queueing theory, “one server” is one “unit of parallel processing capacity”. If I have 1 “server”, I can process one unit of work at a time. If I have 2 servers, I can process 2 units of work at the same time (in parallel). I will also refer to this quantity as parallelism throughout Sidekiq in Practice. This is useful, because in some cases we can have “1.5 servers”, which just sounds weird.
-3. Service Time. Service time is how long it actually takes to process a unit of work. This is how long a Sidekiq job takes to actually run.
-4. Wait Time. How long units of work spend waiting in the queue.
-5. Total Time. Service time plus wait time. This is the total time from a job being enqueued until it is finished.
+1. Unit of Work - job 
+2. Server - one “unit of parallel processing capacity”.
+3. Service Time - actual job execution time
+4. Wait Time
+5. Total Time
 
 ## Little’s Law
 
-Little’s Law is a very simple equation: it simply says that the number of “units of work” (e.g. customers in a line, jobs in our Sidekiq queues) in a queueing system is equal to the average amount of time required to process that work, multiplied by the average rate of arrival of work (how many customers arrive per minute, how many jobs arrive per minute).
-The result of Little’s Law is also called offered traffic.
+Little’s Law: 
+
+```ruby
+“units of work” (aka OFFERED TRAFFIC) ==  
+	"the average amount of time required to process that work / service time" 
+	* "the average rate of arrival of work (how many jobs arrive per sec)."
+# this relates directly to how many of our underlying “servers” (in queueing theory) we need
+# OFFERED TRAFFIC = 10sec / (120 jobs / 60 sec) => 5 jobs offered
+
+
+utilization == OFFERED TRAFFIC / parallelism
+# utilization 50%: 5 (offered traffic) / 10 (parallelism). If you had 10 single-threaded Sidekiq processes pulling from this queue
+
+# on a truly parallel JRuby or TruffleRuby, we would count the number of threads,
+# on MRI Ruby however, the amount of parallelism offered by a multi-threaded Sidekiq process can be complicated to think about,
+# mathematical equation called Amdahl’s Law is used instead
+```
+
+---
 
 Queue Length Exponentially Increases as Utilization Increases
 
-Generally, we can divide queueing systems into two regimes: low utilization and high utilization. When utilization of the system is between 0 and 70%, queue wait times increase quite slowly as utilization increases. But, when utilization increases beyond 70%, the exponential effects take over and queue latency increases quickly.
+Generally, we can divide queueing systems into two regimes:
+1. low utilisation 
+2. high utilisation. 
+
+```ruby
+case utilization
+when 0..70%
+	queue wait times increase quite slowly as utilization increases
+when 70..
+	the exponential effects take over and queue latency increases quickly.
+end
+```
 
 ---
 
