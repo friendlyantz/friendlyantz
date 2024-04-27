@@ -27,9 +27,12 @@ end
 ```
 
 2. `Queues` are list data structures in Redis that hold tuples of [job_class, arguments]. They contain individual requests for running a job.
-3. `Threads`(aka `ServerThreds` or `ProcessorThreads`) - contain instances of `Sidekiq::Processors` that pull from queue or many queues and perform work. `Machines` have many `Processes`, and each `Process` has many `Threads`. Processors call `perform` method on workers
+3. `Threads`(aka `ServerThreds` or `ProcessorThreads`) - contain instances of `Sidekiq::Processors` that pull from queue or many queues and perform work. `Machines` have many `Processes`, and each `Process` has many `Threads` which depend on concurrency. 
+	- Processors call `perform` method on workers. 
+		  i.e. of a process on my laptop (`server`) can be invoked via `sidekiq -r some_job.rb`, which will have `5 threads` (or whatever we give it). I can also run another process in another terminal windows with the same command
+	1.   (# ~~The Processor is a standalone thread~~ - TBC, most likely taken from vid)
 
-- `Sidekiq clients` Ruby objects that place jobs into queues. essentially  which can enqueue jobs, by adding keys to a Redis queue structure.
+- `Sidekiq clients` Ruby objects that place jobs into queues. essentially  which can `enqueue` jobs, by adding keys to a Redis queue structure. Some enqueue, that can `Sidekiq::Client.push_bulk("class" => Smth, "args" => [1,2,3])`, or I can just run in `irb` something like `SomeJob.perform_async(args)` TBC
 - `Sidekiq server` - A number of computers (that is, your servers or VPSs or Kubernetes nodes or whatever) contain a number of `Sidekiq processes` that do the work of pulling jobs from the queue and executing them.
 
 ![](https://www.mermaidchart.com/raw/21e7a3ee-4ee3-430a-8913-daba1f584084?theme=dark&version=v0.1&format=svg)
@@ -144,52 +147,136 @@ end
 
 ---
 
-Wait Time Is Proportional to 1/Servers
+⚡️Wait Time Is Proportional to 1/Servers
 
 > The “knee” can be made “deeper” by increasing the number of servers pulling from the queue. This is because wait time is inversely proportional to how many servers there are.
 
+> Queues which have more servers pulling from them are generally better for utilization and cost efficiency
 ---
 
 ### A stable system when load rapidly increases
 
 As load increases (jobs are enqueued more rapidly), the length of the queue will increase. Rapid growth of a queue can effectively cause a “brownout”, where the system is not technically down (it’s still online and processing jobs), but the queue has become so deep that by the time jobs execute, they may be completely irrelevant!
 
-## USE Method
+## USE Method (Utilization - Saturation - Errors)
 
+>by Netflix engineer Brendan Gregg
 ### Utilization
 
-Utilization metrics are just ratios: resources used divided by resources available.
-In a queueing system, the most important resources are not memory or CPU, but the servers which can do work.
+```ruby
+resources_used / resources_available
 
+Sidekiq::WorkSet.new.size  / Sidekiq::ProcessSet.new.total_concurrency
+# the most important resources are not memory or CPU,
+# but the servers which can do work.
+```
+
+- instantaneous 
+- sampled (i.e. over 15mins or 1 minute, etc.)
 ### Saturation
 
-Saturation is what occurs when our system is 100% utilized at any given moment: that is, saturation is the growth of the queue. In systems without queues, or with queues of limited length, saturation leads to rejection/denial of service.
+Saturation metrics are all about queues. The most important one for Sidekiq will generally be the length of the queue in seconds
 
-Saturation metrics are all about queues. The most important one for Sidekiq will generally be the length of the queue in seconds, calculated by taking the next job in our queue and subtracting when it was enqueued from the current time.
+```ruby
+the_length_of_the_queue_in_seconds =
+	next_job_in_queue - when_it_was_enqueued_from_the_current_time
+	
+Sidekiq::Queue.new('queue_name').latency.round(2)
+# If the next job was enqueued 5 minutes ago, our queue length is 5 minutes.
+```
 
+Saturation is what occurs when our system is 100% utilized at any given moment. In systems without queues, or with queues of limited length, saturation leads to rejection/denial of service.
+
+Control saturation by decreasing utilization:
+1. the most common is adding more Sidekiq `server` processes,
+2. but we can also sometimes increase Sidekiq’s `concurrency` setting to gain more `parallelism`
 ### Errors
-
-All errors are wasted capacity: wasted work that could have been spent doing something productive. Keeping errors low means we keep our server capacity available for useful work.
-Useful error metrics to track for Sidekiq include:
 
 - Size of the retry queue
 - Size of the dead queue
 - Redis connection errors
-Error metrics should be as low as possible, so that capacity can be used for useful work.
 
-The Ideal Sidekiq
+## The Ideal Sidekiq
 
-1. Each job’s total time (time spent in the queue waiting plus time spent servicing the job in a Sidekiq thread) is less than or equal to its requirements, which vary based on the job.
-2. Utilization is as high as possible while still meeting total time requirements.
-3. Errors are low, so that the maximum amount of capacity is being used on useful, not wasteful, work.
-4. The system can respond quickly to changes in load, keeping job “total time” within parameters even when lots of jobs arrive at once, without downtime.
+1. Each job’s `total time` is less than or equal to its requirements, which vary based on the job.
+2. `Utilization` is as high as possible while still meeting total time requirements.
+3. `Errors` are low, so that the maximum amount of capacity is being used on useful, not wasteful, work.
+4. The system `can respond quickly` to changes in load, keeping job “total time” within parameters even when lots of jobs arrive at once, without downtime.
 
+----
+
+## Lab takeaways
+
+`Sidekiq::Stats.new` are handy, but wont get your as far as digging through `Sidekiq::CLI.instance`
+```ruby
+# UTILIZATION
+busy_threads_count = Sidekiq::WorkSet.new.size # number of BUSY threads on server
+busy_threads_count = Sidekiq::Stats.new.workers_size # same as aboeve
+
+all_threads_count = Sidekiq::ProcessSet.new.total_concurrency # number of NOT BUSY and BUYS threads on server
+util = busy_threads_count.to_f / all_threads_count * 100
+
+
+# Alternative, but for one of the processes on server
+worker_set = Sidekiq::CLI.instance&.launcher&.managers&.first&.workers
+    busy_threads_count_for_process = worker_set&.count(&:job) # only busy threads in this process
+    all_threads_count_for_process = worker_set&.count # all threads in this process, it depends on concurrency
+util = busy_threads_count_for_process.to_f / all_threads_count_for_process * 100
+```
+
+```ruby
+# SATURATION
+# current queue depths
+Sidekiq::Stats.new.default_queue_latency.round(2)
+# or
+Sidekiq::Queue.new('retry').latency.round(2)
+
+Sidekiq::Stats.new.retry_size 
+```
+
+for custom concurrency
+
+```ruby
+be sidekiq -c 2-r ./app.rb # will do only 2 threads
+```
+
+----
 # CH 3: Concurrency
 
-**threads cost a lot of memory in CRuby**
-When there is more than one thread in a process, multiple threads can be ready to run Ruby code, but only one can run it at a time. This creates queueing for the Global VM Lock, as threads wait for the GVL to free up. As we covered in the previous chapter, queueing increases latency.
+> fewer threads is often better. default was changed from 25 to 10 in Sidekiq 5.2.0.
+> **threads cost a lot of memory in CRuby**, often caused by `memory fragmentation`
+
+When there is more than one thread in a process, multiple threads can be ready to run Ruby code, but only one can run it at a time. This creates queueing for the Global VM Lock, as threads wait for the GVL to free up. 
 
 **Setting higher than your database setting can slow down your Sidekiq by 100x.**
+
+1 thread uses `log(x)` memory over time (where time is x),
+so increasing the number of threads leads to something like `n * log(x)` memory use.
+
+
+---
+
+- concurrency is when the start and end times of 2 or more operations overlap, 
+- parallelism is when we’re actually working on those operations at the same instant.
+> All parallel operations are concurrent, but not all concurrent operations are parallel.
+
+## exceptions
+
+
+If you’re doing an extremely high amount of I/O in your Sidekiq jobs (90-95% I/O), high thread settings may still be useful to you. If all of your Sidekiq jobs spend 950 milliseconds waiting on a network call from Mailchimp and 50 milliseconds running Ruby code, thread counts as high as 128 may be useful to you. This information is generally available in any APM tool: New Relic, Datadog, etc. Memory fragmentation costs will be extremely high at these high concurrency settings, but your threads would probably still be much more efficient
+
+---
+
+| I/O Wait <br>(i.e API call, DB access <br>- use APM to find it out) | concurrency |
+| ------------------------------------------------------------------- | ----------- |
+| 5% or less                                                          | 1           |
+| 25%                                                                 | 5           |
+| 50%                                                                 | 10 default  |
+| 75%                                                                 | 16          |
+| 90%                                                                 | 32          |
+| 95%                                                                 | 64          |
+most applications fall in the 50-75%-of-a-jobs-time-is-in-IO range, so the default concurrency setting of 10 is great for most
+
 
 ---
 Video takeaways
