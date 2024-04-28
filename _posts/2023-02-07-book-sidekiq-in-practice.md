@@ -27,13 +27,13 @@ end
 ```
 
 2. `Queues` are list data structures in Redis that hold tuples of [job_class, arguments]. They contain individual requests for running a job.
-3. `Threads`(aka `ServerThreds` or `ProcessorThreads`) - contain instances of `Sidekiq::Processors` that pull from queue or many queues and perform work. `Machines` have many `Processes`, and each `Process` has many `Threads` which depend on concurrency. 
+3. `Threads`(aka `ServerThreds` or `ProcessorThreads`) - contain instances of `Sidekiq::Processors` that pull from queue or many queues and perform work. `Machines` have many `Processes`, and each `Process` has many `Threads` which depend on concurrency. `INCREASES CONCURRENCY`
 	- Processors call `perform` method on workers. 
 		  i.e. of a process on my laptop (`server`) can be invoked via `sidekiq -r some_job.rb`, which will have `5 threads` (or whatever we give it). I can also run another process in another terminal windows with the same command
 	1.   (# ~~The Processor is a standalone thread~~ - TBC, most likely taken from vid)
 
 - `Sidekiq clients` Ruby objects that place jobs into queues. essentially  which can `enqueue` jobs, by adding keys to a Redis queue structure. Some enqueue, that can `Sidekiq::Client.push_bulk("class" => Smth, "args" => [1,2,3])`, or I can just run in `irb` something like `SomeJob.perform_async(args)` TBC
-- `Sidekiq server` - A number of computers (that is, your servers or VPSs or Kubernetes nodes or whatever) contain a number of `Sidekiq processes` that do the work of pulling jobs from the queue and executing them.
+- `Sidekiq server` - A number of computers (that is, your servers or VPSs or Kubernetes nodes or whatever) contain a number of `Sidekiq processes` that do the work of pulling jobs from the queue and executing them. `INCREASES PARALLELISM`
 
 ![](https://www.mermaidchart.com/raw/21e7a3ee-4ee3-430a-8913-daba1f584084?theme=dark&version=v0.1&format=svg)
 
@@ -244,7 +244,8 @@ be sidekiq -c 2-r ./app.rb # will do only 2 threads
 # CH 3: Concurrency
 
 > fewer threads is often better. default was changed from 25 to 10 in Sidekiq 5.2.0.
-> **threads cost a lot of memory in CRuby**, often caused by `memory fragmentation`
+
+>**threads cost a lot of memory in CRuby**, often caused by `memory fragmentation`
 
 When there is more than one thread in a process, multiple threads can be ready to run Ruby code, but only one can run it at a time. This creates queueing for the Global VM Lock, as threads wait for the GVL to free up. 
 
@@ -281,9 +282,25 @@ most applications fall in the 50-75%-of-a-jobs-time-is-in-IO range, so the defau
 ---
 Video takeaways
 
-- handfull of queues are better making SLO easier to read and monitor
+- handfull of queues (i.e. `under minute`, `under_hour`, `under_6_hours` are better making SLO easier to read and monitor
 - Floods of a particular job type can be solved with weighting + longer SLOs
 - read-replica queues is a good stratagey. Consider Replica lagDB => read global txn_id to takle it (`perform(args, txn_id`) OR read replica lag(but this is not 100% accurate)
 
-VID
+
 ---
+# Ch4 Parallelism
+
+- `Sidekiq processes`, because each has its own GVL, are always working in `parallel`.
+- but `Threads` in CRuby are only working in parallel part of the time.
+
+- In JRuby or TruffleRuby, threads can work (almost) entirely in parallel. So there thread == a queueing theory “server”
+- in MRI / CRubyeach `Ractor` is a queueing theory “server”, because `Ractors` can execute in parallel.
+
+
+- If you’re using CRuby, only run 1 Sidekiq process per vCPU/CPU core available to the machine.
+- With JRuby or TruffleRuby, you’ll want one Sidekiq thread per core, so concurrency should not exceed the core count.
+
+## redis
+
+the amount of transactions that a Redis database can handle per-second is proportional to the size of the keys. 
+	This means that a Sidekiq system with smaller arguments will scale better, because small arguments mean small Redis keys, leading to more Redis operations per second.
