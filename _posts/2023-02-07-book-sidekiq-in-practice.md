@@ -268,14 +268,14 @@ If you’re doing an extremely high amount of I/O in your Sidekiq jobs (90-95% I
 
 ---
 
-| I/O Wait <br>(i.e API call, DB access <br>- use APM to find it out) | concurrency |
-| ------------------------------------------------------------------- | ----------- |
-| 5% or less                                                          | 1           |
-| 25%                                                                 | 5           |
-| 50%                                                                 | 10 default  |
-| 75%                                                                 | 16          |
-| 90%                                                                 | 32          |
-| 95%                                                                 | 64          |
+| I/O Wait <br>(i.e API call, DB access <br>- use APM to find it out) | concurrency | parallelism (approx) |
+| ------------------------------------------------------------------- | ----------- | -------------------- |
+| 5% or less                                                          | 1           | 1                    |
+| 25%                                                                 | 5           | 1.25                 |
+| 50%                                                                 | 10 default  | 2                    |
+| 75%                                                                 | 16          | 3                    |
+| 90%                                                                 | 32          | 8                    |
+| 95%                                                                 | 64          | 16                   |
 most applications fall in the 50-75%-of-a-jobs-time-is-in-IO range, so the default concurrency setting of 10 is great for most
 
 
@@ -288,7 +288,7 @@ Video takeaways
 
 
 ---
-# Ch4 Parallelism
+# Ch4 Parallelism. Locations of Saturation
 
 - `Sidekiq processes`, because each has its own GVL, are always working in `parallel`.
 - but `Threads` in CRuby are only working in parallel part of the time.
@@ -300,7 +300,22 @@ Video takeaways
 - If you’re using CRuby, only run 1 Sidekiq process per vCPU/CPU core available to the machine.
 - With JRuby or TruffleRuby, you’ll want one Sidekiq thread per core, so concurrency should not exceed the core count.
 
-## redis
+## Scaling additional
+
+you should reserve enough parallelism to cover the minimum of your offered traffic, and then use spot instances to cover the difference between the minimum and maximum of your offered traffic requirements.
+
+## Queueing for system resources ⚡️
+
+- ⚡️ If you’re using CRuby, only run 1 Sidekiq process per vCPU/CPU core available to the machine 
+	- If you’re running out of memory, either get bigger machines with a higher GB-of-memory-to- vCPU ratio, or reduce (but be aware that the latter option reduces parallelism, as above
+- With JRuby or TruffleRuby, you’ll want one Sidekiq thread per core, so
+
+should not exceed the core count.
+
+## redis optimisation
 
 the amount of transactions that a Redis database can handle per-second is proportional to the size of the keys. 
 	This means that a Sidekiq system with smaller arguments will scale better, because small arguments mean small Redis keys, leading to more Redis operations per second.
+
+
+## Locations of Saturation 
