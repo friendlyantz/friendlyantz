@@ -78,7 +78,7 @@ LPUSH           0(1)
 BRPOP           0(N)
 ```
 
-`perform_at` is 🐌 `O(log (N))`and is often used to "smear" load into the future:
+`perform_at` is 🐌 `O(n log (n))`and is often used to "smear" load into the future:
 - On insert: it calls [`ZADD`](https://redis.io/commands/zadd/) Redis command which adds to a sorted list
 - On execution: moves jobs from the scheduled set to a queue with 3
 commands:
@@ -304,18 +304,45 @@ Video takeaways
 
 you should reserve enough parallelism to cover the minimum of your offered traffic, and then use spot instances to cover the difference between the minimum and maximum of your offered traffic requirements.
 
-## Queueing for system resources ⚡️
+## Locations of Saturation 
+
+### 1. Queueing for system resources ⚡️
 
 - ⚡️ If you’re using CRuby, only run 1 Sidekiq process per vCPU/CPU core available to the machine 
 	- If you’re running out of memory, either get bigger machines with a higher GB-of-memory-to- vCPU ratio, or reduce (but be aware that the latter option reduces parallelism, as above
-- With JRuby or TruffleRuby, you’ll want one Sidekiq thread per core, so
+- With JRuby or TruffleRuby, you’ll want one Sidekiq thread per core
 
-should not exceed the core count.
-
-## redis optimisation
+### 2. Queueing for Redis
 
 the amount of transactions that a Redis database can handle per-second is proportional to the size of the keys. 
 	This means that a Sidekiq system with smaller arguments will scale better, because small arguments mean small Redis keys, leading to more Redis operations per second.
 
+### 3. Queueing for your Main Database
 
-## Locations of Saturation 
+1. Connection pool exhaustion. (i.e. pgbouncer - outgoing connections get saturated)
+2. ActiveRecord pool exhaustion. (see database.yml)
+3. Resource exhaustion at the DB server. (less common than above)
+
+### 4. Queueing for External APIs
+
+# Ch5
+
+## Rate limiting API calls
+
+use Sidekiq Enterprise or
+manually -> i.e. sleep 1 sec, if job is 0.2sec and concurrency is 5
+
+```ruby
+class ExternalAPIJob  
+	include Sidekiq::Worker  
+	MINIMUM_DURATION = 1 # Seconds. Tuned for concurrency 5.
+
+	def perform(id)  
+		time = Time.now  
+		# send request here  
+		if Time.now < time + 1
+			sleep(time + 1 - Time.now)
+		end
+	end 
+end
+```
