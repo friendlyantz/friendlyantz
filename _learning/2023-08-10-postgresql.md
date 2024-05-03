@@ -1,6 +1,6 @@
 ---
 title: PostreSQL
-permalink: /psql/
+permalink: /postgresql/
 excerpt: my findings and tricks
 collection: learning
 categories:
@@ -10,6 +10,97 @@ tags:
   - databases
   - postgres
 toc_sticky: true
+---
+
+# Indexing
+
+takeaways from reading - [Effective_Indexing_in_Postgres.](https://resources.pganalyze.com/pganalyze_Effective_Indexing_in_Postgres.pdf)
+[my sandbox](https://github.com/friendlyantz/demystifying-postgres)
+
+---
+
+Indexed query was faster on M1 - 50x times for short string `ABCD` with 500k dataset
+
+`ILIKE` does not leverage standard index
+- with wildcard on both sides vs only on the right side:  little difference. both sides wildcard is slower 10-20%
+- wildcard provided little, to no benefit to ILIKE, however if data after wildcard was more or less identical, it was magnitudes faster. i.e. `ABCD-predictable_string_replaced_by_wildcard` -> `ABCD%`
+Partial index (~20%) scan 
+-  provided substantial improvement too, perhaps proportional to the size of the index, but not sure.
+- Also I noted hitting Partially indexed table second time with the same query (outside index range) was 100x faster, while others did not change
+## Using Indexes with LIKE and ILIKE
+
+GIN/GIST indexes together with `pg_tgrm` can sometimes be used for LIKE and ILIKE, but query performance is unpredictable when user-generated input is presented.
+
+**Pros:**
+- The user doesn‘t have to worry about the case matching
+- The user can enter partial matches
+- No additional Ruby gems required
+
+**Cons:**
+- Index usage is unpredictable
+- Spelling must be accurate (Applo would not find Apple)
+
+```ruby
+  class EnablePgTrgmExtension < ActiveRecord::Migration[7.1]
+    def change
+      enable_extension 'pg_trgm'
+    end
+  end
+
+  EnablePgTrgmExtension.new.migrate(:up)
+
+
+  class CreateGinIndexedCompanies < ActiveRecord::Migration[7.1]
+    def change
+      return if ActiveRecord::Base.connection.table_exists?(:gin_indexed_companies)
+
+      disable_ddl_transaction
+
+      create_table :gin_indexed_companies do |t|
+        t.string :exchange, null: false
+        t.string :symbol, null: false
+        t.string :name, null: false
+        t.text :description, null: false
+        t.timestamps
+
+        t.index :name, 
+	        opclass: :gin_trgm_ops, # Similarity Matches with Trigrams
+	        using: :gin, 
+	        algorithm: :concurrently, 
+	        name: 'index_on_name_trgm'
+      end
+    end
+  end
+```
+## Trigrams fo Similarity Matches
+
+ - Apple and Applo are more similar than Apple and Opple
+
+```sql
+SELECT 
+	show_trgm('Apple'), --  {"  a"," ap",app,"le ",ple,ppl} this is done for words with less than 3 letters
+	show_trgm('Apllo'), -- {"  a"," ap",apl,llo,"lo ",pll}
+	similarity('Apple', 'Apple'), -- 1
+	similarity('Applo', 'Apple'), -- 0.5
+	similarity('Opple', 'Apple'), -- 0.33333334
+	
+	'Apple' % 'Applo' -- true (since it is >0.3 similary)
+	similarity('Odple', 'Apple'), -- 0.2
+	'Odple' % 'Apple' -- false
+--  we have the % operator, which gives you a boolean of whether two strings are similar. By default, Postgres uses the number 0.3 when making this decision, but you can always update this setting.)
+```
+
+**Pros:**
+
+- Misspellings are no problemmatching
+- Searches are case insensitive
+- Searches can be indexed
+
+**Cons:**
+
+- Does not replace the need for natural language search
+
+---
 ---
 
 # [types of DBs refresher](https://youtu.be/W2Z7fbCLSTw)
@@ -194,11 +285,14 @@ AND "debits"."category" = 0 AND "debits"."matures_at" BETWEEN '2021-11-24 13:00:
 
 # Resources
 
+My sandbox:
+- https://github.com/friendlyantz/demystifying-postgres
+
 PGAnayle Books:
 - [Tuning autovacuum for best Postgres performance](https://resources.pganalyze.com/pganalyze_Tuning_autovacuum_for_best_Postgres_performance.pdf)
 - [Advanced Database Programming with Rails and Postgres](https://resources.pganalyze.com/pganalyze_Advanced+Database+Programming+with+Rails.pdf)
 - [Best practices for optimizing postgres query performance](https://resources.pganalyze.com/pganalyze_Best-Practices-for-Optimizing-Postgres-Query-Performance.pdf)
-- [pganalyze_Effective_Indexing_in_Postgres.](https://resources.pganalyze.com/pganalyze_Effective_Indexing_in_Postgres.pdf)
+- [Effective_Indexing_in_Postgres.](https://resources.pganalyze.com/pganalyze_Effective_Indexing_in_Postgres.pdf)
 - [pganalyze_Efficient-Search-in-Rails-with-Postgres](https://resources.pganalyze.com/pganalyze_Efficient-Search-in-Rails-with-Postgres.pdf)
 - [pganalyze_Finding_the_root_cause_of_slow_Postgres_queries_using_EXPLAIN.](https://resources.pganalyze.com/pganalyze_Finding_the_root_cause_of_slow_Postgres_queries_using_EXPLAIN.pdf)
 - [pganalyze_The-Most-Important-Events-To-Monitor-In-Your-Postgres-Logs.](https://resources.pganalyze.com/pganalyze_The-Most-Important-Events-To-Monitor-In-Your-Postgres-Logs.pdf)
