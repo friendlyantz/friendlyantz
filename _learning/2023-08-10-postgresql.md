@@ -14,8 +14,8 @@ toc_sticky: true
 
 # Indexing
 
-takeaways from reading - [Effective_Indexing_in_Postgres.](https://resources.pganalyze.com/pganalyze_Effective_Indexing_in_Postgres.pdf)
-[my sandbox](https://github.com/friendlyantz/demystifying-postgres)
+- takeaways from reading - [Effective_Indexing_in_Postgres.](https://resources.pganalyze.com/pganalyze_Effective_Indexing_in_Postgres.pdf)
+- [my sandbox](https://github.com/friendlyantz/demystifying-postgres)
 
 ---
 
@@ -29,7 +29,9 @@ Partial index (~20%) scan
 - Also I noted hitting Partially indexed table second time with the same query (outside index range) was 100x faster, while others did not change
 ## Using Indexes with LIKE and ILIKE
 
-GIN/GIST indexes together with `pg_tgrm` can sometimes be used for LIKE and ILIKE, but query performance is unpredictable when user-generated input is presented.
+GIN / GIST indexes together with `pg_tgrm` can sometimes be used for LIKE and ILIKE, but query performance is unpredictable when user-generated input is presented.
+
+> **GIN** indexes are the preferred text search index type. [PG sauce](https://www.postgresql.org/docs/current/textsearch-indexes.html)
 
 **Pros:**
 - The user doesn‘t have to worry about the case matching
@@ -54,7 +56,7 @@ GIN/GIST indexes together with `pg_tgrm` can sometimes be used for LIKE and ILIK
     def change
       return if ActiveRecord::Base.connection.table_exists?(:gin_indexed_companies)
 
-      disable_ddl_transaction
+      disable_ddl_transaction! # disable_ddl_transaction! added when creading new migration to add new index , and set the algorithm to concurrently so that this index will be added concurrently. This is useful (or crucial) when you have large amounts of rows and want to avoid locking the table while the index being applied
 
       create_table :gin_indexed_companies do |t|
         t.string :exchange, null: false
@@ -99,11 +101,179 @@ SELECT
 **Cons:**
 
 - Does not replace the need for natural language search
+## Model scope to order by `similary` match
+
+```ruby
+class GinIndexedCompany < ActiveRecord::Base
+  scope :name_similar,
+        lambda { |name|
+          quoted_name = ActiveRecord::Base.connection.quote_string(name)
+          where('gin_indexed_companies.name % :name', name:).order(
+            Arel.sql("similarity(gin_indexed_companies.name, '#{quoted_name}') DESC")
+          )
+        }
+end
+
+GinIndexedCompany.name_similar('William').first
+```
 
 ---
+## Minimal full text search
+
+basic and very slow search
+```ruby
+require 'pg_search'
+
+class UnindexedCompany < ActiveRecord::Base
+  include PgSearch::Model
+  pg_search_scope :search, against: :description
+end
+
+
+UnindexedCompany.search('solutions').first
+```
+
+---
+## The Foundations of Full Text Search
+
+### tsvector
+
+```sql
+SELECT 
+to_tsvector('english', 'the weather in Melbourne is known for its variability as well as predictability');
+
+-----------------------------------------------------------------------
+ 'known':6 'melbourn':4 'predict':13 'variabl':9 'weather':2 'well':11
+(1 row)
+```
+it converts the provided `documents`(a string) to a `tsvector`(text search vector) containing `lexemes`, stripped of [stop words(very common  words like 'a', 'the', etc.)](https://www.postgresql.org/docs/current/textsearch-dictionaries.html#TEXTSEARCH-STOPWORDS)
+
+---
+### tsquery
+
+```sql
+SELECT
+to_tsquery('english', 'weather & predictable & variable');
+
+-----------------------
+ 'weather' & 'predict' & 'variabl'
+ ```
+
 ---
 
-# [types of DBs refresher](https://youtu.be/W2Z7fbCLSTw)
+### compare using `@@`
+
+```sql
+SELECT
+to_tsvector('english', 'the weather in Melbourne is known for its variability as well as predictability')
+@@ 
+to_tsquery('english', 'weather & predictable & variable'); -- TRUE
+```
+
+---
+
+### ts_rank
+
+
+```sql
+SELECT
+ts_rank(
+	to_tsvector('english', 'the weather in Melbourne is known for its variability as well as predictability'),
+	to_tsquery('english', 'weather & predictable & variable')
+	);
+
+------------
+ 0.07614762
+(1 row)
+```
+
+### Combining these together
+
+#### Single column search
+
+```sql
+SELECT
+	id,
+	name,
+	description,
+	ts_rank(
+		to_tsvector('english', description),
+		to_tsquery('english', 'weather & predictable')
+	) AS rank
+FROM unindexed_companies
+WHERE 
+	to_tsvector('english', description)
+	@@
+	to_tsquery('english', 'weather & predictable') -- TRUE
+ORDER BY rank DESC
+LIMIT 5
+;
+
+
+   id   |   name    |                                   description                                   |    rank
+--------+-----------+---------------------------------------------------------------------------------+-------------
+ 456978 | Auckland  | the variable weather in Auckland is not as predictable as in Melbourne          | 0.085297264
+ 456977 | Melbourne | the weather in Melbourne is known for its variability as well as predictability | 0.029667763
+(2 rows)
+```
+
+
+#### Searching Multiple Columns with `setweight`
+
+Data types of tsvector can be concatenated with the `||` operator, and precedence (weight) can be given to a certain column using the setweight function.
+
+Valid weighting options are: A, B, C or D.
+
+```sql
+SELECT
+	id,
+	name,
+	description,
+	ts_rank(
+		setweight(to_tsvector('english', name), 'A')
+		||
+		setweight(to_tsvector('english', description), 'B')
+		,
+		to_tsquery('english', 'Melbourne & predictable')
+	) AS rank
+FROM unindexed_companies
+WHERE
+	setweight(to_tsvector('english', name), 'A')
+	||
+	setweight(to_tsvector('english', description), 'B')
+	@@
+	to_tsquery('english', 'Melbourne & predictable') -- TRUE
+ORDER BY rank DESC
+LIMIT 5
+;
+
+
+   id   |   name    |                                   description                                   |    rank
+--------+-----------+---------------------------------------------------------------------------------+------------
+ 456978 | Auckland  | the variable weather in Auckland is not as predictable as in Melbourne          | 0.38943392
+ 456977 | Melbourne | the weather in Melbourne is known for its variability as well as predictability |   0.285989
+(2 rows)
+```
+
+----
+#### advanced `pg_search_scope`
+
+```ruby
+class UnindexedCompany < ActiveRecord::Base
+  include PgSearch::Model
+  # pg_search_scope :search, against: :description # unscoped / no weights
+  pg_search_scope :search,
+                  against: { name: 'A', description: 'B' }, # can be 'A', 'B', 'C' or 'D'
+                  using: { tsearch: { dictionary: 'english' } }
+end
+```
+
+
+
+
+---
+
+# [SQL fundamentals & types of DBs refresher](https://youtu.be/W2Z7fbCLSTw)
 
 1. KEY-VALUE pair only: Redis- in RAM, EXTREMELY FAST
 2. WIDE COOLUM: Cassandra, HBASE - no schema, CQL language, decentralized, can scale horizontally,
