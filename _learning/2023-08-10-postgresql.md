@@ -9,7 +9,7 @@ categories:
 tags:
   - databases
   - postgres
-toc_sticky: true
+toc_sticky: false
 ---
 
 # Indexing

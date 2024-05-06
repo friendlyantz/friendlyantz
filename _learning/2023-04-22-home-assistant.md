@@ -68,3 +68,9 @@ qm importdisk 100 /root/haos_image local-lvm --format qcow2
 ## OpenAI extended prompt
 
 {% gist 5a5978180f7a6bc50818164fa453efcb %}
+
+
+# M5 Atom Echo
+
+in **Chrome**!!! open [official home RTFM](https://www.home-assistant.io/voice_control/thirteen-usd-voice-remote/#to-delete-the-atom-echo-configuration-from-esphome)
+after installing, go to HAOS, the device should be discovered -> type you network credentials 
