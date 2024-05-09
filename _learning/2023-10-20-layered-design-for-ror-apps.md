@@ -29,3 +29,19 @@ Adapter vs Plugin vs Wrapper patterns
 # Chapter 5
 
 # Chapter 6
+
+# Chapter 13
+
+Infra level parts:
+• Database adapters
+• Third-party API clients
+• Caching and storage systems (that is, Active Storage backends)
+• Configuration providers (credentials, secrets, and so on)
+• Background processing engines (for example, Sidekiq and GoodJob)
+• Web servers (for example, Puma and Unicorn) and Rack middleware
+• Logging and monitoring tools
+
+The **abstraction distance** (the number of in-between abstractions before we reach the actual implementation) can be big in Rails.
+
+ > implementations are not owned by our application or the framework, while infrastructure abstractions are. i.e.
+ > ActiveRecord::Base.connection - still not the actual database connection wrapper (which is database-specific) but, instead, an infrastructure abstraction provided by the framework.

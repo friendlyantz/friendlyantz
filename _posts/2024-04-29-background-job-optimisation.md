@@ -31,7 +31,7 @@ toc_sticky: true
 
 ---
 
-- Jobs (dont call them Workers please)
+- Jobs (old name _Workers_ )
 - Queues
 - Threads
 - Servers --> Processes --> Threads
