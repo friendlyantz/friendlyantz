@@ -383,3 +383,21 @@ rails new myapp --minimal
 4. [rebuilding Rails by Noah Gibbs](https://rubyandrails.info/books/rebuilding-rails)
 5. [RubyConfTH 2022 - Dissecting Rails Talk](https://www.youtube.com/watch?v=gXwRs-FwcmE)
 6. [My demo sandbox](https://github.com/friendlyantz/demystifying-rails)
+
+
+----
+
+# Rails new commands
+
+```zsh
+rails new app_name \
+--database=sqlite3 \
+--css=tailwind \
+--skip-test
+```
+
+# Kamal
+
+```
+kamal init
+```
