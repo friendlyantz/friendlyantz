@@ -268,9 +268,12 @@ class UnindexedCompany < ActiveRecord::Base
 end
 ```
 
+---
+# Bloat removal
+
+https://www.depesz.com/2013/10/15/bloat-removal-without-table-swapping/
 
 ---
-
 # Approx. table count
 
 ```ruby
@@ -289,6 +292,38 @@ def self.approximate_row_count(model)
 end
 ```
 
+---
+
+# Size of tables
+
+```sql
+SELECT
+    c.relname AS relname,
+    c.relkind AS relkind,
+    pg_size_pretty(pg_total_relation_size(c.oid)) AS size
+FROM 
+    pg_class c
+JOIN 
+    pg_namespace n ON n.oid = c.relnamespace
+WHERE 
+    n.nspname = 'public'
+    AND c.relkind IN ('r', 'i')
+ORDER BY 
+    pg_total_relation_size(c.oid) DESC;
+```
+
+---
+
+# PG Stat Tuple
+
+```sql
+CREATE EXTENSION pg_stat_tuple;
+
+\dx
+
+%% turn on extended display, vertical table instead horizontal%%
+\x
+```
 ---
 
 # [SQL fundamentals & types of DBs refresher](https://youtu.be/W2Z7fbCLSTw)
