@@ -269,7 +269,25 @@ end
 ```
 
 
+---
 
+# Approx. table count
+
+```ruby
+ROW_COUNT_SQL = <<~SQL.squish
+  SELECT reltuples AS row_count
+  FROM pg_class
+  WHERE relname = '%s'
+SQL
+
+# Running a COUNT(*) in PostgreSQL can be resource heavy so, if there isn't
+# a need to be exact, this will be much faster
+def self.approximate_row_count(model)
+  sql = format(ROW_COUNT_SQL, model.table_name)
+  result = ActiveRecord::Base.connection.execute(sql)
+  result.first["row_count"]
+end
+```
 
 ---
 
@@ -466,4 +484,3 @@ PGAnayle Books:
 - [pganalyze_Efficient-Search-in-Rails-with-Postgres](https://resources.pganalyze.com/pganalyze_Efficient-Search-in-Rails-with-Postgres.pdf)
 - [pganalyze_Finding_the_root_cause_of_slow_Postgres_queries_using_EXPLAIN.](https://resources.pganalyze.com/pganalyze_Finding_the_root_cause_of_slow_Postgres_queries_using_EXPLAIN.pdf)
 - [pganalyze_The-Most-Important-Events-To-Monitor-In-Your-Postgres-Logs.](https://resources.pganalyze.com/pganalyze_The-Most-Important-Events-To-Monitor-In-Your-Postgres-Logs.pdf)
-
