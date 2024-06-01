@@ -55,7 +55,7 @@ Shortcuts I use on Mac that I think are useful and does not cause conflicts with
 
 ---
 
-VIM combos:
+# VIM combos:
 
 - replace `:%s/ladida/dududu`
 - Ruby linting `:! rubocop -A %`
@@ -71,6 +71,13 @@ VIM combos:
 - `ctrl + 6` last file toggle
 - folding
 	- `zM`, `zc`, `zf`. Unfold all `zr`
+
+# Unfolding Using Normal Mode Commands
+
+- `zo`: Opens one fold under the cursor.
+- `zO`: Opens all folds under the cursor recursively.
+- `zc`: Closes one fold under the cursor.
+- `zM`: Closes all folds in the file.
 
 ---
 
