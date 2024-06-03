@@ -94,7 +94,7 @@ lalalal_block ^e67fce
 
 ## footnotes [^1] 
 
-[^1]: ref details||
+	[^1]: ref details||
 
 
 ---
