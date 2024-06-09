@@ -375,3 +375,15 @@ sudo systemctl status my_services.service
 ```sh
 sudo shutdown -r now
 ```
+
+# Symlinking, iNode
+
+```sh
+ls -li
+
+# ubuntu 
+sudo debugfs /dev/mapper/ubuntu--vg-ubuntu--lv
+stat file.name
+
+
+```
