@@ -12,7 +12,7 @@
 <div align="center">
 
   [![Linkedin Badge](https://img.shields.io/badge/-panteleev-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/panteleev/)](https://www.linkedin.com/in/panteleev/)
-  
+  <a href='https://ko-fi.com/friendlyantz'><img src='https://img.shields.io/badge/&#x2615;-Buy me a coffee-blue' /></a>
   
  ### ![my_favicon](favicon.ico) My www portal :tada: 
   [https://friendlyantz.me/](https://friendlyantz.me/)
