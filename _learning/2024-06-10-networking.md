@@ -7,7 +7,7 @@ tags:
   - learning
   - networking
 ---
-
+[cisco packet tracer download](https://skillsforall.com/resources/lab-downloads)
 # DNS Reset
 
 ```sh
