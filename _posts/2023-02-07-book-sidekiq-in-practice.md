@@ -65,6 +65,7 @@ Sidekiq connects to Redis Pool, but never to Redis directly
  	- i.e. 100-connections DB can support twice ops/sec more that 3000-connections DB
 
 ---
+## `perform_async` vs `perform_at`
 
 `perform_async` is fast `BigO(2)` ⚡️
 

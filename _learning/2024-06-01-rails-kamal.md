@@ -42,7 +42,7 @@ sudo docker logs -f container-id
 kamal app logs -f
 ```
 - ssh limitations: if you have remote machines with different users than root and they are vary
-	- 
+	- dokku, cap rover, capistrano
 ---
 
 # What Kamal offers

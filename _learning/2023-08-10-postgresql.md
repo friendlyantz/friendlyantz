@@ -12,6 +12,10 @@ tags:
 toc_sticky: false
 ---
 
+# Pre-warm cache
+
+[PGdocs](https://www.postgresql.org/docs/current/pgprewarm.html)
+[Useful scripts](https://github.com/robins/PrewarmRDSPostgres/tree/master)
 # Indexing
 
 - takeaways from reading - [Effective_Indexing_in_Postgres.](https://resources.pganalyze.com/pganalyze_Effective_Indexing_in_Postgres.pdf)

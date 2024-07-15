@@ -51,7 +51,7 @@ Shortcuts I use on Mac that I think are useful and does not cause conflicts with
 |         |                                                                                 |
 | Alt-u   | Uppercase till the end of the current word.                                     |
 |         |                                                                                 |
-|Alt-t|Transpose(switch order) 2 words.
+| Alt-t   | Transpose(switch order) 2 words.                                                |
 
 ---
 
@@ -71,6 +71,7 @@ Shortcuts I use on Mac that I think are useful and does not cause conflicts with
 - `ctrl + 6` last file toggle
 - folding
 	- `zM`, `zc`, `zf`. Unfold all `zr`
+- `CTRL + "R", "+"`(in INSERT MODE) - paste from system/clipboard buffer
 
 # Unfolding Using Normal Mode Commands
 
@@ -80,6 +81,7 @@ Shortcuts I use on Mac that I think are useful and does not cause conflicts with
 - `zM`: Closes all folds in the file.
 
 ---
+
 
 ```sh
 vi -u NONE filename.log
