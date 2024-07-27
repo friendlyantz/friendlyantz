@@ -115,3 +115,27 @@ Hence:
 - build applications that can hide the latency through
 	- caching,
 	- pre-fetching, and a variety of similar techniques
+
+# CH 2 - Transmission Control Protocol
+
+## IPv{1,2,3,5}
+
+IPv4 - v4 is homage / heritage of a TCP/IP 1984 v4 draft, which resulted in
+- RFC 791—Internet Protocol
+- RFC 793—Transmission Control Protocol
+Internet Stream Protocol (ST), which never took off, meant to take v5
+
+## Three-Way Handshake
+![](https://hpbn.co/assets/diagrams/b83b75dbbf5b7e4be31c8000f91fc1a8.svg)
+- SYN
+	Client picks a random sequence number x and sends a SYN packet, which may also include additional TCP flags and options.
+
+- SYN ACK
+	Server increments x by one, picks own random sequence number y, appends its own set of flags and options, and dispatches the response.
+
+- ACK
+	Client increments both x and y by one and completes the handshake by dispatching the last ACK packet in the handshake.
+later  adding `receive window (rwnd)`
+
+## TCP Fast Open
+
