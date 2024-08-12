@@ -23,6 +23,13 @@ toc_sticky: false
 
 ---
 
+# Vacuuming
+
+you can do an online vacuum using `pg_repack` without locking the table
+https://reorg.github.io/pg_repack/
+
+---
+
 Indexed query was faster on M1 - 50x times for short string `ABCD` with 500k dataset
 
 `ILIKE` does not leverage standard index
