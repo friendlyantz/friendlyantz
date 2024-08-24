@@ -1,9 +1,9 @@
 ---
 # layout: posts
 # author_profile: true
-title: "JS notes"
+title: "JS"
 permalink: /js/
-excerpt: "JS challenge notes"
+excerpt: "JS, CSS mad challenge notes"
 # last_modified_at: 2016-11-03T11:13:12-04:00
 collection: learning
 categories:

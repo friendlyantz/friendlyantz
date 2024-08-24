@@ -1,4 +1,5 @@
 ---
+title: FPV drones
 # layout: posts
 # author_profile: true
 # title: "Vi Everywhere"
