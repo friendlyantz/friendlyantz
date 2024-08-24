@@ -1,4 +1,5 @@
 ---
+title: "Design"
 collection: learning
 excerpt: How to structure your CLI and not only
 categories:

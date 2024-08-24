@@ -14,3 +14,11 @@ I am currently learning C/C++, Rust🦀 and FPGA hardware programming, while "Ex
 I truly enjoy what I do.
 
 I document my discoveries in the ['Learning']({% link _pages/learning.md %}) section. (By the way, this intro block was AJAX loaded using HTMX!)
+
+---
+
+
+> 1. don’t forget technical underpinnings - it’s not just about shipping code
+> 1. always refactor - your first or second cut is never going to be perfect, be willing to keep improving the code
+> 1. be critical of yourself and others - but not the people - create a robust culture where you can focus on ideas but be ready to let them go
+> <div style="text-align: right">Adam Boas</div>
