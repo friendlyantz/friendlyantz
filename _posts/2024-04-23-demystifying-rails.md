@@ -17,10 +17,6 @@ toc: true
 toc_sticky: true
 # toc_label: "My Table of Contents"
 # toc_icon: "cog"
-# header:
-#   video:
-#     id: _mrF0pp8LIE
-#     provider: youtube
 
 ---
 
@@ -35,6 +31,11 @@ toc_sticky: true
   - ActionMailer, ActionCable, ActionView, ActionController
   - ActiveJob, Routes, DSLs, ...
 ```
+
+---
+
+
+{% include video id="LavkZM_CQME" provider="youtube" %}
 
 ---
 

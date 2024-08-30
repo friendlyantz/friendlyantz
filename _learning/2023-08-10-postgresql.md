@@ -22,6 +22,11 @@ toc_sticky: false
 - [my sandbox](https://github.com/friendlyantz/demystifying-postgres)
 
 ---
+# DB size
+```sql
+SELECT pg_size_pretty( pg_total_relation_size('tablename') );
+```
+---
 
 # Vacuuming
 
