@@ -22,11 +22,6 @@ toc_sticky: false
 - [my sandbox](https://github.com/friendlyantz/demystifying-postgres)
 
 ---
-# DB size
-```sql
-SELECT pg_size_pretty( pg_total_relation_size('tablename') );
-```
----
 
 # Vacuuming
 
@@ -311,7 +306,10 @@ end
 ---
 
 # Size of tables
-
+```sql
+SELECT pg_size_pretty( pg_total_relation_size('tablename') );
+```
+or
 ```sql
 SELECT
     c.relname AS relname,
@@ -342,6 +340,18 @@ CREATE EXTENSION pg_stat_tuple;
 ```
 ---
 
+# Indexing
+
+EXPLAIN, you will typically see one of four main types of scanning a table in Postgres:
+
+- **Sequential Scan:**
+- **Index Scan:**
+- **Index Only Scan:** - result directly from the index,
+- **Bitmap Index Scan** **+** **Bitmap Heap Scan:** Uses an index to generate a bitmap of which parts of the table likely contain the matching rows, and then access the actual table to get these rows using the bitmap - this is particularly useful to combine different indexes (each resulting in a bitmap) to
+
+implement AND and OR conditions in a query
+---
+
 # [SQL fundamentals & types of DBs refresher](https://youtu.be/W2Z7fbCLSTw)
 
 1. KEY-VALUE pair only: Redis- in RAM, EXTREMELY FAST
@@ -361,7 +371,7 @@ CREATE EXTENSION pg_stat_tuple;
 
 > Pay Attention: command execution happens only after `;`-char. 'Enter' only helps with formatting on a new line
 
-# Creation
+## Creation
 
 ```
 psql
@@ -392,7 +402,7 @@ DROP DATABASE sandbox;
 
 ```
 
-# Insertion
+## Insertion
 
 > USE `'sincle quotes'`
 > Note date format: YYYY-MM-DD
@@ -406,7 +416,7 @@ psql
 \i  /Users/somepath.sql
 ```
 
-# Select
+## Select
 ```sh
 SELECT name, fav_num FROM person;
 SELECT name, fav_num FROM person ORDER BY fav_num DESC;
@@ -479,7 +489,7 @@ SELECT fav_num, COUNT(*) FROM person GROUP BY fav_num HAVING COUNT(*) >= 2;
 (2 rows)
 ```
 
-# Comparator
+## Comparator
 
 ```sql
 SELECT true = true;
@@ -512,7 +522,7 @@ SELECT 1 <> 2;
 
 ```
 
-# Explain Analyze
+## Explain Analyze
 
 ```sh
 EXPLAIN ANALYZE SELECT COUNT("debits"."amount") 
