@@ -27,14 +27,15 @@ tags:
 sfjsdfjk
 
 
-| keys                | command               |
-| ------------------- | --------------------- |
-| cmd + enter         | checkbox              |
-| cmd + k             | hprlink               |
-| cmd + e             | preview               |
-| cmd + click_preview | see diff with preview |
-| cmd + P             | cmd pallete           |
-| cmd + opt + click   | multiple cursors      |
+
+| keys                 | command               |
+| -------------------- | --------------------- |
+| cmd + enter, cmd + L | checkbox              |
+| cmd + k              | hprlink               |
+| cmd + e              | preview               |
+| cmd + click_preview  | see diff with preview |
+| cmd + P              | cmd pallete           |
+| cmd + opt + click    | multiple cursors      |
 
 
 ---

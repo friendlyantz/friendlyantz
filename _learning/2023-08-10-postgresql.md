@@ -16,10 +16,120 @@ toc_sticky: false
 
 [PGdocs](https://www.postgresql.org/docs/current/pgprewarm.html)
 [Useful scripts](https://github.com/robins/PrewarmRDSPostgres/tree/master)
+
+---
+
 # Indexing
 
 - takeaways from reading - [Effective_Indexing_in_Postgres.](https://resources.pganalyze.com/pganalyze_Effective_Indexing_in_Postgres.pdf)
 - [my sandbox](https://github.com/friendlyantz/demystifying-postgres)
+
+> B-tree data structure does not support indexing lookups on arbitrary keys for a JSONB value.
+see below
+```sql
+CREATE INDEX ON mytable (int_price, jsonb_description);
+
+EXPLAIN SELECT * FROM companies WHERE price = 123 AND description ? 'osA';
+
+                          QUERY PLAN
+--------------------------------------------------------------
+ Bitmap Heap Scan on companies  (cost=28.79..3123.30 rows=1 width=40)
+   Recheck Cond: (price = 123)
+   Filter: (description ? 'osA'::text)
+   ->  Bitmap Index Scan on companies_price_description_idx  (cost=0.00..28.79 rows=1115 width=0)
+         Index Cond: (price = 123)
+```
+
+## Operator classes / families
+
+ they map a specific operator on a data type to the actual implementation.
+i.e. check all operator classes/families defined for the equality operator (`=`)
+```sql
+SELECT am.amname AS index_method,
+	opf.opfname AS opfamily_name,
+	amop.amopopr::regoperator AS opfamily_operator
+FROM pg_am am,
+	pg_opfamily opf,
+	pg_amop amop
+WHERE opf.opfmethod = am.oid AND amop.amopfamily = opf.oid
+AND amop.amopopr = '=(text,text)'::regoperator;
+
+
+
+ index_method |  opfamily_name   | opfamily_operator
+--------------+------------------+-------------------
+ btree        | text_ops         | =(text,text)
+ hash         | text_ops         | =(text,text)
+ btree        | text_pattern_ops | =(text,text)
+ hash         | text_pattern_ops | =(text,text)
+ spgist       | text_ops         | =(text,text)
+ brin         | text_minmax_ops  | =(text,text)
+ brin         | text_bloom_ops   | =(text,text)
+```
+
+equality comparisons on text data types are not supported on the GIN index type by default.
+
+ - [ ] “text_ops” (the default), and 
+ - [ ] “text_pattern_ ops” -  can be useful when your database is using a non-C locale (e.g. “en_ US.UTF-8”), and you are trying to index the `~~` operator (commonly known by its alias, “LIKE”). 
+
+```sql
+CREATE INDEX ON mytable (column3 text_pattern_ops);
+```
+
+## B-tree indexes
+
+produce sorted output for your queries (as the leaf pages are pre- sorted in the index),
+
+more RTFM on btrees in postgres
+*https://github.com/postgres/postgres/blob/master/src/backend/access/nbtree/README*
+
+# Hash indexes
+
+Hash indexes fit very similar use cases compared to B-tree indexes. They are solely focused on equality operators (“=”) and do not support any other
+operators
+
+```sql
+CREATE INDEX ON mytable USING hash (column1);
+```
+
+## BRIN indexes (Block Range Index)
+
+> “Block” in Postgres terminology refers to a section of a table, typically 8 kb in size.
+
+TLDR: **BRIN indexes help in very specific situations where the physical structure of the table correlates with the range of a value**
+
+-  very small and imprecise
+- best used with append-only tables, where the indexed values linearly increase and the rows are added at the end of the table, and you don’t delete/update values
+
+##  GIN, GIST, SP-GIST
+
+Generic Index Types 
+
+- [ ] **GIN:** Inverted data structures - commonly the index entries are composite values and the kind of query the index supports is a search for one of the elements of the composite value
+- [ ] **GIST:** Search trees - implements a balanced, tree- structured index that is versatile. B-trees, [R-trees](https://postgis.net/workshops/postgis-intro/indexing.html#rtree) and other data structures are a good fit for GIST.
+- [ ] **SP-GIST:** Spatial search trees - implements a non-balanced data structure that repeatedly divides the search space into partitions of different sizes, usable for structures such as [quad-trees](https://en.wikipedia.org/wiki/Quadtree), [k-d trees](https://en.wikipedia.org/wiki/K-d_tree) and [radix trees](https://en.wikipedia.org/wiki/Radix_tree).
+
+use-cases:
+-   GIN: [JSONB](https://www.postgresql.org/docs/13/datatype-json.html#JSON-INDEXING) (e.g. finding key/value pairs, checking whether keys exist)
+- GIN / GIST: Full text search - see our eBook about full text search here
+- GIST: Geospatial data
+- GIST: ltree
+- GIST: Range types (e.g. checking whether values are contained in the range)
+
+## Creating The Best Index For Your Queries
+
+One very important choice is whether to index a single column, or whether **to index multiple columns with the same index**.
+Indexing multiple columns is supported for B-tree, GIST, GIN and BRIN index types.
+
+Things to watch out for b-tree index:
+- Ordering matters - the columns in the beginning to be used by all the queries
+- Postgres <=12: put high-cardinality(diverse) columns in front of the index
+ - more columns in index: less likely planner will use it
+ - for `Index Only Scans`(aka covering index): use the `INCLUDE` keyword to specify columns whose data is included in the index, but which are not used for filtering purposes
+ -  one index on multiple columns vs multiple indexes on one column each, **it often is preferable to rely on a single index**
+ 
+ ![[built-in index types postgresql.png]]
+
 
 ---
 
@@ -29,6 +139,8 @@ you can do an online vacuum using `pg_repack` without locking the table
 https://reorg.github.io/pg_repack/
 
 ---
+
+# Search / Indexing
 
 Indexed query was faster on M1 - 50x times for short string `ABCD` with 500k dataset
 
