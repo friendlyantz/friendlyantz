@@ -19,8 +19,9 @@ mkdir new_dir && cd $_
 mkdir -p /not_yet_created_dir/new_dir && cd $_
 ```
 
-## TODO / Master
+## TODO / master
 
+- [ ] https://sadservers.com/ - fix a broken servers sandbox
 - [ ] xargs
 - [ ] parallel (gnu)
 - [ ] grep
@@ -31,7 +32,7 @@ mkdir -p /not_yet_created_dir/new_dir && cd $_
 ```sh
 # bulk file renaming
 for f in ./*; do mv "$f" "${f/Silicon_Valley/S01E01}"; done
-# works well
+# unix 'sr' tool(symbolic link rename) works well.
 sr app State::ProductItems::ProductItemMapping State::BaseUnitMapping
 ```
 # basic rename of strings in files
@@ -118,6 +119,12 @@ some_command | awk 'NR==1'
 some_command | head -n 1
 ```
 
+## diff in USB devices
+```sh
+ls /dev > temp.patch
+# plug or unplug device
+diff <(ls /dev ) <(cat temp.patch ) | grep -E "^[<>]" | sed 's/[<>] //'
+```
 ## `pbcopy` Apple and `xclip` Linux
 
 
@@ -166,6 +173,9 @@ your_script | grep keyword_in_line | awk '{print $1}' | command_to_use_return_va
 jobs -p | ag lala | awk '{print $3}' | xargs kill -9
 ## or
 ps aux | grep ruby | awk '{ print $2 }'
+##  with ruby
+ps aux | ruby -ne 'puts $_.split("/").last'
+
 ```
 
 ```sh

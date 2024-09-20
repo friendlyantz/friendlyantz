@@ -83,7 +83,7 @@ produce sorted output for your queries (as the leaf pages are pre- sorted in the
 more RTFM on btrees in postgres
 *https://github.com/postgres/postgres/blob/master/src/backend/access/nbtree/README*
 
-# Hash indexes
+## Hash indexes
 
 Hash indexes fit very similar use cases compared to B-tree indexes. They are solely focused on equality operators (“=”) and do not support any other
 operators
@@ -110,26 +110,32 @@ Generic Index Types
 - [ ] **SP-GIST:** Spatial search trees - implements a non-balanced data structure that repeatedly divides the search space into partitions of different sizes, usable for structures such as [quad-trees](https://en.wikipedia.org/wiki/Quadtree), [k-d trees](https://en.wikipedia.org/wiki/K-d_tree) and [radix trees](https://en.wikipedia.org/wiki/Radix_tree).
 
 use-cases:
--   GIN: [JSONB](https://www.postgresql.org/docs/13/datatype-json.html#JSON-INDEXING) (e.g. finding key/value pairs, checking whether keys exist)
-- GIN / GIST: Full text search - see our eBook about full text search here
+- GIN: [JSONB](https://www.postgresql.org/docs/13/datatype-json.html#JSON-INDEXING) (e.g. finding key/value pairs, checking whether keys exist)
+- GIN / GIST: Full text search
 - GIST: Geospatial data
 - GIST: ltree
 - GIST: Range types (e.g. checking whether values are contained in the range)
 
 ## Creating The Best Index For Your Queries
 
-One very important choice is whether to index a single column, or whether **to index multiple columns with the same index**.
+
 Indexing multiple columns is supported for B-tree, GIST, GIN and BRIN index types.
 
+ one index on multiple columns vs multiple indexes on one column each, **it often is preferable to rely on a single index**
+ 
 Things to watch out for b-tree index:
 - Ordering matters - the columns in the beginning to be used by all the queries
 - Postgres <=12: put high-cardinality(diverse) columns in front of the index
  - more columns in index: less likely planner will use it
  - for `Index Only Scans`(aka covering index): use the `INCLUDE` keyword to specify columns whose data is included in the index, but which are not used for filtering purposes
- -  one index on multiple columns vs multiple indexes on one column each, **it often is preferable to rely on a single index**
+ - 
  
  ![[built-in index types postgresql.png]]
 
+
+---
+
+# Logs
 
 ---
 
