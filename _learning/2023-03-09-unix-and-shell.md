@@ -35,6 +35,24 @@ for f in ./*; do mv "$f" "${f/Silicon_Valley/S01E01}"; done
 # unix 'sr' tool(symbolic link rename) works well.
 sr app State::ProductItems::ProductItemMapping State::BaseUnitMapping
 ```
+
+```sh
+# linux: echo to another session (if you want to open multiple terminal windows via a webpage and share between these windows)
+echo 'ROFLCOPTER' > /dev/pts/3
+```
+Hex dump 
+```sh
+# hex dump
+xxd file1.bk | head
+# 00000000: 7265 7175 6972 6520 2762 756e 646c 6572  require 'bundler
+# 00000010: 2f67 656d 5f74 6173 6b73 270a 7265 7175  /gem_tasks'.requ
+# 00000020: 6972 6520 276a 656b 796c 6c27 0a72 6571  ire 'jekyll'.req
+```
+# Run script multiple times
+
+```shell
+for i in {1..10}; do you_script; done
+```
 # basic rename of strings in files
 ```sh
 sr () { ag -0 -l $2 $1 | xargs -0 sed -i '' -e "s/$2/$3/g" }

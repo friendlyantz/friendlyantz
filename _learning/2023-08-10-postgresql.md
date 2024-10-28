@@ -11,6 +11,33 @@ tags:
   - postgres
 toc_sticky: false
 ---
+# Must have extentions
+1. **[pg_stat_statements](https://www.crunchydata.com/blog/tentative-smarter-query-optimization-in-postgres-starts-with-pg_stat_statements)** (std contrib package) - see 'Query Performance' below
+2. **[auto_explain](https://www.postgresql.org/docs/current/auto-explain.html)**(std contrib package) - custom config is necessary, see details below
+3. **[Citus](https://github.com/citusdata/citus)** - turns postgres into a sharded, distributed, horizontally scalable database. 
+4. **[Pg_search](https://github.com/paradedb/paradedb)** - advanced search, but needs configuration(see below) 
+5. **[Pg_cron](https://github.com/citusdata/pg_cron)** 
+## How to add ext (`pg_stat_statements`) on docker Postgres locally
+```sh
+# copy, edit, copy back
+docker cp ./postgresql.conf postgresql-foo:/var/lib/postgresql/data/postgresql.conf
+
+# OPT: fix permissions
+docker exec -u 0 -it postgresql-foo chown postgres:postgres /var/lib/postgresql/data/postgresql.conf
+
+# reload conf
+docker exec -it postgresql-foo psql -U postgres -c "SELECT pg_reload_conf();"
+
+# or reload container
+docker restart postgresql-foo
+```
+ connect and run
+```bash
+psql -U postgres postgres
+```
+```sql
+CREATE EXTENSION pg_stat_statements;
+```
 
 # Pre-warm cache
 
@@ -76,7 +103,7 @@ equality comparisons on text data types are not supported on the GIN index type 
 CREATE INDEX ON mytable (column3 text_pattern_ops);
 ```
 
-## B-tree indexes
+## B-tree(balanced, not binary) indexes
 
 produce sorted output for your queries (as the leaf pages are pre- sorted in the index),
 
@@ -133,9 +160,221 @@ Things to watch out for b-tree index:
  ![[built-in index types postgresql.png]]
 
 
+
+---
+
+## Misc - Indexing
+
+EXPLAIN, you will typically see one of four main types of scanning a table in Postgres:
+
+- **Sequential Scan:**
+- **Index Scan:**
+- **Index Only Scan:** - result directly from the index,
+- **Bitmap Index Scan** **+** **Bitmap Heap Scan:** Uses an index to generate a bitmap of which parts of the table likely contain the matching rows, and then access the actual table to get these rows using the bitmap - this is particularly useful to combine different indexes (each resulting in a bitmap) to
+
+implement AND and OR conditions in a query
+
 ---
 
 # Logs
+
+## Logfile details / db stat helpers
+
+```sh
+rails db
+```
+
+```sql
+SELECT  pg_current_logfile();
+```
+or in Debian
+```
+`pg_lsclusters`
+```
+
+DB stats
+```sql
+SELECT datname, numbackends, xact_commit, xact_rollback, tup_inserted, tup_updated, tup_deleted
+FROM pg_stat_database;
+
+```
+
+### Modify Docker postgres config
+
+```sh
+# download postgres config from container
+docker cp demystifying-postgres:/var/lib/postgresql/data/postgresql.conf ./
+
+# set the setting, i.e.
+log_checkpoints = on
+
+# copy back similar to above
+# restart container
+docker restart demystifying-postgres
+```
+
+## Transaction ID (TXID) Wraparound
+
+https://pganalyze.com/docs/log-insights/autovacuum/A61
+https://pganalyze.com/docs/log-insights/autovacuum/A62
+
+```sh
+WARNING: database “template1” must be vacuumed within 938860 transactions
+
+HINT: To avoid a database shutdown, execute a database-wide VACUUM in that database.
+
+You might also need to commit or roll back old prepared transactions.
+```
+- 32bit at the moment(4 billion unique transaction IDs.), WIP for 64bit - you can run out of available transaction IDs, resulting in the database becoming unavailable.
+```sql
+SELECT age(datfrozenxid) FROM pg_database;
+```
+
+---
+
+## Data Corruption
+
+```text
+WARNING: page verification failed, calculated checksum 20919 but expected 15254
+```
+
+1. make sure you have checksums enabled in Postgres - enable it, otherwise you never know when data becomes corrupted.
+
+choices if this happen: 
+1. **Fail over to an HA standby server / follower database**
+2.  **Replay WAL from an old enough base backup** (Assuming you store both your base backups and all WAL (Write-Ahead Logging) files between them,)
+3. **Accept that some data is lost, and let Postgres move on** https://pganalyze.com/docs/log-insights/server/S6
+
+
+## Reducing I/O spikes: Tuning checkpoints
+
+checkpoints processes responsible for writing data thats is only in shared memory and the WAL, to disk. 
+Quite I/O intensive, as they need to write a lot of data to disk and run fsync to ensure crash safety..
+
+check if it is
+```sql
+SHOW log_checkpoints;
+```
+enable it (this works on some systmes)
+```sql
+ALTER SYSTEM SET log_checkpoints = 'on';
+SELECT pg_reload_conf();
+```
+or in config
+```sh
+log_checkpoints = on
+```
+
+this produces
+```
+LOG: checkpoint starting: xlog
+...
+
+...
+
+...
+LOG: checkpoint complete: wrote 111906 buffers (10.9%); 0 WAL file(s) added, 22 removed,
+
+29 recycled; write=215.895 s, sync=0.014 s, total=216.130 s; sync files=94, longest=0.014 s,
+
+average=0.000 s; distance=850730 kB, estimate=910977 kB
+```
+
+**Why was this checkpoint performed?**
+1. `xlog` - Checkpoint that runs after a certain amount of WAL has been generated since the last checkpoint, as determined by `max_wal_size` (or `checkpoint_segments` in older Postgres versions)
+2. `time` - Checkpoint that runs after a certain amount of time has passed since the last checkpoint, as determined by `checkpoint_timeout`
+
+> The common tuning guidance is to optimize for more **time** based checkpoints
+
+also Postgres hints you if it too frequent
+```
+LOG: checkpoints are occurring too frequently (18 seconds apart)
+HINT: Consider increasing the configuration parameter “max_wal_size”.
+```
+In any scenario other than bulk data loads, you should look at tuning the settings if you see this event.
+## Temporary Files (Improving performance)
+By default you won’t notice this, unless you run `EXPLAIN ANALYZE` on a query to see the detailed query execution plan. 
+However, you can enable the `log_temp_files`
+```sql
+LOG: temporary file: path “base/pgsql_tmp/pgsql_tmp15967.0”, size 200204288
+STATEMENT: alter table pgbench_accounts add primary key (aid)
+```
+> a lot of temporary file log events --->  increasing `work_mem`.
+
+You can set `work_mem`:
+1. in config / gloabally
+2. per-connection, or per-statement basis, using the `SET` command. (*You may want to combine a SET command first, together with `EXPLAIN ANALYZE`, to verify the exact temporary file creation behaviour.*)
+ 
+ **Why?**: Postgres ships with a very low default for the work_mem setting that is used for regular operations. By default this only allows for **4 MB of memory** used for sorting and grouping operations.
+ [more info](https://pganalyze.com/docs/log-insights/server/S7)
+## Lock Notices & Deadlocks (Improving performance)
+
+> you can enable the `log_lock_waits = on` setting ->  **this will log all** **lock requests that were not granted within 1 second**,
+
+[more](https://pganalyze.com/docs/log-insights/locks/L71)
+```sql
+LOG: process 2078 still waiting for ShareLock on transaction 1045207414 after 1000.100 ms
+DETAIL: Process holding the lock: 583. Wait queue: 2078, 456
+QUERY: INSERT INTO x (y) VALUES (1)
+CONTEXT: PL/pgSQL function insert_helper(text) line 5 at EXECUTE statement
+STATEMENT: SELECT insert_helper($1)
+
+
+....lock granted.....
+
+LOG: process 583 acquired AccessExclusiveLock on relation 185044 of database 16384 after 2175.443 ms
+STATEMENT: ALTER TABLE x ADD COLUMN y text;
+```
+or
+```sql
+LOG: process 123 detected deadlock while waiting for AccessExclusiveLock on extension of relation 666 of database 123 after 456.000 ms
+ERROR: deadlock detected
+DETAIL: Process 9788 waits for ShareLock on transaction 1035; blocked by process 91.
+Process 91 waits for ShareLock on transaction 1045; blocked by process 98.
+Process 98: INSERT INTO x (id, name, email) VALUES (1, ‘ABC’, ‘abc@example.com’) ON
+CONFLICT(email) DO UPDATE SET name = excluded.name, /* truncated */
+Process 91: INSERT INTO x (id, name, email) VALUES (1, ‘ABC’, ‘abc@example.com’) ON
+CONFLICT(email) DO UPDATE SET name = excluded.name, /* truncated */”
+HINT: See server log for query details.
+CONTEXT: while inserting index tuple (1,42) in relation “x”
+STATEMENT: INSERT INTO x (id, name, email) VALUES (1, ‘ABC’, ‘abc@e
+```
+
+lock issues can be difficult to analyze, but especially when looking at a pattern over time, or after an incident, it is critical to run your system with `log_lock_waits = on` for full details in the Postgres logs.
+
+## EXPLAIN plans through `auto_explain` ext.
+
+https://www.postgresql.org/docs/11/auto-explain.html
+this ext bundled with `pg_stat_statements` in `shared_preload_libraries`
+```
+shared_preload_libraries = pg_stat_statements, auto_explain
+```
+
+recommended config:
+```
+auto_explain.log_analyze = 1
+auto_explain.log_buffers = 1
+auto_explain.log_timing = 0
+auto_explain.log_triggers = 1
+auto_explain.log_verbose = 1
+auto_explain.log_format = json
+auto_explain.log_min_duration = 1000
+auto_explain.log_nested_statements = 1
+auto_explain.sample_rate = 1
+```
+> 1 and 0 can be replaced with `on` and `off`
+`log_timing` is expensive, only for non `prod` systems
+
+`log_analyze` is also expensive and can be disabled on limited hardware. Though this will give you information about the actual query execution, just like EXPLAIN (ANALYZE), which is critical when understanding what actually got executed
+## Security / Privacy
+
+PII can leak into logs
+
+```sql
+ERROR: duplicate key value violates unique constraint “test_constraint”
+DETAIL: Key (b, c)=(12345, mysecretdata) already exists.
+STATEMENT: INSERT INTO a (b, c) VALUES ($1,$2) RETURNING id
+```
 
 ---
 
@@ -398,7 +637,83 @@ end
 ```
 
 ---
+# Query Performance
+
+1. Add index
+2. Reviewing Query Performance -> [enable `pg_stat_statements` ext](https://pganalyze.com/docs/install/01_enabling_pg_stat_statements?utm_source=ebook_optimizing-query-performance) - comes by default on Debian Postgres package
+> One thing to note is that pg_stat_statements records its statistics from the beginning of when it was installed, or alternatively, from when you’ve last reset the statistics ---> `pg_stat_statements_reset()`
+
+```sql
+SELECT queryid, calls, mean_exec_time, substring(query for 100)
+FROM pg_stat_statements
+ORDER BY total_exec_time DESC
+LIMIT 10;
+```
+
+```sql
+SELECT query FROM pg_stat_statements WHERE queryid = 823659002;
+						query
+--------------------------------------------------------------------
+SELECT “backend_wait_events”.”wait_event” FROM “backend_wait_events”
+WHERE “backend_wait_events”.”backend_id” = $1
+```
+
+$1 is normalised `id` / binding param - to find binding param for slow query use 
+1. `pg_stat_activity` table, which shows the currently running
+2. logs with `log_min_duration_statement = 1000`(ms or +/-) threshold instead of  `log_statement = all` - for this you need `auto_explain` ext (refer above for config)
+```sql
+EXPLAIN (ANALYZE, BUFFERS) YOIUR_QUERY;
+```
+# JIT
+
+https://pganalyze.com/blog/postgres11-jit-compilation-auto-prewarm-sql-stored-procedures
+
+# Finding Root cause of slow query with EXPLAIN
+[pganalyze_Finding_the_root_cause_of_slow_Postgres_queries_using_EXPLAIN.](https://resources.pganalyze.com/pganalyze_Finding_the_root_cause_of_slow_Postgres_queries_using_EXPLAIN.pdf)
+When Postgres receives a query, it runs through the following four phases at the high-level:
+1. **Parsing:** Turning a SQL statement into a parse tree (FAST)
+2. **Analysis:** Identifying which tables are referenced (FAST)
+3. **Planning:** Determining how to execute the query based on 
+	1. configuration settings,
+	2. the table schema and 
+	3. the indexes that were created.
+4. **Execution:** Actually executing the queryin the
+
+**EXPLAIN** plans are captured in two ways:
+1. **EXPLAIN ANALYZE:** Planning and Execution phases
+2. **EXPLAIN (without ANALYZE):** only Planning step and does not actually run the query
+> Ideally we want EXPLAIN ANALYZE, or the similarly named auto_explain.log_analyze, but overhead of actually running the query too high
+
+## Sort memory - Sorts are slower when they spill to disk (~10% performance diff)
+
+be alarmed when `EXPLAIN ANALYZE` shows sort with external disk merge
+```
+Sort Method: external merge Disk: 9856kB
+```
+since **default value** that Postgres sets initially (4 MB), which is **often too small**.
+```sql
+SHOW work_mem;
+ work_mem
+----------
+ 4MB
+(1 row)
+```
+[postgres docs link on work_mem](https://www.postgresql.org/docs/13/runtime-config-resource.html#GUC-WORK-MEM)
+```sql
+SET work_mem = '10MB';
+```
+## Add `BUFFERS`
+```sql
+EXPLAIN (ANALYZE, BUFFERS) YOUR_QUERY;
+```
+Each buffer page is 8kb of data from a table or index that is referenced in the plan node.
+
+```sql
+Buffers: shared read=87747
+```
+87747 x 8kb = 686Mb
 # Bloat removal
+
 
 https://www.depesz.com/2013/10/15/bloat-removal-without-table-swapping/
 
@@ -458,16 +773,6 @@ CREATE EXTENSION pg_stat_tuple;
 ```
 ---
 
-# Indexing
-
-EXPLAIN, you will typically see one of four main types of scanning a table in Postgres:
-
-- **Sequential Scan:**
-- **Index Scan:**
-- **Index Only Scan:** - result directly from the index,
-- **Bitmap Index Scan** **+** **Bitmap Heap Scan:** Uses an index to generate a bitmap of which parts of the table likely contain the matching rows, and then access the actual table to get these rows using the bitmap - this is particularly useful to combine different indexes (each resulting in a bitmap) to
-
-implement AND and OR conditions in a query
 ---
 
 # [SQL fundamentals & types of DBs refresher](https://youtu.be/W2Z7fbCLSTw)
