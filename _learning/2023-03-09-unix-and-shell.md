@@ -12,25 +12,22 @@ tags:
   - scripting
 ---
 
-```shell
-# thank me later
-mkdir new_dir && cd $_
+# practice / master these
 
-mkdir -p /not_yet_created_dir/new_dir && cd $_
-```
-
-## TODO / master
-
-- [ ] https://sadservers.com/ - fix a broken servers sandbox
+- [ ] <https://sadservers.com/scenarios>
 - [ ] xargs
 - [ ] parallel (gnu)
-- [ ] grep
+- [x] grep
 - [ ] find
-- [ ] sed
-- [ ] awk
+- [x] sed
+- [ ] awk '{ print $2 }'  log.file
+- [ ] sort -r
+- [ ] uniq -ci
+- [ ] tail -1
+
+# bulk file renaming
 
 ```sh
-# bulk file renaming
 for f in ./*; do mv "$f" "${f/Silicon_Valley/S01E01}"; done
 # unix 'sr' tool(symbolic link rename) works well.
 sr app State::ProductItems::ProductItemMapping State::BaseUnitMapping
@@ -40,7 +37,9 @@ sr app State::ProductItems::ProductItemMapping State::BaseUnitMapping
 # linux: echo to another session (if you want to open multiple terminal windows via a webpage and share between these windows)
 echo 'ROFLCOPTER' > /dev/pts/3
 ```
-Hex dump 
+
+Hex dump
+
 ```sh
 # hex dump
 xxd file1.bk | head
@@ -48,16 +47,42 @@ xxd file1.bk | head
 # 00000010: 2f67 656d 5f74 6173 6b73 270a 7265 7175  /gem_tasks'.requ
 # 00000020: 6972 6520 276a 656b 796c 6c27 0a72 6571  ire 'jekyll'.req
 ```
+
 # Run script multiple times
 
 ```shell
 for i in {1..10}; do you_script; done
 ```
+
+```sh
+# linux: echo to another session (if you want to open multiple terminal windows via a webpage and share between these windows)
+echo 'ROFLCOPTER' > /dev/pts/3
+```
+
+Hex dump
+
+```sh
+# hex dump
+xxd file1.bk | head
+# 00000000: 7265 7175 6972 6520 2762 756e 646c 6572  require 'bundler
+# 00000010: 2f67 656d 5f74 6173 6b73 270a 7265 7175  /gem_tasks'.requ
+# 00000020: 6972 6520 276a 656b 796c 6c27 0a72 6571  ire 'jekyll'.req
+```
+
+# Run script multiple times
+
+```shell
+for i in {1..10}; do you_script; done
+```
+
 # basic rename of strings in files
+
 ```sh
 sr () { ag -0 -l $2 $1 | xargs -0 sed -i '' -e "s/$2/$3/g" }
 ```
-## Every Bash script
+
+# Every Bash script
+
 a must do for every `bash` script. (However consider Ruby for anything that is harder than elementary)
 (massive credit to Mr. SE)
 
@@ -65,11 +90,13 @@ a must do for every `bash` script. (However consider Ruby for anything that is h
 #!/usr/bin/env bash
 set -euo pipefail
 ```
+
 The `-e` option stands for "exit immediately"
 The `-u` option stands for "unbound (or unset) variables". This causes the script to exit with an error if it attempts to use a variable that has not been set. By default, bash would use an empty string as the value for such variables, which can lead to subtle bugs.
 The `-o` is required `pipefail`
 
 also can add 'debugger' to show what scripts are running
+
 ```sh
 set -x
 ```
@@ -79,7 +106,9 @@ set -x
 > - Always use latest bash (as of 2024-jan I had 3.2.57(1) Mac M2, brew'ed it to 5.2.21)
 
 # `yes`
+
 auto-respond
+
 ```
 # will type `y`
 yes | some_command
@@ -87,11 +116,12 @@ yes | some_command
 yes no | some_command 
 ```
 
-# pwd
+# name of current directory
 
 ```sh
 basename $(pwd)
 ```
+
 ## `PIPESTATUS` (Bash and ZSH differ)
 
 is an array variable in Bash that holds the exit status of the last foreground pipeline (a sequence of one or more commands separated by the pipe `|` operator). Each element of the array corresponds to the exit status of a command in the pipeline.
@@ -120,8 +150,17 @@ cat db/tickets.json | jq '.[].submitter_id' | wc -l
 ## `sed`
 
 ```sh
+echo howtogonk | sed 's/gonk/geek/'
+# howtogeek
 echo 's/hello/world/' > myscript.sed
 sed -f myscript.sed input.txt > output.txt
+
+# Print lines
+sed -n '1,6p' README.md
+sed -n -e '1,6p' -e '10,16p' README.md
+
+# delete lines and create a backup
+sed -i'.bak' '/AWS/d' README.md
 ```
 
 ### take the first line
@@ -138,19 +177,29 @@ some_command | head -n 1
 ```
 
 ## diff in USB devices
+
 ```sh
 ls /dev > temp.patch
 # plug or unplug device
 diff <(ls /dev ) <(cat temp.patch ) | grep -E "^[<>]" | sed 's/[<>] //'
 ```
-## `pbcopy` Apple and `xclip` Linux
 
+## diff in USB devices
+
+```sh
+ls /dev > temp.patch
+# plug or unplug device
+diff <(ls /dev ) <(cat temp.patch ) | grep -E "^[<>]" | sed 's/[<>] //'
+```
+
+## `pbcopy` Apple and `xclip` Linux
 
 ```sh
 cat file.txt | pbcopy
 ```
 
 ### combo with jq / head / copy
+
 ```sh
 bat db/tickets.json | jq '.[]._id' -r | head -n 1 | xclip -selection clipboard
 ```
@@ -222,7 +271,7 @@ find /qwerty -type f 1>> ./lala 2>> ./err
 chmod 666
 ```
 
-In Unix-based systems, file permissions are represented by a series of three numbers, each representing a different group of users: the owner, the group, and everyone else. 
+In Unix-based systems, file permissions are represented by a series of three numbers, each representing a different group of users: the owner, the group, and everyone else.
 
 The "chmod" command stands for "change mode," and "666" is a code that represents the permissions being granted.
 
@@ -248,7 +297,6 @@ The "chmod" command stands for "change mode," and "666" is a code that represent
 7. `dmesg`: "dmesg" displays the kernel ring buffer, which contains messages related to the system's hardware and software. It can be useful for troubleshooting hardware-related issues, device initialization problems, or kernel-level error messages.
 8. `gdb`: "gdb" is a powerful debugger that allows you to analyze and debug programs. It enables you to inspect variables, set breakpoints, step through code, and track down the root cause of program crashes or abnormal behavior.
 
-
 ```sh
 lsof -i -P | grep -i "listen"
 # or
@@ -256,6 +304,7 @@ ps aux | grep postgres
 ```
 
 brew services issues might be down and need / (re)starting
+
 ```sh
 brew services list
 
@@ -329,15 +378,16 @@ EOF
 ## rename
 
  rename
+
 ```sh
 mv db/{oldName,newName}_structure.sql
 ```
 
 ## send session into the background / jobs
-`In VIM ctrl + Z`	Backgrounds the job
-`jobs`	To list all jobs
-`fg` 	Foreground last job (fg 1 or 2 to select specific)
 
+`In VIM ctrl + Z` Backgrounds the job
+`jobs` To list all jobs
+`fg`  Foreground last job (fg 1 or 2 to select specific)
 
 # Calendar
 
@@ -349,6 +399,7 @@ cal -3
 # `auto start on boot` DIY service
 
 1. Create new service
+
 ```sh
 
 vi /etc/systemd/system/my_services.service
@@ -381,17 +432,23 @@ available options for the `Restart`:
 - `always`: Always restart the service regardless of the exit status or how it was terminated.
 
 2. daemon reload
+
 ```bash
 sudo systemctl daemon-reload
 ```
+
 3. enable service
+
 ```bash
 sudo systemctl enable my_services.service
 ```
+
 4. start service
+
 ```bash
 sudo systemctl start my_services.service
 ```
+
 5. check status
 
 ```bash
@@ -399,7 +456,9 @@ sudo systemctl status my_services.service
 ```
 
 ---
+
 # soft reboot
+
 ```sh
 sudo shutdown -r now
 ```
@@ -413,5 +472,18 @@ ls -li
 sudo debugfs /dev/mapper/ubuntu--vg-ubuntu--lv
 stat file.name
 
+
+```
+
+# mkdir and go into it
+
+```shell
+mkdir new_dir && cd $_
+
+#fullpath
+mkdir -p ./not_yet_created_dir/new_dir && cd $_
+
+# multiple dirs
+mkdir -p ./not_yet_created_dir/{a,b}/{x,y,z} && cd $_
 
 ```

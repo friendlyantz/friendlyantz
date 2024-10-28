@@ -39,6 +39,14 @@ psql -U postgres postgres
 CREATE EXTENSION pg_stat_statements;
 ```
 
+# Advance DB programming with Rails
+
+- [ ] Using Subqueries in Rails
+- [ ] Using Materialized Views in Rails
+- [ ] Creating Custom Postgres Data Types in Rails
+
+
+---
 # Pre-warm cache
 
 [PGdocs](https://www.postgresql.org/docs/current/pgprewarm.html)
@@ -955,7 +963,67 @@ AND "debits"."state" IN (1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 12)
 AND "debits"."category" = 0 AND "debits"."matures_at" BETWEEN '2021-11-24 13:00:00' AND '2021-11-25 12:59:59.999999';
 ```
 
+# Rails + Postgres
+
+not all method user Method chaining
+ `Employee.average(:salary)`
+ 
+execute the query and return a result, while other methods implement Method Chaining,
+```ruby
+# bad - executes average
+Employee.where('salary > :avg', avg: Employee.average(:salary))
+# "SELECT \"employees\".* FROM \"employees\" WHERE (salary > 97422.02)"
+# good
+Employee.where('salary > (:avg)', avg: Employee.select('avg(salary)'))
+# "SELECT \"employees\".* FROM \"employees\" WHERE (salary > (SELECT avg(salary) FROM \"employees\"))"
+```
+
+## Left join
+```ruby
+Employee.where(
+  'NOT EXISTS (:vacations)',
+  vacations: Vacation.select('1').where('employees.id = vacations.employee_id')
+)
+
+```
+
+## `Select` - subqueries to find the average employee salary
+### Subquery (slow)
+```ruby
+Employee.select(
+  '*',
+  "(#{avg_sql}) AS avg_salary",
+  "salary - (#{avg_sql}) AS avg_difference"
+)
+# this does not show avg_salary and avg_difference keys in the objects returned, but these methods are available on result array items
+[<Employee:0x000000010ed78fc0
+  id: 1,
+  role_id: 5,
+  name: "Joe Halliday",
+  salary: 142697.0,
+  created_at: Sun, 27 Oct 2024 10:30:53.299383000 UTC +00:00,
+  updated_at: Sun, 27 Oct 2024 10:30:53.299383000 UTC +00:00>,
+	  ....
+  ]
+```
+
+alternative: https://www.postgresql.org/docs/current/tutorial-window.html
+### Window functions (faster)
+
+```ruby
+Employee.select(
+	'*',
+	"avg(salary) OVER () avg_salary",
+	"salary - avg(salary) OVER () avg_difference"
+)
+# SELECT 
+	# *, 
+	# avg(salary) OVER () avg_salary,
+	# salary - avg(salary) OVER () avg_difference 
+# FROM "employees"
+```
 # Resources
+
 
 My sandbox:
 - https://github.com/friendlyantz/demystifying-postgres
