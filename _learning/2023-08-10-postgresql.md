@@ -10,23 +10,26 @@ categories:
 tags:
   - databases
   - postgres
-toc_sticky: false
-
+toc_sticky: true
 ---
 
+
 # Must have extentions
+
 1. **[pg_stat_statements](https://www.crunchydata.com/blog/tentative-smarter-query-optimization-in-postgres-starts-with-pg_stat_statements)** (std contrib package) - see 'Query Performance' below
 2. **[auto_explain](https://www.postgresql.org/docs/current/auto-explain.html)**(std contrib package) - custom config is necessary, see details below
-3. **[Citus](https://github.com/citusdata/citus)** - turns postgres into a sharded, distributed, horizontally scalable database. 
-4. **[pg_search](https://github.com/paradedb/paradedb)** - advanced search, but needs configuration(see below) 
-5. **[pg_cron](https://github.com/citusdata/pg_cron)** 
-6.  [**pg_repack**](https://reorg.github.io/pg_repack/) online vacuum without locking the table
+3. **[Citus](https://github.com/citusdata/citus)** - turns postgres into a sharded, distributed, horizontally scalable database.
+4. **[pg_search](https://github.com/paradedb/paradedb)** - advanced search, but needs configuration(see below)
+5. **[pg_cron](https://github.com/citusdata/pg_cron)**
+6. [**pg_repack**](https://reorg.github.io/pg_repack/) online vacuum without locking the table
 7. `pg_hint_plan` for debugging locally (never use in Prod)
 
-
 # Must watch
+
 - [Optimizing slow queries with EXPLAIN to fix bad query plans](https://youtu.be/NE-cf1h301I?si=VhSLk9lP-kxWyZtC)
+
 ## How to add ext (`pg_stat_statements`) on docker Postgres locally
+
 ```sh
 # copy, edit, copy back
 docker cp ./postgresql.conf postgresql-foo:/var/lib/postgresql/data/postgresql.conf
@@ -40,10 +43,13 @@ docker exec -it postgresql-foo psql -U postgres -c "SELECT pg_reload_conf();"
 # or reload container
 docker restart postgresql-foo
 ```
+
  connect and run
+
 ```bash
 psql -U postgres postgres
 ```
+
 ```sql
 CREATE EXTENSION pg_stat_statements;
 ```
@@ -56,8 +62,8 @@ CREATE EXTENSION pg_stat_statements;
 - [ ] Using Materialized Views in Rails
 - [ ] Creating Custom Postgres Data Types in Rails
 
-
 ---
+
 # Pre-warm cache
 
 [PGdocs](https://www.postgresql.org/docs/current/pgprewarm.html)
@@ -72,6 +78,7 @@ CREATE EXTENSION pg_stat_statements;
 
 > B-tree data structure does not support indexing lookups on arbitrary keys for a JSONB value.
 see below
+
 ```sql
 CREATE INDEX ON mytable (int_price, jsonb_description);
 
@@ -90,13 +97,14 @@ EXPLAIN SELECT * FROM companies WHERE price = 123 AND description ? 'osA';
 
  they map a specific operator on a data type to the actual implementation.
 i.e. check all operator classes/families defined for the equality operator (`=`)
+
 ```sql
 SELECT am.amname AS index_method,
-	opf.opfname AS opfamily_name,
-	amop.amopopr::regoperator AS opfamily_operator
+ opf.opfname AS opfamily_name,
+ amop.amopopr::regoperator AS opfamily_operator
 FROM pg_am am,
-	pg_opfamily opf,
-	pg_amop amop
+ pg_opfamily opf,
+ pg_amop amop
 WHERE opf.opfmethod = am.oid AND amop.amopfamily = opf.oid
 AND amop.amopopr = '=(text,text)'::regoperator;
 
@@ -115,8 +123,8 @@ AND amop.amopopr = '=(text,text)'::regoperator;
 
 equality comparisons on text data types are not supported on the GIN index type by default.
 
- - [ ] “text_ops” (the default), and 
- - [ ] “text_pattern_ ops” -  can be useful when your database is using a non-C locale (e.g. “en_ US.UTF-8”), and you are trying to index the `~~` operator (commonly known by its alias, “LIKE”). 
+ - [ ] “text_ops” (the default), and
+ - [ ] “text_pattern_ops” -  can be useful when your database is using a non-C locale (e.g. “en_ US.UTF-8”), and you are trying to index the `~~` operator (commonly known by its alias, “LIKE”).
 
 ```sql
 CREATE INDEX ON mytable (column3 text_pattern_ops);
@@ -127,7 +135,7 @@ CREATE INDEX ON mytable (column3 text_pattern_ops);
 produce sorted output for your queries (as the leaf pages are pre- sorted in the index),
 
 more RTFM on btrees in postgres
-*https://github.com/postgres/postgres/blob/master/src/backend/access/nbtree/README*
+*<https://github.com/postgres/postgres/blob/master/src/backend/access/nbtree/README>*
 
 ## Hash indexes
 
@@ -147,15 +155,16 @@ TLDR: **BRIN indexes help in very specific situations where the physical structu
 -  very small and imprecise
 - best used with append-only tables, where the indexed values linearly increase and the rows are added at the end of the table, and you don’t delete/update values
 
-##  GIN, GIST, SP-GIST
+## GIN, GIST, SP-GIST
 
-Generic Index Types 
+Generic Index Types
 
 - [ ] **GIN:** Inverted data structures - commonly the index entries are composite values and the kind of query the index supports is a search for one of the elements of the composite value
 - [ ] **GIST:** Search trees - implements a balanced, tree- structured index that is versatile. B-trees, [R-trees](https://postgis.net/workshops/postgis-intro/indexing.html#rtree) and other data structures are a good fit for GIST.
 - [ ] **SP-GIST:** Spatial search trees - implements a non-balanced data structure that repeatedly divides the search space into partitions of different sizes, usable for structures such as [quad-trees](https://en.wikipedia.org/wiki/Quadtree), [k-d trees](https://en.wikipedia.org/wiki/K-d_tree) and [radix trees](https://en.wikipedia.org/wiki/Radix_tree).
 
 use-cases:
+
 - GIN: [JSONB](https://www.postgresql.org/docs/13/datatype-json.html#JSON-INDEXING) (e.g. finding key/value pairs, checking whether keys exist)
 - GIN / GIST: Full text search
 - GIST: Geospatial data
@@ -164,21 +173,18 @@ use-cases:
 
 ## Creating The Best Index For Your Queries
 
-
 Indexing multiple columns is supported for B-tree, GIST, GIN and BRIN index types.
 
  one index on multiple columns vs multiple indexes on one column each, **it often is preferable to rely on a single index**
- 
+
 Things to watch out for b-tree index:
+
 - Ordering matters - the columns in the beginning to be used by all the queries
 - Postgres <=12: put high-cardinality(diverse) columns in front of the index
  - more columns in index: less likely planner will use it
  - for `Index Only Scans`(aka covering index): use the `INCLUDE` keyword to specify columns whose data is included in the index, but which are not used for filtering purposes
- - 
- 
+
  ![[built-in index types postgresql.png]]
-
-
 
 ---
 
@@ -206,12 +212,15 @@ rails db
 ```sql
 SELECT  pg_current_logfile();
 ```
+
 or in Debian
+
 ```
 `pg_lsclusters`
 ```
 
 DB stats
+
 ```sql
 SELECT datname, numbackends, xact_commit, xact_rollback, tup_inserted, tup_updated, tup_deleted
 FROM pg_stat_database;
@@ -234,8 +243,8 @@ docker restart demystifying-postgres
 
 ## Transaction ID (TXID) Wraparound
 
-https://pganalyze.com/docs/log-insights/autovacuum/A61
-https://pganalyze.com/docs/log-insights/autovacuum/A62
+<https://pganalyze.com/docs/log-insights/autovacuum/A61>
+<https://pganalyze.com/docs/log-insights/autovacuum/A62>
 
 ```sh
 WARNING: database “template1” must be vacuumed within 938860 transactions
@@ -244,7 +253,9 @@ HINT: To avoid a database shutdown, execute a database-wide VACUUM in that datab
 
 You might also need to commit or roll back old prepared transactions.
 ```
+
 - 32bit at the moment(4 billion unique transaction IDs.), WIP for 64bit - you can run out of available transaction IDs, resulting in the database becoming unavailable.
+
 ```sql
 SELECT age(datfrozenxid) FROM pg_database;
 ```
@@ -259,32 +270,38 @@ WARNING: page verification failed, calculated checksum 20919 but expected 15254
 
 1. make sure you have checksums enabled in Postgres - enable it, otherwise you never know when data becomes corrupted.
 
-choices if this happen: 
-1. **Fail over to an HA standby server / follower database**
-2.  **Replay WAL from an old enough base backup** (Assuming you store both your base backups and all WAL (Write-Ahead Logging) files between them,)
-3. **Accept that some data is lost, and let Postgres move on** https://pganalyze.com/docs/log-insights/server/S6
+choices if this happen:
 
+1. **Fail over to an HA standby server / follower database**
+2. **Replay WAL from an old enough base backup** (Assuming you store both your base backups and all WAL (Write-Ahead Logging) files between them,)
+3. **Accept that some data is lost, and let Postgres move on** <https://pganalyze.com/docs/log-insights/server/S6>
 
 ## Reducing I/O spikes: Tuning checkpoints
 
-checkpoints processes responsible for writing data thats is only in shared memory and the WAL, to disk. 
+checkpoints processes responsible for writing data thats is only in shared memory and the WAL, to disk.
 Quite I/O intensive, as they need to write a lot of data to disk and run fsync to ensure crash safety..
 
 check if it is
+
 ```sql
 SHOW log_checkpoints;
 ```
+
 enable it (this works on some systmes)
+
 ```sql
 ALTER SYSTEM SET log_checkpoints = 'on';
 SELECT pg_reload_conf();
 ```
+
 or in config
+
 ```sh
 log_checkpoints = on
 ```
 
 this produces
+
 ```
 LOG: checkpoint starting: xlog
 ...
@@ -300,37 +317,47 @@ average=0.000 s; distance=850730 kB, estimate=910977 kB
 ```
 
 **Why was this checkpoint performed?**
+
 1. `xlog` - Checkpoint that runs after a certain amount of WAL has been generated since the last checkpoint, as determined by `max_wal_size` (or `checkpoint_segments` in older Postgres versions)
 2. `time` - Checkpoint that runs after a certain amount of time has passed since the last checkpoint, as determined by `checkpoint_timeout`
 
 > The common tuning guidance is to optimize for more **time** based checkpoints
 
 also Postgres hints you if it too frequent
+
 ```
 LOG: checkpoints are occurring too frequently (18 seconds apart)
 HINT: Consider increasing the configuration parameter “max_wal_size”.
 ```
+
 In any scenario other than bulk data loads, you should look at tuning the settings if you see this event.
+
 ## Temporary Files (Improving performance)
-By default you won’t notice this, unless you run `EXPLAIN ANALYZE` on a query to see the detailed query execution plan. 
+
+By default you won’t notice this, unless you run `EXPLAIN ANALYZE` on a query to see the detailed query execution plan.
 However, you can enable the `log_temp_files`
+
 ```sql
 LOG: temporary file: path “base/pgsql_tmp/pgsql_tmp15967.0”, size 200204288
 STATEMENT: alter table pgbench_accounts add primary key (aid)
 ```
+
 > a lot of temporary file log events --->  increasing `work_mem`.
 
 You can set `work_mem`:
+
 1. in config / gloabally
 2. per-connection, or per-statement basis, using the `SET` command. (*You may want to combine a SET command first, together with `EXPLAIN ANALYZE`, to verify the exact temporary file creation behaviour.*)
- 
+
  **Why?**: Postgres ships with a very low default for the work_mem setting that is used for regular operations. By default this only allows for **4 MB of memory** used for sorting and grouping operations.
  [more info](https://pganalyze.com/docs/log-insights/server/S7)
+
 ## Lock Notices & Deadlocks (Improving performance)
 
 > you can enable the `log_lock_waits = on` setting ->  **this will log all** **lock requests that were not granted within 1 second**,
 
 [more](https://pganalyze.com/docs/log-insights/locks/L71)
+
 ```sql
 LOG: process 2078 still waiting for ShareLock on transaction 1045207414 after 1000.100 ms
 DETAIL: Process holding the lock: 583. Wait queue: 2078, 456
@@ -344,7 +371,9 @@ STATEMENT: SELECT insert_helper($1)
 LOG: process 583 acquired AccessExclusiveLock on relation 185044 of database 16384 after 2175.443 ms
 STATEMENT: ALTER TABLE x ADD COLUMN y text;
 ```
+
 or
+
 ```sql
 LOG: process 123 detected deadlock while waiting for AccessExclusiveLock on extension of relation 666 of database 123 after 456.000 ms
 ERROR: deadlock detected
@@ -361,15 +390,17 @@ STATEMENT: INSERT INTO x (id, name, email) VALUES (1, ‘ABC’, ‘abc@e
 
 lock issues can be difficult to analyze, but especially when looking at a pattern over time, or after an incident, it is critical to run your system with `log_lock_waits = on` for full details in the Postgres logs.
 
-## EXPLAIN plans through `auto_explain` ext.
+## EXPLAIN plans through `auto_explain` ext
 
-https://www.postgresql.org/docs/11/auto-explain.html
+<https://www.postgresql.org/docs/11/auto-explain.html>
 this ext bundled with `pg_stat_statements` in `shared_preload_libraries`
+
 ```
 shared_preload_libraries = pg_stat_statements, auto_explain
 ```
 
 recommended config:
+
 ```
 auto_explain.log_analyze = 1
 auto_explain.log_buffers = 1
@@ -381,10 +412,12 @@ auto_explain.log_min_duration = 1000
 auto_explain.log_nested_statements = 1
 auto_explain.sample_rate = 1
 ```
+
 > 1 and 0 can be replaced with `on` and `off`
 `log_timing` is expensive, only for non `prod` systems
 
 `log_analyze` is also expensive and can be disabled on limited hardware. Though this will give you information about the actual query execution, just like EXPLAIN (ANALYZE), which is critical when understanding what actually got executed
+
 ## Security / Privacy
 
 PII can leak into logs
@@ -400,7 +433,7 @@ STATEMENT: INSERT INTO a (b, c) VALUES ($1,$2) RETURNING id
 # Vacuuming
 
 you can do an online vacuum using `pg_repack` without locking the table
-https://reorg.github.io/pg_repack/
+<https://reorg.github.io/pg_repack/>
 
 ---
 
@@ -409,11 +442,13 @@ https://reorg.github.io/pg_repack/
 Indexed query was faster on M1 - 50x times for short string `ABCD` with 500k dataset
 
 `ILIKE` does not leverage standard index
+
 - with wildcard on both sides vs only on the right side:  little difference. both sides wildcard is slower 10-20%
 - wildcard provided little, to no benefit to ILIKE, however if data after wildcard was more or less identical, it was magnitudes faster. i.e. `ABCD-predictable_string_replaced_by_wildcard` -> `ABCD%`
-Partial index (~20%) scan 
--  provided substantial improvement too, perhaps proportional to the size of the index, but not sure.
+Partial index (~20%) scan
+- provided substantial improvement too, perhaps proportional to the size of the index, but not sure.
 - Also I noted hitting Partially indexed table second time with the same query (outside index range) was 100x faster, while others did not change
+
 ## Using Indexes with LIKE and ILIKE
 
 GIN / GIST indexes together with `pg_tgrm` can sometimes be used for LIKE and ILIKE, but query performance is unpredictable when user-generated input is presented.
@@ -421,11 +456,13 @@ GIN / GIST indexes together with `pg_tgrm` can sometimes be used for LIKE and IL
 > **GIN** indexes are the preferred text search index type. [PG sauce](https://www.postgresql.org/docs/current/textsearch-indexes.html)
 
 **Pros:**
+
 - The user doesn‘t have to worry about the case matching
 - The user can enter partial matches
 - No additional Ruby gems required
 
 **Cons:**
+
 - Index usage is unpredictable
 - Spelling must be accurate (Applo would not find Apple)
 
@@ -453,29 +490,30 @@ GIN / GIST indexes together with `pg_tgrm` can sometimes be used for LIKE and IL
         t.timestamps
 
         t.index :name, 
-	        opclass: :gin_trgm_ops, # Similarity Matches with Trigrams
-	        using: :gin, 
-	        algorithm: :concurrently, 
-	        name: 'index_on_name_trgm'
+         opclass: :gin_trgm_ops, # Similarity Matches with Trigrams
+         using: :gin, 
+         algorithm: :concurrently, 
+         name: 'index_on_name_trgm'
       end
     end
   end
 ```
+
 ## Trigrams fo Similarity Matches
 
  - Apple and Applo are more similar than Apple and Opple
 
 ```sql
 SELECT 
-	show_trgm('Apple'), --  {"  a"," ap",app,"le ",ple,ppl} this is done for words with less than 3 letters
-	show_trgm('Apllo'), -- {"  a"," ap",apl,llo,"lo ",pll}
-	similarity('Apple', 'Apple'), -- 1
-	similarity('Applo', 'Apple'), -- 0.5
-	similarity('Opple', 'Apple'), -- 0.33333334
-	
-	'Apple' % 'Applo' -- true (since it is >0.3 similary)
-	similarity('Odple', 'Apple'), -- 0.2
-	'Odple' % 'Apple' -- false
+ show_trgm('Apple'), --  {"  a"," ap",app,"le ",ple,ppl} this is done for words with less than 3 letters
+ show_trgm('Apllo'), -- {"  a"," ap",apl,llo,"lo ",pll}
+ similarity('Apple', 'Apple'), -- 1
+ similarity('Applo', 'Apple'), -- 0.5
+ similarity('Opple', 'Apple'), -- 0.33333334
+ 
+ 'Apple' % 'Applo' -- true (since it is >0.3 similary)
+ similarity('Odple', 'Apple'), -- 0.2
+ 'Odple' % 'Apple' -- false
 --  we have the % operator, which gives you a boolean of whether two strings are similar. By default, Postgres uses the number 0.3 when making this decision, but you can always update this setting.)
 ```
 
@@ -488,6 +526,7 @@ SELECT
 **Cons:**
 
 - Does not replace the need for natural language search
+
 ## Model scope to order by `similary` match
 
 ```ruby
@@ -505,9 +544,11 @@ GinIndexedCompany.name_similar('William').first
 ```
 
 ---
+
 ## Minimal full text search
 
 basic and very slow search
+
 ```ruby
 require 'pg_search'
 
@@ -521,6 +562,7 @@ UnindexedCompany.search('solutions').first
 ```
 
 ---
+
 ## The Foundations of Full Text Search
 
 ### tsvector
@@ -533,9 +575,11 @@ to_tsvector('english', 'the weather in Melbourne is known for its variability as
  'known':6 'melbourn':4 'predict':13 'variabl':9 'weather':2 'well':11
 (1 row)
 ```
+
 it converts the provided `documents`(a string) to a `tsvector`(text search vector) containing `lexemes`, stripped of [stop words(very common  words like 'a', 'the', etc.)](https://www.postgresql.org/docs/current/textsearch-dictionaries.html#TEXTSEARCH-STOPWORDS)
 
 ---
+
 ### tsquery
 
 ```sql
@@ -561,13 +605,12 @@ to_tsquery('english', 'weather & predictable & variable'); -- TRUE
 
 ### ts_rank
 
-
 ```sql
 SELECT
 ts_rank(
-	to_tsvector('english', 'the weather in Melbourne is known for its variability as well as predictability'),
-	to_tsquery('english', 'weather & predictable & variable')
-	);
+ to_tsvector('english', 'the weather in Melbourne is known for its variability as well as predictability'),
+ to_tsquery('english', 'weather & predictable & variable')
+ );
 
 ------------
  0.07614762
@@ -580,18 +623,18 @@ ts_rank(
 
 ```sql
 SELECT
-	id,
-	name,
-	description,
-	ts_rank(
-		to_tsvector('english', description),
-		to_tsquery('english', 'weather & predictable')
-	) AS rank
+ id,
+ name,
+ description,
+ ts_rank(
+  to_tsvector('english', description),
+  to_tsquery('english', 'weather & predictable')
+ ) AS rank
 FROM unindexed_companies
 WHERE 
-	to_tsvector('english', description)
-	@@
-	to_tsquery('english', 'weather & predictable') -- TRUE
+ to_tsvector('english', description)
+ @@
+ to_tsquery('english', 'weather & predictable') -- TRUE
 ORDER BY rank DESC
 LIMIT 5
 ;
@@ -604,7 +647,6 @@ LIMIT 5
 (2 rows)
 ```
 
-
 #### Searching Multiple Columns with `setweight`
 
 Data types of tsvector can be concatenated with the `||` operator, and precedence (weight) can be given to a certain column using the setweight function.
@@ -613,23 +655,23 @@ Valid weighting options are: A, B, C or D.
 
 ```sql
 SELECT
-	id,
-	name,
-	description,
-	ts_rank(
-		setweight(to_tsvector('english', name), 'A')
-		||
-		setweight(to_tsvector('english', description), 'B')
-		,
-		to_tsquery('english', 'Melbourne & predictable')
-	) AS rank
+ id,
+ name,
+ description,
+ ts_rank(
+  setweight(to_tsvector('english', name), 'A')
+  ||
+  setweight(to_tsvector('english', description), 'B')
+  ,
+  to_tsquery('english', 'Melbourne & predictable')
+ ) AS rank
 FROM unindexed_companies
 WHERE
-	setweight(to_tsvector('english', name), 'A')
-	||
-	setweight(to_tsvector('english', description), 'B')
-	@@
-	to_tsquery('english', 'Melbourne & predictable') -- TRUE
+ setweight(to_tsvector('english', name), 'A')
+ ||
+ setweight(to_tsvector('english', description), 'B')
+ @@
+ to_tsquery('english', 'Melbourne & predictable') -- TRUE
 ORDER BY rank DESC
 LIMIT 5
 ;
@@ -643,6 +685,7 @@ LIMIT 5
 ```
 
 ----
+
 #### advanced `pg_search_scope`
 
 ```ruby
@@ -656,9 +699,11 @@ end
 ```
 
 ---
-# Optimising Slow Queries 
+
+# Optimising Slow Queries
 
 tldr:
+
 1. User `EXPLAIN (ANALYZE, BUFFERS)`
 2. Add sensible (multi-column) index(refer Indexes section)
 3. guide the planner(6steps)
@@ -669,105 +714,115 @@ tldr:
 ---
 
 Query phases:
+
 1. **Parsing:** Turning a SQL statement into a parse tree (FAST)
 2. **Analysis:** Identifying which tables are referenced (FAST)
-3. **Planning:** Determining how to execute the query based on 
-	1. configuration
-	2. the table schema
-	3. the indexes present
+3. **Planning:** Determining how to execute the query based on
+1. configuration
+2. the table schema
+3. the indexes present
 4. **Execution:** Actually executing the query
-
 
 ---
 
 EXPLAIN commands
+
 1. **EXPLAIN** - the plan planner chose w/o stats
 1. **EXPLAIN (ANALYZE):** Plan chosen+ Execution stats
 1. **EXPLAIN (ANALYZE, BUFFERS):** Plan + Execution stats + I/O stats
 1. **EXPLAIN (ANALYZE, BUFFERS, TIMING ON(default)/OFF):** Plan + Execution stats + I/O stats + startup / output time (OFF minimises overhead)
+
 ## EXPLAIN
 
 ![[explain.png]]---
+
 ## EXPLAIN (ANALYZE)
 
 ![[explain_analyze.png]]
 
 ---
-##  EXPLAIN (ANALYZE, BUFFERS)
+
+## EXPLAIN (ANALYZE, BUFFERS)
+
 ![[explain_analyze_buffers.png]]
 
 **1 buffer == 8kB page** (most cases)
 41531 + 8kb => 300Mb+ loaded
 
 ## Dead rows and bloat affects buffer counts
+
 High (shared) buffer hit => sign of bloated DB
 
 ![[bloated_postgres_buffer_shared_hit.png]]
 > but careful with interpreting buffer count, as loops multiple actual buffer count resulting in multiplied results returned by EXPLAIN
 
 ---
-# Planner uses cost, but what is cost?
 
-### Costs
+## Planner uses cost, but what is cost?
+
 for seq unindexed scan:
+
 ```ruby
 cost = `confing_modifier`(usually 1) * `number_of_8kb_pages`
 ```
+
 for indexed cost depends on the type of index(btree, GIN, etc)
 
 JOIN estimates are complex and need to be tweaked ( increase statistics per table)
+
 ### Guiding the planner to make correct decision
 
 ```sql
-SET enable_seqscan = off
-%% sets the cost really high 1000000000000... %%
-
-SET enable_mergejoib = off
-SET enable_hashjoib = off
-%% forces nested loop %%
+SELECT query FROM pg_stat_statements WHERE queryid = 823659002;
+      query
+--------------------------------------------------------------------
+SELECT “backend_wait_events”.”wait_event” FROM “backend_wait_events”
+WHERE “backend_wait_events”.”backend_id” = $1
 ```
 
-use `pg_hint_plan` ext (never use in Prox)
+$1 is normalised `id` / binding param - to find binding param for slow query use
 
-### consider disabling memoisation to prevent bad plans to have lower cost than unmemoised good plans
+1. `pg_stat_activity` table, which shows the currently running
+2. logs with `log_min_duration_statement = 1000`(ms or +/-) threshold instead of  `log_statement = all` - for this you need `auto_explain` ext (refer above for config)
+
 ```sql
-SET enable_memoize = off
+EXPLAIN (ANALYZE, BUFFERS) YOIUR_QUERY;
 ```
 
-### 6_way_to_guide_the_planner
+# JIT
 
-![[6_way_to_guide_the_planner.png]]
+<https://pganalyze.com/blog/postgres11-jit-compilation-auto-prewarm-sql-stored-procedures>
 
-STATISTICS helps with JOINs (step 1,2)
+# Finding Root cause of slow query with EXPLAIN
 
----
-## Thisngs to be aware
-### Inefficient Nested Loop
+[pganalyze_Finding_the_root_cause_of_slow_Postgres_queries_using_EXPLAIN.](https://resources.pganalyze.com/pganalyze_Finding_the_root_cause_of_slow_Postgres_queries_using_EXPLAIN.pdf)
+When Postgres receives a query, it runs through the following four phases at the high-level:
 
-beware when estimate is wildly off from actual
-![[nested_loop.png]]
+1. **Parsing:** Turning a SQL statement into a parse tree (FAST)
+2. **Analysis:** Identifying which tables are referenced (FAST)
+3. **Planning:** Determining how to execute the query based on
+1. configuration settings,
+2. the table schema and
+3. the indexes that were created.
+4. **Execution:** Actually executing the queryin the
 
----
-### Join order
+**EXPLAIN** plans are captured in two ways:
 
-((A,B)C) 
+1. **EXPLAIN ANALYZE:** Planning and Execution phases
+2. **EXPLAIN (without ANALYZE):** only Planning step and does not actually run the query
 
-((A leftjoin B on (Pab)) leftjoin C on (Pbc)) 
-> "Pab" = Predicate (join condition)
+> Ideally we want EXPLAIN ANALYZE, or the similarly named auto_explain.log_analyze, but overhead of actually running the query too high
 
-if you join 12+ tables => GEQO kicks in by default ([Genetic Query Optimiser](https://www.postgresql.org/docs/current/geqo-pg-intro.html))
-
----
-
-### Force different index
-![[force_different_index.png]]
-### SORTs are slower when they spill to disk (~10% performance diff)
+## Sort memory - Sorts are slower when they spill to disk (~10% performance diff)
 
 be alarmed when `EXPLAIN ANALYZE` shows sort with external disk merge
+
 ```
 Sort Method: external merge Disk: 9856kB
 ```
+
 since **default value** that Postgres sets initially (4 MB), which is **often too small**.
+
 ```sql
 SHOW work_mem;
  work_mem
@@ -775,17 +830,32 @@ SHOW work_mem;
  4MB
 (1 row)
 ```
+
 [postgres docs link on work_mem](https://www.postgresql.org/docs/13/runtime-config-resource.html#GUC-WORK-MEM)
+
 ```sql
 SET work_mem = '10MB';
 ```
 
 ---
+
 1. Add index
 2. Reviewing Query Performance -> [enable `pg_stat_statements` ext](https://pganalyze.com/docs/install/01_enabling_pg_stat_statements?utm_source=ebook_optimizing-query-performance) - comes by default on Debian Postgres package
+
+> One thing to note is that `pg_stat_statements` records its statistics from the beginning of when it was installed, or alternatively, from when you’ve last reset the statistics ---> `pg_stat_statements_reset()`
+
+---
+
+1. Add index
+2. Reviewing Query Performance -> [enable `pg_stat_statements` ext](https://pganalyze.com/docs/install/01_enabling_pg_stat_statements?utm_source=ebook_optimizing-query-performance) - comes by default on Debian Postgres package
+
 > One thing to note is that `pg_stat_statements` records its statistics from the beginning of when it was installed, or alternatively, from when you’ve last reset the statistics ---> `pg_stat_statements_reset()`
 
 ```sql
+SELECT queryid, calls, mean_exec_time, substring(query for 100)
+FROM pg_stat_statements
+ORDER BY total_exec_time DESC
+LIMIT 10;
 SELECT queryid, calls, mean_exec_time, substring(query for 100)
 FROM pg_stat_statements
 ORDER BY total_exec_time DESC
@@ -794,26 +864,29 @@ LIMIT 10;
 
 ```sql
 SELECT query FROM pg_stat_statements WHERE queryid = 823659002;
-						query
+      query
 --------------------------------------------------------------------
 SELECT “backend_wait_events”.”wait_event” FROM “backend_wait_events”
 WHERE “backend_wait_events”.”backend_id” = $1
 ```
 
-$1 is normalised `id` / binding param - to find binding param for slow query use 
+$1 is normalised `id` / binding param - to find binding param for slow query use
+
 1. `pg_stat_activity` table, which shows the currently running
 2. logs with `log_min_duration_statement = 1000`(ms or +/-) threshold instead of  `log_statement = all` - for this you need `auto_explain` ext (refer above for config)
 
 ---
 
-# JIT 
+# JIT
 
-- [ ] https://pganalyze.com/blog/postgres11-jit-compilation-auto-prewarm-sql-stored-procedures
+- [ ] <https://pganalyze.com/blog/postgres11-jit-compilation-auto-prewarm-sql-stored-procedures>
+
 # Bloat removal
 
-- [ ] https://www.depesz.com/2013/10/15/bloat-removal-without-table-swapping/
+- [ ] <https://www.depesz.com/2013/10/15/bloat-removal-without-table-swapping/>
 
 ---
+
 # Approx. table count
 
 ```ruby
@@ -835,10 +908,13 @@ end
 ---
 
 # Size of tables
+
 ```sql
 SELECT pg_size_pretty( pg_total_relation_size('tablename') );
 ```
+
 or
+
 ```sql
 SELECT
     c.relname AS relname,
@@ -867,6 +943,7 @@ CREATE EXTENSION pg_stat_tuple;
 %% turn on extended display, vertical table instead horizontal%%
 \x
 ```
+
 ---
 
 ---
@@ -875,17 +952,17 @@ CREATE EXTENSION pg_stat_tuple;
 
 1. KEY-VALUE pair only: Redis- in RAM, EXTREMELY FAST
 2. WIDE COOLUM: Cassandra, HBASE - no schema, CQL language, decentralized, can scale horizontally,
-	a. Weather, history
-	b. Frequent rights/infrequent updates
+ a. Weather, history
+ b. Frequent rights/infrequent updates
 3. DOCUMENT DB: Mongo, firestorm, couch db, dyno db
-	a. Unstructured/no schema
-	b. Collections
+ a. Unstructured/no schema
+ b. Collections
 4. RELATIONAL DB: MySQL, Postges
-	a. Tedd codd from IBM invented 
+ a. Tedd codd from IBM invented
 5. Graph db: neo4j, d graph
-	a. No join tables required
+ a. No join tables required
 6. Search
-	a. Based on Apache Lucene: elastic search, solr, Aprilia, meili search
+ a. Based on Apache Lucene: elastic search, solr, Aprilia, meili search
 7. MULTI MODEL DB
 
 > Pay Attention: command execution happens only after `;`-char. 'Enter' only helps with formatting on a new line
@@ -906,8 +983,8 @@ CREATE TABLE user (
     dob TIMESTAMP / DATE NOT NULL
 );
 ```
-[data_types in postgres](https://www.postgresql.org/docs/current/datatype.html)
 
+[data_types in postgres](https://www.postgresql.org/docs/current/datatype.html)
 
 ```sh
 # do not do this
@@ -936,6 +1013,7 @@ psql
 ```
 
 ## Select
+
 ```sh
 SELECT name, fav_num FROM person;
 SELECT name, fav_num FROM person ORDER BY fav_num DESC;
@@ -950,6 +1028,7 @@ SELECT * FROM person WHERE fav_num >= 5 OFFSET 1 LIMIT 2
 ## LIMIT
 
 > `LIMIT` is non-orthodox SQL format / keyword
+
 ```
 SELECT * FROM person WHERE fav_num >= 5 LIMIT 2
 # or using FETCH
@@ -970,6 +1049,7 @@ SELECT * FROM person WHERE fav_num BETWEEN 5 AND 7;
 
 > `%` - wildcard
 > `_` - single char
+
 ```
 SELECT * FROM person WHERE name LIKE 'A_t%';
 # or case insensitive =-> ILIKE
@@ -994,6 +1074,7 @@ SELECT fav_num, COUNT(*) FROM person GROUP BY fav_num;
        1 |     3
 (6 rows)
 ```
+
 ## HAVING
 
 > `HAVING` must be before ORDER BY
@@ -1032,6 +1113,7 @@ sandbox=# SELECT 'la' = 'LA';
 ```
 
 ## not eql
+
 ```
 SELECT 1 <> 2;
  ?column? 
@@ -1055,8 +1137,9 @@ AND "debits"."category" = 0 AND "debits"."matures_at" BETWEEN '2021-11-24 13:00:
 
 not all method user Method chaining
  `Employee.average(:salary)`
- 
+
 execute the query and return a result, while other methods implement Method Chaining,
+
 ```ruby
 # bad - executes average
 Employee.where('salary > :avg', avg: Employee.average(:salary))
@@ -1067,6 +1150,7 @@ Employee.where('salary > (:avg)', avg: Employee.select('avg(salary)'))
 ```
 
 ## Left join
+
 ```ruby
 Employee.where(
   'NOT EXISTS (:vacations)',
@@ -1076,7 +1160,9 @@ Employee.where(
 ```
 
 ## `Select` - subqueries to find the average employee salary
+
 ### Subquery (slow)
+
 ```ruby
 Employee.select(
   '*',
@@ -1091,32 +1177,35 @@ Employee.select(
   salary: 142697.0,
   created_at: Sun, 27 Oct 2024 10:30:53.299383000 UTC +00:00,
   updated_at: Sun, 27 Oct 2024 10:30:53.299383000 UTC +00:00>,
-	  ....
+   ....
   ]
 ```
 
-alternative: https://www.postgresql.org/docs/current/tutorial-window.html
+alternative: <https://www.postgresql.org/docs/current/tutorial-window.html>
+
 ### Window functions (faster)
 
 ```ruby
 Employee.select(
-	'*',
-	"avg(salary) OVER () avg_salary",
-	"salary - avg(salary) OVER () avg_difference"
+ '*',
+ "avg(salary) OVER () avg_salary",
+ "salary - avg(salary) OVER () avg_difference"
 )
 # SELECT 
-	# *, 
-	# avg(salary) OVER () avg_salary,
-	# salary - avg(salary) OVER () avg_difference 
+ # *, 
+ # avg(salary) OVER () avg_salary,
+ # salary - avg(salary) OVER () avg_difference 
 # FROM "employees"
 ```
+
 # Resources
 
-
 My sandbox:
-- https://github.com/friendlyantz/demystifying-postgres
+
+- <https://github.com/friendlyantz/demystifying-postgres>
 
 PGAnayle Books:
+
 - [Tuning autovacuum for best Postgres performance](https://resources.pganalyze.com/pganalyze_Tuning_autovacuum_for_best_Postgres_performance.pdf)
 - [Advanced Database Programming with Rails and Postgres](https://resources.pganalyze.com/pganalyze_Advanced+Database+Programming+with+Rails.pdf)
 - [Best practices for optimizing postgres query performance](https://resources.pganalyze.com/pganalyze_Best-Practices-for-Optimizing-Postgres-Query-Performance.pdf)
