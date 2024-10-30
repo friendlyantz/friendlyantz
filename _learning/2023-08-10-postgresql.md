@@ -1,4 +1,5 @@
 ---
+
 title: PostreSQL
 permalink: /postgresql/
 excerpt: my findings and tricks
@@ -10,13 +11,21 @@ tags:
   - databases
   - postgres
 toc_sticky: false
+
 ---
+
 # Must have extentions
 1. **[pg_stat_statements](https://www.crunchydata.com/blog/tentative-smarter-query-optimization-in-postgres-starts-with-pg_stat_statements)** (std contrib package) - see 'Query Performance' below
 2. **[auto_explain](https://www.postgresql.org/docs/current/auto-explain.html)**(std contrib package) - custom config is necessary, see details below
 3. **[Citus](https://github.com/citusdata/citus)** - turns postgres into a sharded, distributed, horizontally scalable database. 
-4. **[Pg_search](https://github.com/paradedb/paradedb)** - advanced search, but needs configuration(see below) 
-5. **[Pg_cron](https://github.com/citusdata/pg_cron)** 
+4. **[pg_search](https://github.com/paradedb/paradedb)** - advanced search, but needs configuration(see below) 
+5. **[pg_cron](https://github.com/citusdata/pg_cron)** 
+6.  [**pg_repack**](https://reorg.github.io/pg_repack/) online vacuum without locking the table
+7. `pg_hint_plan` for debugging locally (never use in Prod)
+
+
+# Must watch
+- [Optimizing slow queries with EXPLAIN to fix bad query plans](https://youtu.be/NE-cf1h301I?si=VhSLk9lP-kxWyZtC)
 ## How to add ext (`pg_stat_statements`) on docker Postgres locally
 ```sh
 # copy, edit, copy back
@@ -38,6 +47,8 @@ psql -U postgres postgres
 ```sql
 CREATE EXTENSION pg_stat_statements;
 ```
+
+---
 
 # Advance DB programming with Rails
 
@@ -645,11 +656,134 @@ end
 ```
 
 ---
-# Query Performance
+# Optimising Slow Queries 
 
+tldr:
+1. User `EXPLAIN (ANALYZE, BUFFERS)`
+2. Add sensible (multi-column) index(refer Indexes section)
+3. guide the planner(6steps)
+4. add `pg_stat_statements` ext
+5. add `auto_explain` ext with custom config!
+6. pg_hint_plan - for debugging locally
+
+---
+
+Query phases:
+1. **Parsing:** Turning a SQL statement into a parse tree (FAST)
+2. **Analysis:** Identifying which tables are referenced (FAST)
+3. **Planning:** Determining how to execute the query based on 
+	1. configuration
+	2. the table schema
+	3. the indexes present
+4. **Execution:** Actually executing the query
+
+
+---
+
+EXPLAIN commands
+1. **EXPLAIN** - the plan planner chose w/o stats
+1. **EXPLAIN (ANALYZE):** Plan chosen+ Execution stats
+1. **EXPLAIN (ANALYZE, BUFFERS):** Plan + Execution stats + I/O stats
+1. **EXPLAIN (ANALYZE, BUFFERS, TIMING ON(default)/OFF):** Plan + Execution stats + I/O stats + startup / output time (OFF minimises overhead)
+## EXPLAIN
+
+![[explain.png]]---
+## EXPLAIN (ANALYZE)
+
+![[explain_analyze.png]]
+
+---
+##  EXPLAIN (ANALYZE, BUFFERS)
+![[explain_analyze_buffers.png]]
+
+**1 buffer == 8kB page** (most cases)
+41531 + 8kb => 300Mb+ loaded
+
+## Dead rows and bloat affects buffer counts
+High (shared) buffer hit => sign of bloated DB
+
+![[bloated_postgres_buffer_shared_hit.png]]
+> but careful with interpreting buffer count, as loops multiple actual buffer count resulting in multiplied results returned by EXPLAIN
+
+---
+# Planner uses cost, but what is cost?
+
+### Costs
+for seq unindexed scan:
+```ruby
+cost = `confing_modifier`(usually 1) * `number_of_8kb_pages`
+```
+for indexed cost depends on the type of index(btree, GIN, etc)
+
+JOIN estimates are complex and need to be tweaked ( increase statistics per table)
+### Guiding the planner to make correct decision
+
+```sql
+SET enable_seqscan = off
+%% sets the cost really high 1000000000000... %%
+
+SET enable_mergejoib = off
+SET enable_hashjoib = off
+%% forces nested loop %%
+```
+
+use `pg_hint_plan` ext (never use in Prox)
+
+### consider disabling memoisation to prevent bad plans to have lower cost than unmemoised good plans
+```sql
+SET enable_memoize = off
+```
+
+### 6_way_to_guide_the_planner
+
+![[6_way_to_guide_the_planner.png]]
+
+STATISTICS helps with JOINs (step 1,2)
+
+---
+## Thisngs to be aware
+### Inefficient Nested Loop
+
+beware when estimate is wildly off from actual
+![[nested_loop.png]]
+
+---
+### Join order
+
+((A,B)C) 
+
+((A leftjoin B on (Pab)) leftjoin C on (Pbc)) 
+> "Pab" = Predicate (join condition)
+
+if you join 12+ tables => GEQO kicks in by default ([Genetic Query Optimiser](https://www.postgresql.org/docs/current/geqo-pg-intro.html))
+
+---
+
+### Force different index
+![[force_different_index.png]]
+### SORTs are slower when they spill to disk (~10% performance diff)
+
+be alarmed when `EXPLAIN ANALYZE` shows sort with external disk merge
+```
+Sort Method: external merge Disk: 9856kB
+```
+since **default value** that Postgres sets initially (4 MB), which is **often too small**.
+```sql
+SHOW work_mem;
+ work_mem
+----------
+ 4MB
+(1 row)
+```
+[postgres docs link on work_mem](https://www.postgresql.org/docs/13/runtime-config-resource.html#GUC-WORK-MEM)
+```sql
+SET work_mem = '10MB';
+```
+
+---
 1. Add index
 2. Reviewing Query Performance -> [enable `pg_stat_statements` ext](https://pganalyze.com/docs/install/01_enabling_pg_stat_statements?utm_source=ebook_optimizing-query-performance) - comes by default on Debian Postgres package
-> One thing to note is that pg_stat_statements records its statistics from the beginning of when it was installed, or alternatively, from when you’ve last reset the statistics ---> `pg_stat_statements_reset()`
+> One thing to note is that `pg_stat_statements` records its statistics from the beginning of when it was installed, or alternatively, from when you’ve last reset the statistics ---> `pg_stat_statements_reset()`
 
 ```sql
 SELECT queryid, calls, mean_exec_time, substring(query for 100)
@@ -669,61 +803,15 @@ WHERE “backend_wait_events”.”backend_id” = $1
 $1 is normalised `id` / binding param - to find binding param for slow query use 
 1. `pg_stat_activity` table, which shows the currently running
 2. logs with `log_min_duration_statement = 1000`(ms or +/-) threshold instead of  `log_statement = all` - for this you need `auto_explain` ext (refer above for config)
-```sql
-EXPLAIN (ANALYZE, BUFFERS) YOIUR_QUERY;
-```
-# JIT
 
-https://pganalyze.com/blog/postgres11-jit-compilation-auto-prewarm-sql-stored-procedures
+---
 
-# Finding Root cause of slow query with EXPLAIN
-[pganalyze_Finding_the_root_cause_of_slow_Postgres_queries_using_EXPLAIN.](https://resources.pganalyze.com/pganalyze_Finding_the_root_cause_of_slow_Postgres_queries_using_EXPLAIN.pdf)
-When Postgres receives a query, it runs through the following four phases at the high-level:
-1. **Parsing:** Turning a SQL statement into a parse tree (FAST)
-2. **Analysis:** Identifying which tables are referenced (FAST)
-3. **Planning:** Determining how to execute the query based on 
-	1. configuration settings,
-	2. the table schema and 
-	3. the indexes that were created.
-4. **Execution:** Actually executing the queryin the
+# JIT 
 
-**EXPLAIN** plans are captured in two ways:
-1. **EXPLAIN ANALYZE:** Planning and Execution phases
-2. **EXPLAIN (without ANALYZE):** only Planning step and does not actually run the query
-> Ideally we want EXPLAIN ANALYZE, or the similarly named auto_explain.log_analyze, but overhead of actually running the query too high
-
-## Sort memory - Sorts are slower when they spill to disk (~10% performance diff)
-
-be alarmed when `EXPLAIN ANALYZE` shows sort with external disk merge
-```
-Sort Method: external merge Disk: 9856kB
-```
-since **default value** that Postgres sets initially (4 MB), which is **often too small**.
-```sql
-SHOW work_mem;
- work_mem
-----------
- 4MB
-(1 row)
-```
-[postgres docs link on work_mem](https://www.postgresql.org/docs/13/runtime-config-resource.html#GUC-WORK-MEM)
-```sql
-SET work_mem = '10MB';
-```
-## Add `BUFFERS`
-```sql
-EXPLAIN (ANALYZE, BUFFERS) YOUR_QUERY;
-```
-Each buffer page is 8kb of data from a table or index that is referenced in the plan node.
-
-```sql
-Buffers: shared read=87747
-```
-87747 x 8kb = 686Mb
+- [ ] https://pganalyze.com/blog/postgres11-jit-compilation-auto-prewarm-sql-stored-procedures
 # Bloat removal
 
-
-https://www.depesz.com/2013/10/15/bloat-removal-without-table-swapping/
+- [ ] https://www.depesz.com/2013/10/15/bloat-removal-without-table-swapping/
 
 ---
 # Approx. table count
