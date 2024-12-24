@@ -24,6 +24,7 @@ toc_sticky: true
 6. [**pg_repack**](https://reorg.github.io/pg_repack/) online vacuum without locking the table
 7. `pg_hint_plan` for debugging locally (never use in Prod)
 
+
 # Must watch
 
 - [Optimizing slow queries with EXPLAIN to fix bad query plans](https://youtu.be/NE-cf1h301I?si=VhSLk9lP-kxWyZtC)
@@ -62,6 +63,12 @@ CREATE EXTENSION pg_stat_statements;
 - [ ] Using Materialized Views in Rails
 - [ ] Creating Custom Postgres Data Types in Rails
 
+---
+tod[]()o
+
+```ruby
+ User.where("user_actions_overrides -> 'company' ->> 'can_manage_users' = ?", 'true')
+```
 ---
 
 # Pre-warm cache
@@ -747,7 +754,7 @@ EXPLAIN commands
 ![[explain_analyze_buffers.png]]
 
 **1 buffer == 8kB page** (most cases)
-41531 + 8kb => 300Mb+ loaded
+41531 * 8kb => 300Mb+ loaded
 
 ## Dead rows and bloat affects buffer counts
 
