@@ -19,6 +19,7 @@ tags:
 - [ ] parallel (gnu)
 - [x] grep
 - [ ] find
+- [ ] | tee output.txt
 - [x] sed
 - [ ] awk '{ print $2 }'  log.file
 - [ ] sort -r
@@ -486,4 +487,10 @@ mkdir -p ./not_yet_created_dir/new_dir && cd $_
 # multiple dirs
 mkdir -p ./not_yet_created_dir/{a,b}/{x,y,z} && cd $_
 
+```
+
+# Apple MacOS
+
+```sh
+osascript -e 'display notification "demo a notification" with title "hi Anton  🛎️🛎️" sound name "Bell"'
 ```

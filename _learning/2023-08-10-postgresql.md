@@ -216,6 +216,13 @@ implement AND and OR conditions in a query
 rails db
 ```
 
+```ruby
+# or in rails console
+conn = ActiveRecord::Base.connection
+sql = "SELECT * FROM events"
+conn.execute(sql)
+```
+
 ```sql
 SELECT  pg_current_logfile();
 ```
