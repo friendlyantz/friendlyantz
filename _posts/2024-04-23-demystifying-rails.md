@@ -144,6 +144,7 @@ ri FileUtils
 ```
 
 ---
+
 # Rack
 
 ---
@@ -161,6 +162,12 @@ rackup
 
 ```sh
 curl -i http://127.0.0.1:9292
+```
+
+see middleware used in your rails app
+
+```
+bin/rails middleware
 ```
 
 ---
@@ -207,6 +214,7 @@ class User < ApplicationRecord
   delegate :name, to: :profile
 end
 ```
+
 ---
 
 # [ActiveModel](https://guides.rubyonrails.org/active_model_basics.html)

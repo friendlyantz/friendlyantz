@@ -6,3 +6,4 @@ _site
 .jekyll-metadata
 vendor
 .obsidian/workspace.json
+temp.patch
