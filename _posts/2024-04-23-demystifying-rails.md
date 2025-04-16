@@ -400,13 +400,27 @@ rails new myapp --minimal
 
 ```zsh
 rails new app_name \
---database=sqlite3 \
+--database=postgresql \
 --css=tailwind \
 --skip-test
+--skip-rubocop
 ```
 
-# Kamal
+# Gems
 
-```
-kamal init
+## trace_location
+
+```ruby
+gem "trace_location"
+
+request = Rack::MockRequest.env_for('http://localhost:3000')
+
+was_alloc = GC.stat[:total_allocated_objects] # the number of created Ruby objects
+
+TraceLocation.trace(format: :log, methods: [:call]) do
+  Rails.application.call(request)
+end
+
+new_alloc = GC.stat[:total_allocated_objects]
+puts "Total allocations: #{new_alloc - was_alloc}"
 ```
