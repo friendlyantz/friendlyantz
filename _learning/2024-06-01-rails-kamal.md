@@ -20,17 +20,32 @@ tags:
 #     provider: youtube
 ---
 
-
-WIP
-# TODO notes
+https://www.youtube.com/watch?v=sPUk9-1WVXI
 
 ```sh
-kamal traefik reboot
-```
-- deploy lock
-- SSL / Traefik SSL with Kamal [^2]
-- Traefik will be replaced by Kamal Proxy in Kamal v2 [^3]
+bin/rails credentials:edit --environment production
+# add postgres settings here
 
+```
+
+# postgres container
+
+```
+docker exec -it 2a6abf271200 bash
+
+# check ENV to have username, db name and password
+env
+
+psql -U $POSTGRES_USER -d $POSTGRES_DB
+
+```
+
+----
+
+https://rameerez.com/kamal-tutorial-how-to-deploy-a-postgresql-rails-app/
+# notes and todos
+
+- deploy lock
 - from VM
 ```sh
 docker ps --format "table {{.ID}}\t{{.Names}}\t{{.Status}}\t{{.Ports}}"
@@ -43,6 +58,14 @@ kamal app logs -f
 ```
 - ssh limitations: if you have remote machines with different users than root and they are vary
 	- dokku, cap rover, capistrano
+
+# Cloudflare
+```
+proxy:
+  ssl: true
+  host: example.com
+  forward_headers: true
+```
 ---
 
 # What Kamal offers

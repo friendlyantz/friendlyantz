@@ -18,7 +18,7 @@ tags:
 ---
 # TODO / MEMOs
 
-- [ ] ExpressLRS presets mights be required after flashing new firmware!
+- [ ] ExpressLRS presets might be required after flashing new firmware! 50Hz longrange/Cinematic
 - [ ] BetaFlight ports -> might be required to be re-anabled (check below)
 - [ ] BetaFlight PID -> throttle and motor setting -> reduce from 100% to 60-70%. don't go below 50%
 # Batteries
@@ -31,11 +31,21 @@ tags:
 - charge current - lower the better. 0.3-0.6A, depending on battery
 # RX/TX
 
-ELRS - do it via wifi
-ELRS configurator app builds RX and TX
--binding phrase
+ELRS - do it via wifi: power off TX, power on RX, wait for wifihotspot -> password `expresslrs` or Launch ExpressLRS Wifi TX as well as TX hotspots from TX
+ELRS configurator app: build RX and TX
+You don't have to re-flash ELRS after betaflight firmaware update
 
-# BeteFlight
+Packet rate: 50hz -> longerst range
+Telemetry: `STD`
+Switch Mode: `Wide`
+
+# Goggles
+double tap and hold to power on
+https://rotorriot.com/pages/downloads - range mod
+# File transfer from Goggles and O3
+- goggles - card reader
+- o3, connect via USB, no batter required
+# BetaFlight
 
 ## scripts
 
