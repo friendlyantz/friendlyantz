@@ -1,5 +1,5 @@
 ---
-excerpt: authorisation concepts
+excerpt: 
 collection: learning
 categories:
   - software_engineering
@@ -7,10 +7,26 @@ categories:
 tags:
   - software_engineering
   - learning
-  - security
   - authorisation
+  - webauthn
+  - authentication
 ---
-# Models [^1]
+# Authentication
+## WebAuthn
+
+[my app using it https://strivo.me/registration/new](https://strivo.me/registration/new)
+
+or
+
+[official demo](https://webauthn.cedarcode.com)
+
+ [rails 8 demo app repo](https://github.com/cedarcode/webauthn-rails-demo-app)
+
+[commit how i implemented(further cleanup /daisy ui conversion was later added)](https://github.com/friendlyantz/take-on-me/commit/ba68ad632bac7117dcdfb87f1eb68b5251f4d435 )
+
+https://github.com/cedarcode/webauthn-ruby
+# Authorization
+## Models [^1]
 - [ ] DAC - Discretionary 
 	- [ ] every user has a permission to another resource - similar to linux file system
 	- [ ] Problems: has to many permission/role objects, which can be mitigated by joining users into groups for example
