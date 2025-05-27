@@ -12,7 +12,6 @@ tags:
 toc: true
 toc_sticky: true
 ---
-
 # Ch 1: How Sidekiq works
 
 Main Sidekiq components: job/work, queues, and threads

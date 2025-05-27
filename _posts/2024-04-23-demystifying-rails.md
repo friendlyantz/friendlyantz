@@ -34,7 +34,6 @@ toc_sticky: true
 
 ---
 
-
 {% include video id="LavkZM_CQME" provider="youtube" %}
 
 ---
@@ -236,14 +235,15 @@ include ActiveModel::SecurePassword
 ```
 
 ---
+
 # ActiveRecord
 
 ---
 
 ```ruby
 ActiveRecord
-	.is_kind_of_an ActiveModel
-	.with DB persistence layer
+ .is_kind_of_an ActiveModel
+ .with DB persistence layer
 
 # named after a **Active Record** design pattern:
 "An object that wraps a row in a database table or view, encapsulates the database access, and adds domain logic on that data."
@@ -266,6 +266,7 @@ class User < ActiveRecord::Base
   has_many :posts
 end
 ```
+
 ActiveRecord scripting can be used for data manipulation / relocation / sanitisation scripts
 
 ---
@@ -284,6 +285,7 @@ end
 
 ActiveRecord::LogSubscriber.attach_to :active_record
 ```
+
 [sauce]([https://www.mayerdan.com/ruby/2022/06/27/rails-query-tracing](https://www.mayerdan.com/ruby/2022/06/27/rails-query-tracing))
 
 ---
@@ -303,6 +305,7 @@ ActiveRecord::LogSubscriber.attach_to :active_record
 - [Delayed Job](https://github.com/collectiveidea/delayed_job#active-job)
 
 ---
+
 # ActionMailer
 
 ---
@@ -331,7 +334,7 @@ LalaMailer.notify.deliver_now
 ---
 
 - ActionCable
-- ActionView 
+- ActionView
 - Templating
 - ActionController
 - ActionPack
@@ -341,6 +344,7 @@ LalaMailer.notify.deliver_now
 - [brakeman](https://github.com/presidentbeef/brakeman) - will be part of Rails 8 by default
 
 ---
+
 # run minimalistic rails
 
 ---
@@ -371,13 +375,14 @@ rails generate model --help
 # Conclusion
 
 ---
+
 ```ruby
 
 - try and build stuff in isolation:
-	- `Rake` scripts, `Rack`up server,
-	- `bundle init/add/console`
-	- use `Active Support`  to extend Ruby for code challenges
-	- user `ActiveRecord + Rack` to build a basic app
+ - `Rake` scripts, `Rack`up server,
+ - `bundle init/add/console`
+ - use `Active Support`  to extend Ruby for code challenges
+ - user `ActiveRecord + Rack` to build a basic app
 - start simple and minimal, YAGNI, use minimal presets
 rails new myapp --minimal
 ```
@@ -393,7 +398,6 @@ rails new myapp --minimal
 5. [RubyConfTH 2022 - Dissecting Rails Talk](https://www.youtube.com/watch?v=gXwRs-FwcmE)
 6. [My demo sandbox](https://github.com/friendlyantz/demystifying-rails)
 
-
 ----
 
 # Rails new commands
@@ -404,6 +408,13 @@ rails new app_name \
 --css=tailwind \
 --skip-test
 --skip-rubocop
+
+```
+
+```ruby
+ActiveRecord::Base.logger = Logger.new(STDOUT)
+```
+
 ```
 
 # Gems
