@@ -12,6 +12,11 @@ tags:
   - front_end
   - React
 ---
+## React
+```js
+onClick={() => onDelete(tag)} //- func defenition
+onClick={ onDelete(tag)} //- func invocation directly
+```
 
 RTFM React
 
