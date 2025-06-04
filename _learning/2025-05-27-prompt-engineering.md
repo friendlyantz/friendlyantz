@@ -10,6 +10,7 @@ tags:
   - ml
   - ai
   - llm
+permalink: /prompt-engineering
 ---
 - LLM configs
 - Prompting techniques
