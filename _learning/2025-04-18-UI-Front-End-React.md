@@ -11,6 +11,7 @@ tags:
   - UI
   - front_end
   - React
+permalink: ui
 ---
 ## React
 ```js
