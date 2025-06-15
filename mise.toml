@@ -1,0 +1,19 @@
+[tools]
+jj = "latest"
+ruby = "3.4.4"
+
+[tasks.install]
+description = "install dependencies"
+run = "bundle install"
+
+[tasks.lint]
+description = "lint Code"
+run = "bundle exec standardrb --fix"
+
+[tasks.jj_push_to_master]
+description = "set bookmark to master and push to remote"
+run = [
+  "jj bookmark set master",
+  "jj git push",
+  "jj"
+]
