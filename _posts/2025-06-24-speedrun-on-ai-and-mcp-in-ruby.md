@@ -264,8 +264,9 @@ Claude Desktop agent `claude_desktop_config.json`
 ```
 
 chat history
-https://claude.ai/share/69c174c5-40b1-4f24-9769-583541d71c95
-
+[https://claude.ai/share/69c174c5-40b1-4f24-9769-583541d71c95
+](https://claude.ai/share/69c174c5-40b1-4f24-9769-583541d71c95
+)
 ---
 REFERENCES:
 [Prompt engineering paper](https://drive.google.com/file/d/1AbaBYbEa_EbPelsT40-vj64L-2IwUJHy/view) by google
