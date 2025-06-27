@@ -53,7 +53,7 @@ end
 
 ---
 
-<img src="temp topp topK.png" alt="drawing" width="500"/>
+![temp topp topK](https://github.com/user-attachments/assets/c83ab110-2414-42c1-afe8-01cbf5ba246b)
 
 ---
 
@@ -111,12 +111,12 @@ It keeps adding words until their cumulative probability exceeds P. good start w
 
 ---
 
-![[Pasted image 20250624171218.png]]
+![Pasted image 20250624171218](https://github.com/user-attachments/assets/b6d40ea0-9627-46ea-9707-0a311c08bcb2)
+
 
 ---
 
-<img src="rag-queen.png" alt="drawing" width="500"/>
-
+![rag-queen](https://github.com/user-attachments/assets/b3c8be5b-4933-43a9-8980-ac2dc753de61)
 
 ---
 
@@ -127,7 +127,7 @@ RAG / embeddings are not the final answer, other resources are available in real
 
 ---
 
-![[Pasted image 20250624171847.png]]
+![Pasted image 20250624171847](https://github.com/user-attachments/assets/8c87292b-4f18-408f-9c6d-a4744fdaa3ba)
 
 
 ---
@@ -135,7 +135,7 @@ RAG / embeddings are not the final answer, other resources are available in real
 great explanation of MCP
 https://www.youtube.com/watch?v=FLpS7OfD5-s
 
-![[Pasted image 20250624173333.png]]
+![Pasted image 20250624173333](https://github.com/user-attachments/assets/d0526fff-5413-450c-8e04-dab7da9a9750)
 ---
 
 https://github.com/yjacquin/fast-mcp
