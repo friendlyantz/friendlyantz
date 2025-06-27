@@ -269,5 +269,5 @@ chat history
 )
 ---
 REFERENCES:
-[Prompt engineering paper](https://drive.google.com/file/d/1AbaBYbEa_EbPelsT40-vj64L-2IwUJHy/view) by google
-https://docs.anthropic.com/en/docs/mcp
+- [Prompt engineering paper](https://drive.google.com/file/d/1AbaBYbEa_EbPelsT40-vj64L-2IwUJHy/view) by google
+- [https://docs.anthropic.com/en/docs/mcp](https://docs.anthropic.com/en/docs/mcp)
