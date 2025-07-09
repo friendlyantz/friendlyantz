@@ -1,9 +1,7 @@
 ---
 excerpt: Model Context Protocol (MCP) talk at Ruby Melbourne
 collection: learning
-categories:
-  - software_engineering
-  - learning
+categories: 
 tags:
   - software_engineering
   - learning
@@ -12,6 +10,7 @@ tags:
 toc: true
 toc_sticky: true
 title: "Ruby Melbourne talk: speed-run on AI and MCP with Ruby"
+permalink: speedrun-on-ai-and-mcp-in-ruby
 ---
 ---
 
