@@ -42,6 +42,7 @@ class Friendlyantz
 
 ---
 
+# Intro: Prompt Engineering
 ```ruby
 class Intro::PromptEngineering
 	temperature
@@ -132,12 +133,12 @@ RAG / embeddings are not the final answer, other resources are available in real
 ---
 
 great explanation of MCP
-https://www.youtube.com/watch?v=FLpS7OfD5-s
+[https://www.youtube.com/watch?v=FLpS7OfD5-s](https://www.youtube.com/watch?v=FLpS7OfD5-s)
 
 ![Pasted image 20250624173333](https://github.com/user-attachments/assets/d0526fff-5413-450c-8e04-dab7da9a9750)
 ---
 
-https://github.com/yjacquin/fast-mcp
+[https://github.com/yjacquin/fast-mcp](https://github.com/yjacquin/fast-mcp)
 
 ---
 
