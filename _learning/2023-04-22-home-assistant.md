@@ -74,3 +74,14 @@ qm importdisk 100 /root/haos_image local-lvm --format qcow2
 
 in **Chrome**!!! open [official home RTFM](https://www.home-assistant.io/voice_control/thirteen-usd-voice-remote/#to-delete-the-atom-echo-configuration-from-esphome)
 after installing, go to HAOS, the device should be discovered -> type you network credentials 
+
+# Awtrix
+
+web ui password in 2-nd `Icons` tab!!!
+## icons
+5282
+44873
+7823
+
+# MQTT co2 sensirion
+vscode - edit sensors under mqtt
