@@ -1,6 +1,6 @@
 [tools]
 jj = "latest"
-ruby = "latest"
+ruby = "3.4.1" # refer githib actions supported ver
 
 [tasks.install]
 description = "install dependencies"
