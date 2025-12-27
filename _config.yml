@@ -230,9 +230,6 @@ kramdown:
 
 # Collections
 collections:
-  art:
-    output: true
-    permalink: /:collection/:path/
   learning:
     output: true
     permalink: /:collection/:path/
@@ -330,15 +327,6 @@ defaults:
     values:
       layout: single
       author_profile: true
-  # _art
-  - scope:
-      path: ""
-      type: art
-    values:
-      layout: single
-      author_profile: false
-      share: true
-      comments: true
   # _learning
   - scope:
       path: ""
