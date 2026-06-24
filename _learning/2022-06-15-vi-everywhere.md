@@ -12,6 +12,7 @@ header:
   video:
     id: l6dwu6cCfkM
     provider: youtube
+permalink: /vim
 ---
 
 Mike's talk. loved it!
@@ -24,6 +25,8 @@ TLDR
 set -o | egrep -e 'emacs|vi '
 set -o vi
 ```
+
+
 # Further Read and EMACS {#further-read}
 BUT, you might still want to invest in learning some basic shortcuts of EMACS, as VI binding are not always available, also look further into [ReadLine](https://readline.kablamo.org/emacs.html)
 

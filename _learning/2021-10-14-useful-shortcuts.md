@@ -136,6 +136,7 @@ lalalal_block ^e67fce
 - Shift + CMD + ?: access menu bar
 - ⌘ + G select next find (add shift for prev)
 - Command+Control+Q --> **LOCK SCREEN**
+- `Cmd + Shift + .`  show hidden files
 
 ### FINDER
 
