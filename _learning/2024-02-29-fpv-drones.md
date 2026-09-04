@@ -1,11 +1,6 @@
 ---
 title: FPV drones
-# layout: posts
-# author_profile: true
-# title: "Vi Everywhere"
-# permalink: /life/pages/
-excerpt: "notes on FPV drones"
-# last_modified_at: 2016-11-03T11:13:12-04:00
+excerpt: notes on FPV drones
 collection: learning
 categories:
   - learning
@@ -14,7 +9,7 @@ tags:
   - drones
   - hardware
   - radio
-
+permalink: fpv
 ---
 # TODO / MEMOs
 
@@ -29,15 +24,33 @@ tags:
 - dead limit 2.5V 
 - ok'ish limit 2.7V, as it is recovers back to 3V ish
 - charge current - lower the better. 0.3-0.6A, depending on battery
+
 # RX/TX
 
-ELRS - do it via wifi: power off TX, power on RX, wait for wifihotspot -> password `expresslrs` or Launch ExpressLRS Wifi TX as well as TX hotspots from TX
+ELRS - do it via wifi: 
+power off TX, power on RX, wait for wifihotspot -> password `expresslrs` or Launch ExpressLRS Wifi TX as well as TX hotspots from TX
 ELRS configurator app: build RX and TX
 You don't have to re-flash ELRS after betaflight firmaware update
 
 Packet rate: 50hz -> longerst range
 Telemetry: `STD`
 Switch Mode: `Wide`
+iFlight 2.4GHz TX /RX
+http://10.0.0.1/
+
+DONT forget binding phrase
+
+sometimes it says when upld file over wifi 'not enough space' =>  just retry
+
+IMPORTANT
+```
+RX firmware.bin.gz
+TX firmware.bin
+```
+
+## for RX ELRS menu to appear
+`elrs.lua` - just add menu item to TX UIx
+copy `elrs.lua` script to SD card SCRIPTS/TOOLS first, then upd firmware.bin (was needed for v3 -> v4 UPD)
 
 # Goggles
 double tap and hold to power on
@@ -45,6 +58,12 @@ https://rotorriot.com/pages/downloads - range mod
 # File transfer from Goggles and O3
 - goggles - card reader
 - o3, connect via USB, no batter required
+
+
+# Velocidrone
+
+USB-C-USB-C doesn't work
+use USB-A to USB-C, with hub
 # BetaFlight
 
 ## scripts
